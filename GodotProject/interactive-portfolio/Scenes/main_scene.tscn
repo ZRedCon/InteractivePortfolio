@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ba1cyqhtxills"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bpmhk"]
+
+[sub_resource type="GDScript" id="GDScript_2ia5b"]
+script/source = "extends MeshInstance3D
+
+var ttl_time : float = 0
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	ttl_time += delta
+	rotate_y(0.01)
+	rotate_x(0.02)
+	rotate_z(sin(ttl_time) * delta)
+"
+
+[sub_resource type="Environment" id="Environment_2ia5b"]
+
+[node name="MainScene" type="Node3D" unique_id=217244631]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=220048155]
+mesh = SubResource("BoxMesh_bpmhk")
+script = SubResource("GDScript_2ia5b")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=906922240]
+transform = Transform3D(0.98480797, 0.10129002, -0.14104468, 0, 0.8122496, 0.58331007, 0.17364696, -0.5744484, 0.7999099, -0.70240974, 1.0764055, 1.5386927)
+environment = SubResource("Environment_2ia5b")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1382339994]
+transform = Transform3D(0.7807294, 0.25082657, -0.57231784, 0, 0.91590005, 0.40140644, 0.62486935, -0.3133898, 0.71507007, -1.4758582, 2.302283, 5.1300287)
