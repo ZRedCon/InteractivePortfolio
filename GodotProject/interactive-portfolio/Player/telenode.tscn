@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ndylflykhad8"]
+
+[ext_resource type="Material" uid="uid://b0rv5e78oi6iu" path="res://Player/TelenodeMat.tres" id="1_e0tcv"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_bpmhk"]
+lightmap_size_hint = Vector2i(25, 3)
+material = ExtResource("1_e0tcv")
+inner_radius = 0.735
+outer_radius = 0.611
+rings = 16
+ring_segments = 8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bpmhk"]
+material = ExtResource("1_e0tcv")
+top_radius = 0.4
+bottom_radius = 0.0
+radial_segments = 16
+rings = 0
+
+[node name="Telenode" type="Node3D" unique_id=1354045738]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=641985315]
+transform = Transform3D(1, 0, 0, 0, 1.8786553, 0, 0, 0, 1, 0, 0, 0)
+layers = 2
+mesh = SubResource("TorusMesh_bpmhk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=543149747]
+transform = Transform3D(1, 0, 0, 0, 0.4810563, 0, 0, 0, 1, 0, 0.5968935, 0)
+layers = 2
+mesh = SubResource("CylinderMesh_bpmhk")
