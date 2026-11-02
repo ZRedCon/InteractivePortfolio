@@ -1,6 +1,6 @@
 extends Control
 
-@onready var sensitivity : NumberEdit = $Container/Sensitivity
+@onready var sensitivity : NumberEdit = $"Settings Container/Sensitivity"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
