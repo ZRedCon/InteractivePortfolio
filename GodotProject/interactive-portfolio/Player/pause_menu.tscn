@@ -62,7 +62,7 @@ keybinds = "Shift"
 [node name="Waddle" parent="Settings Container" unique_id=793305893 instance=ExtResource("2_l3uhn")]
 layout_mode = 2
 display_name = "Waddle"
-keybinds = "Ctrl"
+keybinds = "Space"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Settings Container" unique_id=243258090]
 layout_mode = 2
