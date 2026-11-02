@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://3vceguea1ccv"]
+
+[ext_resource type="Script" uid="uid://uorgnpc4x08o" path="res://Player/control_bar.gd" id="1_sm337"]
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=2028866397]
+script = ExtResource("1_sm337")
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=2119360403]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+text = "[ Label ]"
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Seperator" type="RichTextLabel" parent="." unique_id=977448801]
+custom_minimum_size = Vector2(10, 30)
+layout_mode = 2
+text = ":"
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyBinds" type="RichTextLabel" parent="." unique_id=1466116702]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+text = "[ Control ]"
+autowrap_mode = 0
+vertical_alignment = 1

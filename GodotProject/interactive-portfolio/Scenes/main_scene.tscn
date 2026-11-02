@@ -39,3 +39,14 @@ shape = SubResource("BoxShape3D_bpmhk")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1657082734]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0)
 mesh = SubResource("PlaneMesh_85ri6")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1248129735 groups=["Floor"]]
+transform = Transform3D(0.86602527, 0, -0.5, 0, 1, 0, 0.5, 0, 0.86602527, 20.768, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1469905351]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, -1, 0)
+shape = SubResource("BoxShape3D_bpmhk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=168506043 groups=["Floor"]]
+transform = Transform3D(9.999999, 0, 0, 0, 1, 0, 0, 0, 9.999999, 0, -1, 0)
+mesh = SubResource("PlaneMesh_85ri6")

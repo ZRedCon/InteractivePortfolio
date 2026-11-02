@@ -2,30 +2,24 @@
 
 [ext_resource type="Script" uid="uid://d3qt7u5sxshe8" path="res://Player/scale_edit.gd" id="1_uul1u"]
 
-[node name="Sensitivity" type="Control" unique_id=623910398]
-layout_mode = 3
-anchors_preset = 0
+[node name="Sensitivity" type="HBoxContainer" unique_id=787136843]
+custom_minimum_size = Vector2(500, 31)
 offset_right = 500.0
 offset_bottom = 31.0
 script = ExtResource("1_uul1u")
 
-[node name="HSlider" type="HSlider" parent="." unique_id=1860291440]
-layout_mode = 0
-offset_left = 95.0
-offset_right = 398.0
-offset_bottom = 31.0
-
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1898576313]
-layout_mode = 0
-offset_right = 91.0
-offset_bottom = 31.0
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
 text = "Generic"
+autowrap_mode = 0
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="HSlider" type="HSlider" parent="." unique_id=1860291440]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+
 [node name="SpinBox" type="SpinBox" parent="." unique_id=2096306973]
-layout_mode = 0
-offset_left = 413.0
-offset_right = 499.5
-offset_bottom = 31.0
+layout_mode = 2
 max_value = 0.0

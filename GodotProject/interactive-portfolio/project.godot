@@ -24,6 +24,10 @@ PlayerInputHandler="*uid://bw7oea7attxg6"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+Floor="Something the player is expected to be able to stand on"
+
 [input]
 
 Forward={
