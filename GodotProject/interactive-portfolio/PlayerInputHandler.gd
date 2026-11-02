@@ -37,6 +37,9 @@ static var teleport_state : int:
 			return 2
 		return 0
 
+static var is_paused : bool:
+	get(): return Instance._paused
+
 var _paused : bool:
 	set(val):
 		_paused = val
