@@ -1,3 +1,13 @@
 h1 {
     text-align: center;
 }
+
+/* Godot game window: 16:9 like the project's viewport, capped to 80% of the browser height */
+#godot-frame {
+    display: block;
+    width: min(100%, 1280px, calc(80vh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    border: none;
+    background-color: black;
+}

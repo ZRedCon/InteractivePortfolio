@@ -2,22 +2,19 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Technobabble Generator</title>
+	<title>Interactive Portfolio</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="styles/default-styles.css">
-	
+	<link rel="shortcut icon" href="assets/images/famicons/famicon-16.png" type="image/x-icon" sizes="16x16">
+    <link rel="shortcut icon" href="assets/images/famicons/famicon-32.png" type="image/x-icon" sizes="32x32">
+    <link rel="shortcut icon" href="assets/images/famicons/famicon-48.png" type="image/x-icon" sizes="48x48">
+    <link rel="stylesheet" href="styles/default-styles.css">
 </head>
 <body>
     <h1>Welcome to the interactive Portfolio!</h1>
-    <p>The interactive portfolio is a 3D project that contains 
-        everything I've worked on. In case your curious, 
-        the web portfolio below, while using the same information, 
-        is going to inherinetly be worse as the interactive portfolio 
-        is the intended way (And uses a system I am more familiar with). 
-        Please refer to the web version if the interactive portfolio is 
-        down / uncooperative.</p>
-    <!-- Godot game window here -->
+    <!-- Godot game window (Godot's Web export writes into the godot/ folder) -->
+    <iframe id="godot-frame" src="godot/index.html" title="Interactive Portfolio" allowfullscreen></iframe>
     <h2>If the project doesn't load below is a purly web side version of the same data</h2>
+    
 </body>
 <script src="src/main.js"></script>
 </html>
