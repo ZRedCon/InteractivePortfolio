@@ -52,7 +52,7 @@ keybinds = "LMB (Left Mouse Button)"
 [node name="Pause" parent="Settings Container" unique_id=422300162 instance=ExtResource("2_l3uhn")]
 layout_mode = 2
 display_name = "Pause Toggle"
-keybinds = "Esc"
+keybinds = "`"
 
 [node name="Sprint" parent="Settings Container" unique_id=1557228526 instance=ExtResource("2_l3uhn")]
 layout_mode = 2
