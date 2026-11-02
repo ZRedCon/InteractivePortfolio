@@ -25,8 +25,8 @@ static var move_planar : Vector3:
 
 static var move_speed : float:
 	get():
-		return (MOVE_WALK if Input.is_action_pressed("Slow") else 
-				MOVE_RUN if Input.is_action_pressed("Sprint") else 
+		return (MOVE_WALK if Input.is_action_pressed("Slow") else
+				MOVE_RUN if Input.is_action_pressed("Sprint") else
 				MOVE_SPRINT)
 
 static var teleport_state : int:
@@ -45,21 +45,35 @@ var _paused : bool:
 		_paused = val
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if not val else Input.MOUSE_MODE_VISIBLE
 
+var _captured : bool:
+	get(): return Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
+
+var _was_captured : bool
 var _mouse_total : Vector2
 
 func _ready() -> void:
 	Instance = self
-	_paused = false
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and not _paused:
+	if event is InputEventMouseMotion and _captured:
 		_mouse_event_handler_fps( event )
+
+func _unhandled_input(event: InputEvent) -> void:
+	if (not _paused and not _captured and event is InputEventMouseButton and
+		event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _pause_handler() -> void:
+	if Input.is_action_just_pressed("Pause"): _paused = not _paused
+	elif _was_captured and not _captured and not _paused: _paused = true
+	_was_captured = _captured
 
 func _mouse_event_handler_fps(event: InputEventMouseMotion) -> void:
 	var raw_vector : Vector2 = Vector2(event.relative.y, event.relative.x) * SENSATIVITY
-	_mouse_total.x = clampf(_mouse_total.x + raw_vector.x, -MAX_LOOK_ANGLE_VERTICAL, MAX_LOOK_ANGLE_VERTICAL)
+	_mouse_total.x = clampf(_mouse_total.x + raw_vector.x, 
+							-MAX_LOOK_ANGLE_VERTICAL, 
+							MAX_LOOK_ANGLE_VERTICAL)
 	_mouse_total.y += raw_vector.y
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Pause"):
-		_paused = not _paused
+	_pause_handler()

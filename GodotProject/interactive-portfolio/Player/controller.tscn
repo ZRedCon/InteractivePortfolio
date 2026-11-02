@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vavklmehhjdb" path="res://Player/controller.gd" id="1_blokf"]
 [ext_resource type="PackedScene" uid="uid://ndylflykhad8" path="res://Player/telenode.tscn" id="2_qycdo"]
+[ext_resource type="PackedScene" uid="uid://b0ok6cox56206" path="res://Player/pause_menu.tscn" id="3_h12aw"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bpmhk"]
 
@@ -22,6 +23,8 @@ current = true
 visible = false
 target_position = Vector3(0, 0, -10000)
 collide_with_areas = true
+
+[node name="PauseMenu" parent="Camera3D" unique_id=1901717719 instance=ExtResource("3_h12aw")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=512289835]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0003018, 0)

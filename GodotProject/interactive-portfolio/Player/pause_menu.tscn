@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b0ok6cox56206"]
+
+[ext_resource type="Script" uid="uid://ckl2o1gvkb2mb" path="res://Player/pause_menu.gd" id="1_7fc20"]
+
+[node name="PauseMenu" type="Control" unique_id=1901717719]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7fc20")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1899039126]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.105882354, 0.105882354, 0.105882354, 0.47058824)
