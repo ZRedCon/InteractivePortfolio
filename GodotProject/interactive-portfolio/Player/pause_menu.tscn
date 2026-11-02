@@ -31,8 +31,12 @@ text = "Button"
 
 [node name="Container" type="VBoxContainer" parent="." unique_id=1712217484]
 layout_mode = 0
-offset_right = 174.0
-offset_bottom = 187.0
+offset_right = 164.0
+offset_bottom = 35.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Container" unique_id=243258090]
+layout_mode = 2
+text = "-- Settings -- "
 
 [node name="Sensitivity" parent="Container" unique_id=623910398 instance=ExtResource("2_jppwi")]
 layout_mode = 2
