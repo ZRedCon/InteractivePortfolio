@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://b0ok6cox56206"]
 
 [ext_resource type="Script" uid="uid://ckl2o1gvkb2mb" path="res://Player/pause_menu.gd" id="1_7fc20"]
+[ext_resource type="PackedScene" uid="uid://ce5s5jn17n57s" path="res://Player/number_edit_bar.tscn" id="2_jppwi"]
 
 [node name="PauseMenu" type="Control" unique_id=1901717719]
+propagate_maximum_size = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,3 +20,30 @@ layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.105882354, 0.105882354, 0.105882354, 0.47058824)
+
+[node name="Button" type="Button" parent="." unique_id=263912988]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 550.0
+offset_right = 127.0
+offset_bottom = 647.0
+text = "Button"
+
+[node name="Container" type="VBoxContainer" parent="." unique_id=1712217484]
+layout_mode = 0
+offset_right = 174.0
+offset_bottom = 187.0
+
+[node name="Sensitivity" parent="Container" unique_id=623910398 instance=ExtResource("2_jppwi")]
+layout_mode = 2
+display_name = "Sensitivity"
+default_value = 50.0
+min_value = 1.0
+max_value = 200.0
+
+[node name="Music volume" parent="Container" unique_id=1191333979 instance=ExtResource("2_jppwi")]
+layout_mode = 2
+display_name = "Sensitivity"
+default_value = 50.0
+min_value = 1.0
+max_value = 200.0

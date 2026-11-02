@@ -34,5 +34,7 @@ func _handle_floor_cast() -> void:
 		global_position = _tele_data.hit_point
 
 func _process(delta: float) -> void:
+	if PIH.is_paused: return
+	
 	camera.rotation.x = PIH.mouse_x
 	rotation.y = PIH.mouse_y
