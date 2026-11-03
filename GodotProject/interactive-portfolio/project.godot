@@ -25,6 +25,10 @@ FileParser="*uid://cd6qba7pyuit7"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/portfolio_data/plugin.cfg")
+
 [global_group]
 
 Floor="Something the player is expected to be able to stand on"

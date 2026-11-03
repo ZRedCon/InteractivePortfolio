@@ -22,56 +22,59 @@ offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.105882354, 0.105882354, 0.105882354, 0.47058824)
 
-[node name="Settings Container" type="VBoxContainer" parent="." unique_id=1712217484]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=158002960]
 layout_mode = 0
-offset_right = 545.0
-offset_bottom = 219.0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Settings Container" unique_id=1125025094]
+[node name="Settings Container" type="VBoxContainer" parent="HBoxContainer" unique_id=1712217484]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/Settings Container" unique_id=1125025094]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "-- Controls -- "
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Movement" parent="Settings Container" unique_id=2028866397 instance=ExtResource("2_l3uhn")]
+[node name="Movement" parent="HBoxContainer/Settings Container" unique_id=2028866397 instance=ExtResource("2_l3uhn")]
 layout_mode = 2
 display_name = "Movement"
 keybinds = "W A S D"
 
-[node name="Teleport" parent="Settings Container" unique_id=1965012403 instance=ExtResource("2_l3uhn")]
+[node name="Teleport" parent="HBoxContainer/Settings Container" unique_id=1965012403 instance=ExtResource("2_l3uhn")]
 layout_mode = 2
 display_name = "Teleport"
 keybinds = "RMB (Right Mouse Button)"
 
-[node name="Interact" parent="Settings Container" unique_id=1967493935 instance=ExtResource("2_l3uhn")]
+[node name="Interact" parent="HBoxContainer/Settings Container" unique_id=1967493935 instance=ExtResource("2_l3uhn")]
 layout_mode = 2
 display_name = "Interact"
 keybinds = "LMB (Left Mouse Button)"
 
-[node name="Pause" parent="Settings Container" unique_id=422300162 instance=ExtResource("2_l3uhn")]
+[node name="Pause" parent="HBoxContainer/Settings Container" unique_id=422300162 instance=ExtResource("2_l3uhn")]
 layout_mode = 2
 display_name = "Pause Toggle"
 keybinds = "`"
 
-[node name="Sprint" parent="Settings Container" unique_id=1557228526 instance=ExtResource("2_l3uhn")]
+[node name="Sprint" parent="HBoxContainer/Settings Container" unique_id=1557228526 instance=ExtResource("2_l3uhn")]
 layout_mode = 2
 display_name = "Sprint"
 keybinds = "Shift"
 
-[node name="Waddle" parent="Settings Container" unique_id=793305893 instance=ExtResource("2_l3uhn")]
+[node name="Waddle" parent="HBoxContainer/Settings Container" unique_id=793305893 instance=ExtResource("2_l3uhn")]
 layout_mode = 2
 display_name = "Waddle"
 keybinds = "Space"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings Container" unique_id=243258090]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Settings Container" unique_id=243258090]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "-- Settings -- "
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Sensitivity" parent="Settings Container" unique_id=623910398 instance=ExtResource("2_jppwi")]
+[node name="Sensitivity" parent="HBoxContainer/Settings Container" unique_id=623910398 instance=ExtResource("2_jppwi")]
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 display_name = "Sensitivity"
@@ -79,16 +82,20 @@ default_value = 50.0
 min_value = 1.0
 max_value = 200.0
 
-[node name="Music volume" parent="Settings Container" unique_id=1191333979 instance=ExtResource("2_jppwi")]
+[node name="Music volume" parent="HBoxContainer/Settings Container" unique_id=1191333979 instance=ExtResource("2_jppwi")]
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 display_name = "Music Volume"
 default_value = 100.0
 max_value = 100.0
 
-[node name="Sfx Voluime" parent="Settings Container" unique_id=787136843 instance=ExtResource("2_jppwi")]
+[node name="Sfx Voluime" parent="HBoxContainer/Settings Container" unique_id=787136843 instance=ExtResource("2_jppwi")]
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 display_name = "Sound Volume"
 default_value = 100.0
 max_value = 100.0
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="HBoxContainer" unique_id=391913485]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
