@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerInputHandler="*uid://bw7oea7attxg6"
 FileParser="*uid://cd6qba7pyuit7"
+MapLayout="*uid://cpvo560id57ar"
 
 [display]
 
@@ -27,7 +28,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/portfolio_data/plugin.cfg")
+enabled=PackedStringArray("res://addons/map_painter/plugin.cfg")
 
 [global_group]
 

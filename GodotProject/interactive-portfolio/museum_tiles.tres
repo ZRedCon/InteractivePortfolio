@@ -1,0 +1,23 @@
+[gd_resource type="TileSet" format=3 uid="uid://d0bq6v6qxln82"]
+
+[ext_resource type="Texture2D" uid="uid://dq8bpourgg48p" path="res://assets/images/MuseumSet.png" id="1_7pcns"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lsxtm"]
+texture = ExtResource("1_7pcns")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_lsxtm")

@@ -16,22 +16,12 @@ static func get_webfiles_dir() -> String:
 	return ProjectSettings.globalize_path( "res://" ).path_join( WEBFILES_FROM_PROJECT ).simplify_path()
 
 var _is_web_mode : bool
-var entries : Array[ Entry ] 
+var entries : Array[ Entry ]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_is_web_mode = OS.has_feature( "web" )
 	entries = await parse_for_web() if OS.has_feature( "web" ) else parse_for_pc()
-	
-	var proof : String = ""
-	
-	for entry in entries:
-		print( entry )
-		proof += str( entry ) + "\n"
-		proof += "\n"
-	
-	await get_tree().create_timer( 0.1 ).timeout
-	PauseMenu.set_debug_out( proof )
 
 #region Web pipeline
 
