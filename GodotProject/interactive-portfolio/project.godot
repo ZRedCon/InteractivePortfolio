@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerInputHandler="*uid://bw7oea7attxg6"
+FileParser="*uid://cd6qba7pyuit7"
 
 [display]
 

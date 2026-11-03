@@ -1,0 +1,19 @@
+{
+	"name": "Example Game 2",
+	"time": [ "11-2-26", "11-3-26" ],
+	"description": "This is the example other game entries will be based off of",
+	"related-skills": 7,
+	"contribution": "I made essentially everything",
+	"notes": [ 
+		"This took a lot of work",
+        "I figured that since I'm better at game design than web design, and my protfolio is about games, why not make it a game?"
+	],
+	"main-image": "test1",
+	"slide-show": [ "test1", "test2", "test3" ],
+	"related-links": [
+		{
+			"display-test": "Github Page",
+			"url": "https://github.com/ZRedCon/InteractivePortfolio"
+		}
+	]
+}
