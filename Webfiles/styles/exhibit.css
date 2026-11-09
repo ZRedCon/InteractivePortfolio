@@ -1,0 +1,236 @@
+/* =============================================================================
+   Exhibit: one portfolio entry, laid out from the reference images in
+   assets/images/exhibit-layout-refs/.
+
+   The rules at the top are the THIN (mobile) layout. The @media block at the
+   bottom switches to the WIDE layout once the window is at least 60em wide
+   (960px at the browser's default text size).
+
+   Class -> reference color:
+     .entry-name     red        .date           pink       .skills  orange
+     .proj-desc      yellow     .contribution   green
+     .slide-show     cyan       .text-unimportant  blue (notes)
+     .links          purple
+   ============================================================================= */
+
+.exhibit {
+    --exhibit-gap: 1.25rem;   /* space between sections, and between columns */
+    --exhibit-pad: 1rem;      /* space between the card's edge and its contents */
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--exhibit-gap);
+    max-width: 75rem;         /* past 1200px the exhibit stops growing and stays centered */
+    margin: 2rem auto;
+    padding: var(--exhibit-pad);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow-wrap: anywhere;  /* long words/URLs wrap instead of pushing a column wider */
+}
+
+/* Spacing comes from the flex gaps and the rules below, not the browser's default margins. */
+.exhibit :where(h2, h3, p, ul) {
+    margin: 0;
+}
+
+/* ---- Red + pink: entry name and date ------------------------------------- */
+
+/* Thin: name on one line, date on the line below it. */
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.entry-name {
+    font-size: 1.5rem;
+}
+
+.date {
+    text-align: right;
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;   /* every digit is the same width, so dates line up */
+    white-space: nowrap;
+}
+
+/* ---- Orange: skills ------------------------------------------------------ */
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;            /* lots of skills flow onto a second row */
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block: 0.5em;       /* half a character of space above and below the widgets */
+    border-block: 1px solid var(--color-border);
+    font-size: 0.875rem;
+}
+
+.skill {
+    display: inline;
+    border-radius: 9999999px;
+    padding: 6px 11px;
+    background-color: var(--color-border);
+
+}
+
+.skill > div {
+    display: inline-block;
+    border-radius: 50%;
+    width: 0.9rem; 
+    height: 0.9rem;
+}
+
+.skill > span {
+    padding-left: 5px;
+}
+
+/* ---- Content: description, contribution, slideshow, notes ---------------- */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--exhibit-gap);
+}
+
+/* Yellow + green. Side by side while each column can be at least 16rem (256px) wide;
+   on narrower screens (phones) they stack, since thinner columns get hard to read. */
+.text-important {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--exhibit-gap);
+}
+
+.proj-desc,
+.contribution {
+    flex: 1 1 16rem;            /* same basis + same grow = always the same width */
+}
+
+.exhibit h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.exhibit p + p {
+    margin-top: 0.75em;
+}
+
+.contribution ul {
+    padding-left: 1.25rem;
+}
+
+.contribution li + li {
+    margin-top: 0.375em;
+}
+
+/* Cyan: the slideshow is a frame, and the image is scaled up or down to fit inside it
+   (centered, never cropped). Because the image is positioned "absolute", its own size
+   never pushes the layout around, and later slides of other sizes won't either. */
+.slide-show {
+    order: -1;                  /* thin: the slideshow comes first in the content */
+    position: relative;
+    aspect-ratio: 16 / 9;
+}
+
+.slide-show img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* An entry with no images: hide the empty frame so the text gets its space. */
+.slide-show:empty {
+    display: none;
+}
+
+/* Blue: notes, smaller and grayer than the main text. */
+.text-unimportant {
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+}
+
+/* ---- Purple: links ------------------------------------------------------- */
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+/* Outlined buttons: easy to spot, and big enough to tap on a phone. */
+.links a {
+    padding: 0.375em 1em;
+    border: 1px solid var(--color-accent);
+    border-radius: 6px;
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.links a:hover {
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+}
+
+/* =============================================================================
+   WIDE layout
+   Between 960px and 1200px the exhibit shrinks with the window; past 1200px
+   it stops growing (see max-width on .exhibit).
+   ============================================================================= */
+@media (min-width: 60em) {
+    .exhibit {
+        --exhibit-gap: 1.5rem;
+        --exhibit-pad: 2rem;
+    }
+
+    /* Name on the far left, date on the far right, both centered on the same line. */
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .entry-name {
+        font-size: 1.75rem;
+    }
+
+    .date {
+        font-size: 1.125rem;
+    }
+
+    /* Three columns: [description over contribution] [slideshow] [notes]. */
+    .content {
+        flex-direction: row;
+    }
+
+    .text-important {
+        flex: 1 1 0;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    /* In a column the 16rem basis from above would set their HEIGHT, so turn it off. */
+    .proj-desc,
+    .contribution {
+        flex: none;
+    }
+
+    /* Exactly a third of the content's width, and it never shrinks. The two text columns
+       split what's left evenly, so the slideshow sits dead center, right above the links.
+       Its height stretches to match the tallest text column; the 16:9 aspect-ratio from
+       above now only acts as a minimum, so a short entry can't squash the image. */
+    .slide-show {
+        order: 0;
+        flex: 0 0 calc(100% / 3);
+    }
+
+    .text-unimportant {
+        flex: 1 1 0;
+    }
+}

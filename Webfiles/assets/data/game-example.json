@@ -1,9 +1,9 @@
 {
 	"name": "Example Game",
-	"time": [ "11-3-26", "11-4-26" ],
+	"time": [ "11/3/26", "11/4/26" ],
 	"description": "_",
 	"related-skills": 0,
-	"contribution": "_",
+	"contribution": [ ],
 	"notes": [ 
 		"_"
 	],

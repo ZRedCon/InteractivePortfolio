@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c241mv4likfbd"]
 
 [ext_resource type="Script" uid="uid://vu2oc6skf33u" path="res://prefabs/entry.gd" id="1_vjtbd"]
-[ext_resource type="Texture2D" uid="uid://cycv7nkyk6opa" path="res://icon.svg" id="2_dfqob"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vjtbd"]
 viewport_path = NodePath("SubViewport")
@@ -14,21 +13,6 @@ script = ExtResource("1_vjtbd")
 transparent_bg = true
 render_target_update_mode = 4
 
-[node name="Verticals" type="VBoxContainer" parent="SubViewport" unique_id=341308181]
+[node name="Exhibit" type="VBoxContainer" parent="SubViewport" unique_id=341308181]
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Title" type="Label" parent="SubViewport/Verticals" unique_id=1762062489]
-layout_mode = 2
-text = "TEST"
-
-[node name="Content" type="HBoxContainer" parent="SubViewport/Verticals" unique_id=1603604813]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/Verticals/Content" unique_id=1253604995]
-layout_mode = 2
-text = "This is th description Lorem Ispum Lorem IspumLorem IspumLorem IspumLorem IspumLorem IspumLorem IspumLorem IspumLorem IspumLorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem Ispum Lorem IspumLorem IspumLorem Ispum Lorem IspumLorem Ispum "
-
-[node name="TextureRect" type="TextureRect" parent="SubViewport/Verticals/Content" unique_id=892245902]
-layout_mode = 2
-texture = ExtResource("2_dfqob")

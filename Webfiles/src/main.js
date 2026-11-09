@@ -1,6 +1,5 @@
-// Each portfolio entry is one JSON file in assets/data/. Browsers can't list a folder, so the file
-// names come from assets/data-index.json, which the Godot project's Portfolio Data plugin keeps
-// up to date.
+import * as ToHTML from './entryToExhibit.js'
+
 const DATA_PATH = "assets/data/";
 const DATA_INDEX_PATH = "assets/data-index.json";
 
@@ -30,4 +29,6 @@ window.onload = async () => {
     const entries = await Promise.all(fileNames.map(loadEntry));
     objects = entries.filter((entry) => entry !== null);
     console.log("DONE!", objects);
+    let conversion = ToHTML.getHTMLFromEntry(objects[0]);
+    document.querySelector("#exhibits").innerHTML += conversion;
 };

@@ -1,11 +1,42 @@
+/* Page-wide colors. Other stylesheets (like exhibit.css) use these through var(--name),
+   so changing a value here changes it everywhere. All text colors pass WCAG AA contrast. */
+:root {
+    --color-page: #f3f4f6;      /* page background */
+    --color-surface: #ffffff;   /* exhibit cards */
+    --color-text: #1f2328;      /* main text */
+    --color-muted: #5b6470;     /* secondary text: dates, notes */
+    --color-border: #d8dde3;    /* thin divider lines and card outlines */
+    --color-accent: #0b62c4;    /* links */
+}
+
+/* Makes width/height include padding and borders, so sizes add up the way you'd expect. */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    /* Each OS's own UI font (Segoe UI on Windows, San Francisco on Apple, Roboto on Android). */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-page);
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
 h1 {
     text-align: center;
 }
 
-/* Godot game window: 16:9 like the project's viewport, capped to 80% of the browser height */
 #godot-frame {
     display: block;
-    width: min(100%, 1280px, calc(80vh * 16 / 9));
+    width: min(100%, calc(80vh * 16 / 9));
     aspect-ratio: 16 / 9;
     margin: 0 auto;
     border: none;

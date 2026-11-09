@@ -3,23 +3,25 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Interactive Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" class="native-dark-class-original">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 	<link rel="shortcut icon" href="assets/images/famicons/famicon-16.png" type="image/x-icon" sizes="16x16">
     <link rel="shortcut icon" href="assets/images/famicons/famicon-32.png" type="image/x-icon" sizes="32x32">
     <link rel="shortcut icon" href="assets/images/famicons/famicon-48.png" type="image/x-icon" sizes="48x48">
     <link rel="stylesheet" href="styles/default-styles.css">
+    <link rel="stylesheet" href="styles/exhibit.css">
     <script src="src/main.js" type="module"></script>
 </head>
 <body>
     <h1>Welcome to the interactive Portfolio!</h1>
     <!-- Godot game window (Godot's Web export writes into the godot/ folder) -->
     <iframe id="godot-frame" src="godot/index.html" title="Interactive Portfolio" allowfullscreen></iframe>
-    <h2>If the project doesn't load below is a purly web side version of the same data</h2>
-    
-    <div class="exhibit">
+    <h2>If the project doesn't load below is a purely web side version of the same data</h2>
+    <!-- One exhibit (portfolio entry). Its layout lives in styles/exhibit.css. -->
+    <article class="exhibit">
         <section class="header">
             <h2 class="entry-name">Entry Test</h2>
-            <h2 class="date">11/8/26 - 11/9/26</h2>
+            <p class="date">11/8/26 - 11/9/26</p>
         </section>
         <section class="skills">
             <p>This will eventually contain widgets that show skills</p>
@@ -42,7 +44,7 @@
             </section>
             
             <section class="slide-show">
-                just imagine a really cool image here instead of this
+                <img src="assets/images/Debug/Debug1/pair1.png" alt="Placeholder: magenta and black checkerboard">
             </section>
 
             <section class="text-unimportant">
@@ -52,10 +54,12 @@
 
         </section>
         <section class="links">
-            <a href="https://www.youtube.com/">Youtube</a> |
+            <a href="https://www.youtube.com/">Youtube</a>
             <a href="https://www.youtube.com/">Github</a>
         </section>
-    </div>
+    </article>
+
+    <div id="exhibits"></div>
 
 </body>
 </html>

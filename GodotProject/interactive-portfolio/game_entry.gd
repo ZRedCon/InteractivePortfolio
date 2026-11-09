@@ -36,7 +36,7 @@ var descr : String
 var start_date : String
 var end_date : String
 var skills : int
-var contribution : String
+var contribution : PackedStringArray
 var notes : PackedStringArray
 var main_image : String
 var slide_show_images : PackedStringArray
@@ -44,7 +44,7 @@ var supplementary_links : Array[ Dictionary ]
 
 func _init(_name: String, _decsr: String, 
 	time: PackedStringArray, _skills: Variant, 
-	contri: String, _notes: PackedStringArray,
+	contri: PackedStringArray, _notes: PackedStringArray,
 	main_img: String, slide_show: PackedStringArray,
 	supple_links: Array) -> void:
 	name = _name
@@ -63,7 +63,7 @@ func _to_string() -> String:
 			"\n  Desc: " + descr + 
 			"\n  Delta time ( " + start_date + " -> " + end_date + 
 			" )\n  Skills: " + str( to_skills( skills ) ) + 
-			"\n  Contribution: " + contribution + 
+			"\n  Contribution: " + str( contribution ) + 
 			"\n  Notes: " + str( notes ) +
 			"\n  Main Image: " + main_image +
 			"\n  Slide show: " + str( slide_show_images ) +
