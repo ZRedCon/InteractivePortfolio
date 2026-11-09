@@ -1,13 +1,13 @@
 {
 	"name": "Example Game",
-	"time": [ "11/3/26", "11/4/26" ],
+	"time": [ "_", "_" ],
 	"description": "_",
-	"related-skills": 0,
-	"contribution": [ ],
+	"related-skills": 511,
+	"contribution": [ "_" ],
 	"notes": [ 
 		"_"
 	],
 	"main-image": "test2",
-	"slide-show": [ "test2" ],
+	"slide-show": [ "Debug/Debug1/pair0" ],
 	"related-links": [ ]
 }

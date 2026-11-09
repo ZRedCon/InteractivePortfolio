@@ -28,7 +28,9 @@ window.onload = async () => {
     // Downloads every file at once; the results keep the index's order.
     const entries = await Promise.all(fileNames.map(loadEntry));
     objects = entries.filter((entry) => entry !== null);
-    console.log("DONE!", objects);
-    let conversion = ToHTML.getHTMLFromEntry(objects[0]);
-    document.querySelector("#exhibits").innerHTML += conversion;
+    console.log("Parsed objects: ", objects);
+    for (const item of objects) {
+        let conversion = ToHTML.getHTMLFromEntry( item );
+        document.querySelector("#exhibits").innerHTML += conversion;
+    }
 };

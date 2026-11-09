@@ -125,8 +125,8 @@
 }
 
 /* Cyan: the slideshow is a frame, and the image is scaled up or down to fit inside it
-   (centered, never cropped). Because the image is positioned "absolute", its own size
-   never pushes the layout around, and later slides of other sizes won't either. */
+    (centered, never cropped). Because the image is positioned "absolute", its own size
+    never pushes the layout around, and later slides of other sizes won't either. */
 .slide-show {
     order: -1;                  /* thin: the slideshow comes first in the content */
     position: relative;
