@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b1ojuq67yjq6" path="res://assets/images/skyboxes/wasteland_clouds_puresky_4k.hdr" id="1_6l7je"]
 [ext_resource type="PackedScene" uid="uid://bgsgwceyq1l1p" path="res://Player/controller.tscn" id="1_52fb6"]
+[ext_resource type="PackedScene" uid="uid://c241mv4likfbd" path="res://prefabs/Entry.tscn" id="3_jv6wh"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_npwjr"]
 panorama = ExtResource("1_6l7je")
@@ -18,6 +19,9 @@ sky = SubResource("Sky_85ri6")
 size = Vector3(20, 0, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_85ri6"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jv6wh"]
+viewport_path = NodePath("SubViewport")
 
 [node name="MainScene" type="Node3D" unique_id=217244631]
 
@@ -36,17 +40,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.076747894, 1.8733559, 2.14
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, -1, 0)
 shape = SubResource("BoxShape3D_bpmhk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1657082734]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1657082734 groups=["Floor"]]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0)
 mesh = SubResource("PlaneMesh_85ri6")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1248129735 groups=["Floor"]]
-transform = Transform3D(0.86602527, 0, -0.5, 0, 1, 0, 0.5, 0, 0.86602527, 20.768, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1469905351]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, -1, 0)
-shape = SubResource("BoxShape3D_bpmhk")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=168506043 groups=["Floor"]]
-transform = Transform3D(9.999999, 0, 0, 0, 1, 0, 0, 0, 9.999999, 0, -1, 0)
-mesh = SubResource("PlaneMesh_85ri6")
+[node name="Node2D" parent="." unique_id=1956691089 instance=ExtResource("3_jv6wh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8746071, 0.59600925, -7.234706)
+texture = SubResource("ViewportTexture_jv6wh")
