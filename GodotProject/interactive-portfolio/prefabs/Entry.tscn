@@ -1,18 +1,20 @@
 [gd_scene format=3 uid="uid://c241mv4likfbd"]
 
 [ext_resource type="Script" uid="uid://vu2oc6skf33u" path="res://prefabs/entry.gd" id="1_vjtbd"]
+[ext_resource type="PackedScene" uid="uid://c3ie8m45lxi00" path="res://prefabs/ui_exhibit.tscn" id="2_dfqob"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vjtbd"]
 viewport_path = NodePath("SubViewport")
 
 [node name="EntryNode" type="Sprite3D" unique_id=1943423101]
+pixel_size = 0.004
 texture = SubResource("ViewportTexture_vjtbd")
 script = ExtResource("1_vjtbd")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1043445019]
+editor_description = "The exhibit card. 1200 px wide = .exhibit's CSS max-width (75rem), the width it shows at on desktop. The height only fits this placeholder content."
 transparent_bg = true
+size = Vector2i(1040, 475)
 render_target_update_mode = 4
 
-[node name="Exhibit" type="VBoxContainer" parent="SubViewport" unique_id=341308181]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UIExhibit" parent="SubViewport" unique_id=378705747 instance=ExtResource("2_dfqob")]

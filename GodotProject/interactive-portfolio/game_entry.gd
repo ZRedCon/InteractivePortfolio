@@ -12,6 +12,10 @@ static var SKILLS : Array[ String ] = [
 	"Production"
 ]
 
+const SEED = 951;
+static func color_from_index(index: int) -> Color:
+	return Color.from_ok_hsl(((SEED * (index+1)) % 360) / 360.0, 1.0, 0.5)
+
 static func to_skills(from: int) -> Array[ String ]:
 	var labels : Array[ String ]
 	var index : int = 0
