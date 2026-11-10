@@ -70,13 +70,13 @@ theme_override_constants/separation = 16
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
-text = "Example Game 2"
+text = "[name]"
 autowrap_mode = 3
 
 [node name="Date" type="Label" parent="Exhibit/Header" unique_id=883133244]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "11/2/26 - 11/3/26"
+text = "[start] - [end]"
 horizontal_alignment = 2
 
 [node name="Skills" type="PanelContainer" parent="Exhibit" unique_id=1607492032]
@@ -112,7 +112,7 @@ text = "Project Description:"
 
 [node name="Description" type="Label" parent="Exhibit/Content/TextImportant/ProjDesc" unique_id=577939168]
 layout_mode = 2
-text = "This is the example other game entries will be based off of"
+text = "[Desc]"
 autowrap_mode = 3
 
 [node name="Contribution" type="VBoxContainer" parent="Exhibit/Content/TextImportant" unique_id=1759535947]

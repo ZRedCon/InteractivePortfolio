@@ -47,8 +47,7 @@ func set_values(exhibit_name: String, desc: String,
 	for note in notes:
 		notes_holder.add_item( note )
 	links.remove_items()								# supplementary_links
-	for link in sup_links:
-		links.add_item( link )
+	links.add_set_of_links( sup_links )
 	
 
 func _ready() -> void:
@@ -63,5 +62,9 @@ func _ready() -> void:
 				[
 					{ "display-text": "Github", "url": "https://github.com/ZRedCon/InteractivePortfolio"},
 					{ "display-text": "Github2", "url": "https://github.com/ZRedCon/InteractivePortfolio"},
+					{ "display-text": "Github3", "url": "https://github.com/ZRedCon/InteractivePortfolio"},
+					{ "display-text": "Github4", "url": "https://github.com/ZRedCon/InteractivePortfolio"},
+					{ "display-text": "Github5", "url": "https://github.com/ZRedCon/InteractivePortfolio"},
+					{ "display-text": "Github6", "url": "https://github.com/ZRedCon/InteractivePortfolio"},
 				]
 	)
