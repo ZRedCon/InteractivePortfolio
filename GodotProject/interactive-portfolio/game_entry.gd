@@ -18,7 +18,7 @@ static func get_hue(index: int) -> float:
 	return ((SEED * (index+1)) % 360) / 360.0
 
 static func color_from_index(index: int) -> Color:
-	return Color.from_ok_hsl(get_hue(index), 1, 0.5)
+	return Color.from_hsv(get_hue(index), 1.0, 1.0)
 
 static func to_skills(from: int) -> Array[ String ]:
 	var labels : Array[ String ]
