@@ -14,7 +14,7 @@ script = ExtResource("1_vjtbd")
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1043445019]
 editor_description = "The exhibit card. 1200 px wide = .exhibit's CSS max-width (75rem), the width it shows at on desktop. The height only fits this placeholder content."
 transparent_bg = true
-size = Vector2i(1040, 475)
+size = Vector2i(1064, 475)
 render_target_update_mode = 4
 
 [node name="UIExhibit" parent="SubViewport" unique_id=378705747 instance=ExtResource("2_dfqob")]

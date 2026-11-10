@@ -21,6 +21,7 @@ func _calc_mode_from_parent() -> void:
 	mode = THIN if size.x < 960 else WIDE
 
 func _ready() -> void:
+	await get_tree().process_frame
 	_calc_mode_from_parent()
 
 func _process(_delta: float) -> void:

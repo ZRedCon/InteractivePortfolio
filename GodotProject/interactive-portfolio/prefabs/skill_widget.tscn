@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://c1h34rjiuwgy1"]
+
+[ext_resource type="Script" uid="uid://ycyuym4c31pj" path="res://prefabs/skill_widget.gd" id="1_12usp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0ekf"]
+bg_color = Color(0.4392157, 0.4392157, 0.4392157, 0.6431373)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="Gradient" id="Gradient_t0ekf"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5194274)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t0ekf"]
+gradient = SubResource("Gradient_t0ekf")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="SkillWidget" type="PanelContainer" unique_id=1069053965]
+offset_right = 153.0
+offset_bottom = 32.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t0ekf")
+script = ExtResource("1_12usp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=825944660]
+layout_mode = 2
+
+[node name="Color" type="TextureRect" parent="HBoxContainer" unique_id=586607918]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("GradientTexture2D_t0ekf")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=765454058]
+layout_mode = 2
+theme_override_constants/margin_right = 15
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer" unique_id=1546705862]
+layout_mode = 2
+text = "Game Design"

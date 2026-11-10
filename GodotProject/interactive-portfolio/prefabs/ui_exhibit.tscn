@@ -1,17 +1,14 @@
 [gd_scene format=3 uid="uid://c3ie8m45lxi00"]
 
+[ext_resource type="Script" uid="uid://sd66iqa6282x" path="res://prefabs/exhibit.gd" id="1_fwjg3"]
 [ext_resource type="Texture2D" uid="uid://cycv7nkyk6opa" path="res://icon.svg" id="1_px4js"]
 [ext_resource type="Script" uid="uid://creqf0jqum84g" path="res://prefabs/content.gd" id="1_qit8j"]
+[ext_resource type="Script" uid="uid://58dgn7tedg3f" path="res://prefabs/skillsManager.gd" id="1_xnv4v"]
+[ext_resource type="Script" uid="uid://2pxy4okyo36l" path="res://prefabs/links_manager.gd" id="5_fwjg3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qit8j"]
 content_margin_top = 8.0
 content_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jsju3"]
-content_margin_left = 11.0
-content_margin_top = 6.0
-content_margin_right = 11.0
-content_margin_bottom = 6.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xnv4v"]
 content_margin_left = 17.0
@@ -26,6 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fwjg3")
 
 [node name="Exhibit" type="VBoxContainer" parent="." unique_id=69379542]
 editor_description = "article.exhibit (wide layout). Offsets of 33 = 2rem padding + 1px border. Separation 24 = --exhibit-gap."
@@ -62,67 +60,13 @@ horizontal_alignment = 2
 editor_description = "section.skills. Content margins of 8 = 0.5em padding-block (7 px at its 14 px font size) + 1px border-block."
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_qit8j")
+script = ExtResource("1_xnv4v")
 
 [node name="Flow" type="HFlowContainer" parent="Exhibit/Skills" unique_id=217641539]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 alignment = 1
-
-[node name="Skill" type="PanelContainer" parent="Exhibit/Skills/Flow" unique_id=1459204231]
-editor_description = "span.skill: 6px 11px padding. Row separation 5 = the label's 5px padding-left."
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_jsju3")
-
-[node name="Row" type="HBoxContainer" parent="Exhibit/Skills/Flow/Skill" unique_id=2026967113]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Dot" type="ColorRect" parent="Exhibit/Skills/Flow/Skill/Row" unique_id=10857293]
-custom_minimum_size = Vector2(14.4, 14.4)
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Name" type="Label" parent="Exhibit/Skills/Flow/Skill/Row" unique_id=1409526216]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Game Design"
-
-[node name="Skill2" type="PanelContainer" parent="Exhibit/Skills/Flow" unique_id=1866101745]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_jsju3")
-
-[node name="Row" type="HBoxContainer" parent="Exhibit/Skills/Flow/Skill2" unique_id=2085828009]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Dot" type="ColorRect" parent="Exhibit/Skills/Flow/Skill2/Row" unique_id=241831011]
-custom_minimum_size = Vector2(14.4, 14.4)
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Name" type="Label" parent="Exhibit/Skills/Flow/Skill2/Row" unique_id=900851209]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Game Dev"
-
-[node name="Skill3" type="PanelContainer" parent="Exhibit/Skills/Flow" unique_id=530125623]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_jsju3")
-
-[node name="Row" type="HBoxContainer" parent="Exhibit/Skills/Flow/Skill3" unique_id=764721485]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Dot" type="ColorRect" parent="Exhibit/Skills/Flow/Skill3/Row" unique_id=1983852105]
-custom_minimum_size = Vector2(14.4, 14.4)
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Name" type="Label" parent="Exhibit/Skills/Flow/Skill3/Row" unique_id=2044751523]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Programming"
 
 [node name="Content" type="BoxContainer" parent="Exhibit" unique_id=219210833]
 layout_mode = 2
@@ -226,6 +170,7 @@ layout_mode = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 alignment = 1
+script = ExtResource("5_fwjg3")
 
 [node name="Link" type="Button" parent="Exhibit/Links" unique_id=338849690]
 editor_description = "a: 0.375em 1em padding + 1px border = content margins of 7 and 17."
