@@ -13,8 +13,12 @@ static var SKILLS : Array[ String ] = [
 ]
 
 const SEED = 951;
+
+static func get_hue(index: int) -> float:
+	return ((SEED * (index+1)) % 360) / 360.0
+
 static func color_from_index(index: int) -> Color:
-	return Color.from_ok_hsl(((SEED * (index+1)) % 360) / 360.0, 1.0, 0.5)
+	return Color.from_ok_hsl(get_hue(index), 1, 0.5)
 
 static func to_skills(from: int) -> Array[ String ]:
 	var labels : Array[ String ]
@@ -26,6 +30,16 @@ static func to_skills(from: int) -> Array[ String ]:
 		from >>= 1
 	
 	return labels
+
+static func to_indecies(from: int) -> Array[ int ]:
+	var indecies : Array[ int ]
+	var index : int = 0
+	while from > 0:
+		if from & 1 == 1: indecies.append( index )
+		index += 1
+		from >>= 1
+	
+	return indecies
 
 static func to_int(from: Array[ String ]) -> int:
 	var val : int = 0

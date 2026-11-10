@@ -14,7 +14,7 @@
 	"slide-show": [ "Debug/Debug1/pair0", "Debug/Debug1/pair0" ],
 	"related-links": [
 		{
-			"display-test": "Github Page",
+			"display-text": "Github Page",
 			"url": "https://github.com/ZRedCon/InteractivePortfolio"
 		}
 	]

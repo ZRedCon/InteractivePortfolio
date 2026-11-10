@@ -4,17 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://cycv7nkyk6opa" path="res://icon.svg" id="1_px4js"]
 [ext_resource type="Script" uid="uid://creqf0jqum84g" path="res://prefabs/content.gd" id="1_qit8j"]
 [ext_resource type="Script" uid="uid://58dgn7tedg3f" path="res://prefabs/skillsManager.gd" id="1_xnv4v"]
+[ext_resource type="Script" uid="uid://bclnaub0xcq50" path="res://prefabs/list.gd" id="4_atjpu"]
+[ext_resource type="Script" uid="uid://dhfrye32vy6ui" path="res://prefabs/slide_show.gd" id="5_eqgsw"]
 [ext_resource type="Script" uid="uid://2pxy4okyo36l" path="res://prefabs/links_manager.gd" id="5_fwjg3"]
+[ext_resource type="Script" uid="uid://krb05sgnsg8u" path="res://prefabs/exhibit_notes.gd" id="6_atjpu"]
+[ext_resource type="PackedScene" uid="uid://cxtfn1be3e2n6" path="res://prefabs/exhibit_link.tscn" id="9_gteqk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qit8j"]
 content_margin_top = 8.0
 content_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xnv4v"]
-content_margin_left = 17.0
-content_margin_top = 7.0
-content_margin_right = 17.0
-content_margin_bottom = 7.0
 
 [node name="UIExhibit" type="Control" unique_id=378705747]
 layout_mode = 3
@@ -104,27 +102,13 @@ text = "Contributions:"
 [node name="List" type="VBoxContainer" parent="Exhibit/Content/TextImportant/Contribution" unique_id=740831091]
 layout_mode = 2
 theme_override_constants/separation = 6
-
-[node name="Item" type="HBoxContainer" parent="Exhibit/Content/TextImportant/Contribution/List" unique_id=1234943359]
-editor_description = "li. The 20 px Bullet column = the ul's 1.25rem padding-left, so wrapped lines stay indented past the bullet."
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Bullet" type="Label" parent="Exhibit/Content/TextImportant/Contribution/List/Item" unique_id=1022816133]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-text = "•"
-
-[node name="Text" type="Label" parent="Exhibit/Content/TextImportant/Contribution/List/Item" unique_id=1775320806]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "I made essentially everything"
-autowrap_mode = 3
+script = ExtResource("4_atjpu")
 
 [node name="SlideShow" type="Control" parent="Exhibit/Content" unique_id=277074186]
 editor_description = "section.slide-show: flex 0 0 calc(100% / 3) + aspect-ratio 16 / 9. Min size = a third of the 1134 px content row, at 16:9 (378 x 212.625); recompute both if the SubViewport width changes. Gets stretched to the tallest column's height, like align-items: stretch."
 custom_minimum_size = Vector2(378, 212.625)
 layout_mode = 2
+script = ExtResource("5_eqgsw")
 
 [node name="Slide" type="TextureRect" parent="Exhibit/Content/SlideShow" unique_id=1975133973]
 editor_description = "img: position absolute + inset 0 = full-rect anchors; object-fit: contain = keep aspect centered; image-rendering: pixelated = nearest filter. The icon is only a stand-in for the real image."
@@ -152,18 +136,7 @@ text = "Notes:"
 [node name="Notes" type="VBoxContainer" parent="Exhibit/Content/TextUnimportant" unique_id=1794597078]
 layout_mode = 2
 theme_override_constants/separation = 11
-
-[node name="Note" type="Label" parent="Exhibit/Content/TextUnimportant/Notes" unique_id=913985454]
-layout_mode = 2
-theme_override_font_sizes/font_size = 15
-text = "This took a lot of work"
-autowrap_mode = 3
-
-[node name="Note2" type="Label" parent="Exhibit/Content/TextUnimportant/Notes" unique_id=1781679964]
-layout_mode = 2
-theme_override_font_sizes/font_size = 15
-text = "I figured that since I'm better at game design than web design, and my protfolio is about games, why not make it a game?"
-autowrap_mode = 3
+script = ExtResource("6_atjpu")
 
 [node name="Links" type="HFlowContainer" parent="Exhibit" unique_id=1101634949]
 layout_mode = 2
@@ -172,8 +145,5 @@ theme_override_constants/v_separation = 12
 alignment = 1
 script = ExtResource("5_fwjg3")
 
-[node name="Link" type="Button" parent="Exhibit/Links" unique_id=338849690]
-editor_description = "a: 0.375em 1em padding + 1px border = content margins of 7 and 17."
+[node name="Link" parent="Exhibit/Links" unique_id=1938243887 instance=ExtResource("9_gteqk")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xnv4v")
-text = "Github Page"

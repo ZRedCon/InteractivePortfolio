@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ckr6t5v373kqy"]
+
+[ext_resource type="Script" uid="uid://bcrjxnen8b7ff" path="res://prefabs/list_item.gd" id="1_yfs1g"]
+
+[node name="ListItem" type="HBoxContainer" unique_id=1192475036]
+editor_description = "li. The 20 px Bullet column = the ul's 1.25rem padding-left, so wrapped lines stay indented past the bullet."
+theme_override_constants/separation = 0
+script = ExtResource("1_yfs1g")
+
+[node name="Bullet" type="Label" parent="." unique_id=1111313806]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+text = "•"
+
+[node name="Text" type="Label" parent="." unique_id=462115385]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "I made essentially everything"
+autowrap_mode = 3
