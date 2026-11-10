@@ -33,6 +33,7 @@ enabled=PackedStringArray("res://addons/map_painter/plugin.cfg")
 [global_group]
 
 Floor="Something the player is expected to be able to stand on"
+Clickable="Something that the player can click"
 
 [input]
 
