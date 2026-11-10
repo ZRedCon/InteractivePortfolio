@@ -1,14 +1,12 @@
 [gd_scene format=3 uid="uid://cxtfn1be3e2n6"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xnv4v"]
-content_margin_left = 17.0
-content_margin_top = 7.0
-content_margin_right = 17.0
-content_margin_bottom = 7.0
-
-[node name="Link" type="Button" unique_id=1938243887]
+[node name="Link" type="LinkButton" unique_id=1872143662]
 editor_description = "a: 0.375em 1em padding + 1px border = content margins of 7 and 17."
+offset_right = 129.0
+offset_bottom = 37.0
 theme_override_colors/font_color = Color(0, 0.62787163, 1.5561339, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xnv4v")
+theme_override_colors/font_pressed_color = Color(0.4509804, 0.3372549, 0.87058824, 1)
+theme_override_colors/font_hover_color = Color(0.43160236, 0.6371645, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.4509804, 0.3372549, 0.87058824, 1)
 text = "Github Page"
 text_direction = 1

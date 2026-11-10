@@ -51,21 +51,28 @@ function convertToContribution(contributions) {
 function convertToLinks(links) {
     let output = `<section class="links">`;
     for (const item of links) {
-        output += `<a href="${item["url"]}">${item["display-test"]}</a>`;
+        output += `<a href="${item["url"]}">${item["display-text"]}</a>`;
     }
     return output + `</section>`;
 }
 
-//TODO
+// The images, plus (when there's more than one) the arrows and the row of dots that marks the
+// current image. slideShow.js makes them move. No images = an empty section, which CSS hides.
 function convertToSlideShow(slideShow, name) {
     let output = `<section class="slide-show">`;
 
     for (const item of slideShow) {
-        output += `
-        <img src="assets/images/${item}.png" alt="Image for: ${name}">`;
+        output += `<img src="assets/images/${item}.png" alt="Image for: ${name}" draggable="false">`;
     }
-    console.log(output);
-    //return `<section class="slide-show"><img src="assets/images/${slideShow[0]}.png" alt="Placeholder: magenta and black checkerboard"></section>`;
+    if (slideShow.length > 1) {
+        output += `<button class="slide-arrow prev" type="button" aria-label="Previous image"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>`;
+        output += `<button class="slide-arrow next" type="button" aria-label="Next image"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>`;
+        output += `<div class="slide-dots" aria-hidden="true">`;
+        for (let i = 0; i < slideShow.length; i++) {
+            output += i === 0 ? `<span class="current"></span>` : `<span></span>`;
+        }
+        output += `</div>`;
+    }
     return output + `</section>`;
 }
 

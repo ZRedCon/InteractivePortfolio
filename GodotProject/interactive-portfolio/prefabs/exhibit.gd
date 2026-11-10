@@ -43,11 +43,12 @@ func set_values(exhibit_name: String, desc: String,
 	slide_show_holder.remove_items()					# slideshow
 	for slide in slide_show:
 		slide_show_holder.add_item( slide )
-	notes_holder.remove_items()							# supplementary_links
+	notes_holder.remove_items()							# notes
 	for note in notes:
 		notes_holder.add_item( note )
+	links.remove_items()								# supplementary_links
 	for link in sup_links:
-		print( sup_links )
+		links.add_item( link )
 	
 
 func _ready() -> void:
@@ -58,7 +59,7 @@ func _ready() -> void:
 				511, 
 				PackedStringArray([ "contribution1", "contribution1" ]), 
 				PackedStringArray([ "note1", "note2" ]), 
-				PackedStringArray([ "img1", "img2" ]),
+				PackedStringArray([ "Debug/Debug1/pair0", "Debug/Debug1/pair1" ]),
 				[
 					{ "display-text": "Github", "url": "https://github.com/ZRedCon/InteractivePortfolio"},
 					{ "display-text": "Github2", "url": "https://github.com/ZRedCon/InteractivePortfolio"},

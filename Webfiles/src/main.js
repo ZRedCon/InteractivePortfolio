@@ -1,4 +1,5 @@
 import * as ToHTML from './entryToExhibit.js'
+import { SlideShow } from './slideShow.js'
 
 const DATA_PATH = "assets/data/";
 const DATA_INDEX_PATH = "assets/data-index.json";
@@ -29,8 +30,12 @@ window.onload = async () => {
     const entries = await Promise.all(fileNames.map(loadEntry));
     objects = entries.filter((entry) => entry !== null);
     console.log("Parsed objects: ", objects);
+    const exhibits = document.querySelector("#exhibits");
     for (const item of objects) {
         let conversion = ToHTML.getHTMLFromEntry( item );
-        document.querySelector("#exhibits").innerHTML += conversion;
+        // Adds the exhibit after the others without rebuilding them. (innerHTML += rebuilds every
+        // exhibit already there, and the rebuilt slideshows would lose their clicks and drags.)
+        exhibits.insertAdjacentHTML("beforeend", conversion);
+        new SlideShow(exhibits.lastElementChild.querySelector(".slide-show"));
     }
 };

@@ -8,11 +8,36 @@
 [ext_resource type="Script" uid="uid://dhfrye32vy6ui" path="res://prefabs/slide_show.gd" id="5_eqgsw"]
 [ext_resource type="Script" uid="uid://2pxy4okyo36l" path="res://prefabs/links_manager.gd" id="5_fwjg3"]
 [ext_resource type="Script" uid="uid://krb05sgnsg8u" path="res://prefabs/exhibit_notes.gd" id="6_atjpu"]
-[ext_resource type="PackedScene" uid="uid://cxtfn1be3e2n6" path="res://prefabs/exhibit_link.tscn" id="9_gteqk"]
+[ext_resource type="PackedScene" uid="uid://cc84u6s1hq2lj" path="res://prefabs/slide.tscn" id="10_sllkz"]
+[ext_resource type="PackedScene" uid="uid://ctqw7kxvyuo63" path="res://prefabs/slide_dot.tscn" id="11_8o4o5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qit8j"]
 content_margin_top = 8.0
 content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_839nz"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_csytq"]
+bg_color = Color(0, 0, 0, 0.45)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3tmo"]
+bg_color = Color(0, 0, 0, 0.85)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31mtn"]
+bg_color = Color(0, 0, 0, 0.7)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
 
 [node name="UIExhibit" type="Control" unique_id=378705747]
 layout_mode = 3
@@ -105,23 +130,114 @@ theme_override_constants/separation = 6
 script = ExtResource("4_atjpu")
 
 [node name="SlideShow" type="Control" parent="Exhibit/Content" unique_id=277074186]
-editor_description = "section.slide-show: flex 0 0 calc(100% / 3) + aspect-ratio 16 / 9. Min size = a third of the 1134 px content row, at 16:9 (378 x 212.625); recompute both if the SubViewport width changes. Gets stretched to the tallest column's height, like align-items: stretch."
+editor_description = "section.slide-show: flex 0 0 calc(100% / 3) + aspect-ratio 16 / 9. Min size = a third of the 1134 px content row, at 16:9 (378 x 212.625); recompute both if the SubViewport width changes. Gets stretched to the tallest column's height, like align-items: stretch. slide_show.gd runs it (src/slideShow.js on the website)."
 custom_minimum_size = Vector2(378, 212.625)
 layout_mode = 2
 script = ExtResource("5_eqgsw")
 
-[node name="Slide" type="TextureRect" parent="Exhibit/Content/SlideShow" unique_id=1975133973]
-editor_description = "img: position absolute + inset 0 = full-rect anchors; object-fit: contain = keep aspect centered; image-rendering: pixelated = nearest filter. The icon is only a stand-in for the real image."
-texture_filter = 1
+[node name="Slides" type="Panel" parent="Exhibit/Content/SlideShow" unique_id=1246592542]
+editor_description = "The frame: section.slide-show's black background, and overflow: hidden = clip_contents. slide_show.gd puts one prefabs/slide.tscn per image in here."
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_839nz")
+
+[node name="Slide" parent="Exhibit/Content/SlideShow/Slides" unique_id=1917369586 instance=ExtResource("10_sllkz")]
+editor_description = "Placeholder so the editor shows an image. slide_show.gd removes it when the game runs."
+layout_mode = 1
 texture = ExtResource("1_px4js")
-expand_mode = 1
-stretch_mode = 5
+
+[node name="PrevArrow" type="Button" parent="Exhibit/Content/SlideShow" unique_id=1246171231]
+editor_description = ".slide-arrow.prev: a 2.25rem (36 px) circle, 0.5rem (8 px) in from the left edge, vertically centered."
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -18.0
+offset_right = 44.0
+offset_bottom = 18.0
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_csytq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l3tmo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_31mtn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_l3tmo")
+
+[node name="Chevron" type="Line2D" parent="Exhibit/Content/SlideShow/PrevArrow" unique_id=1946046333]
+points = PackedVector2Array(21, 11, 14, 18, 21, 25)
+width = 3.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="NextArrow" type="Button" parent="Exhibit/Content/SlideShow" unique_id=775078514]
+editor_description = ".slide-arrow.next: a 2.25rem (36 px) circle, 0.5rem (8 px) in from the right edge, vertically centered."
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -18.0
+offset_right = -8.0
+offset_bottom = 18.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_csytq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l3tmo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_31mtn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_l3tmo")
+
+[node name="Chevron" type="Line2D" parent="Exhibit/Content/SlideShow/NextArrow" unique_id=347131425]
+points = PackedVector2Array(15, 11, 22, 18, 15, 25)
+width = 3.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="Dots" type="HBoxContainer" parent="Exhibit/Content/SlideShow" unique_id=524447623]
+editor_description = ".slide-dots: a centered row, 0.5rem (8 px) above the bottom edge, with 0.375rem (6 px) gaps. slide_show.gd puts one prefabs/slide_dot.tscn per image in here."
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Dot" parent="Exhibit/Content/SlideShow/Dots" unique_id=952989595 instance=ExtResource("11_8o4o5")]
+editor_description = "Placeholder dots so the editor shows the marker (this one drawn as the current image). slide_show.gd replaces them when the game runs."
+modulate = Color(1, 1, 1, 1)
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+
+[node name="Dot2" parent="Exhibit/Content/SlideShow/Dots" unique_id=1791579305 instance=ExtResource("11_8o4o5")]
+layout_mode = 2
+
+[node name="Dot3" parent="Exhibit/Content/SlideShow/Dots" unique_id=1656649350 instance=ExtResource("11_8o4o5")]
+layout_mode = 2
+
+[node name="Timer" type="Timer" parent="Exhibit/Content/SlideShow" unique_id=1381072604]
+editor_description = "How long each image stays before the slideshow moves to the next one."
+wait_time = 5.0
+one_shot = true
 
 [node name="TextUnimportant" type="VBoxContainer" parent="Exhibit/Content" unique_id=1454613416]
 layout_mode = 2
@@ -144,6 +260,3 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 alignment = 1
 script = ExtResource("5_fwjg3")
-
-[node name="Link" parent="Exhibit/Links" unique_id=1938243887 instance=ExtResource("9_gteqk")]
-layout_mode = 2

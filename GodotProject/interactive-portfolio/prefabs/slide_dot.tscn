@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ctqw7kxvyuo63"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sl6o8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_size = 2
+
+[node name="SlideDot" type="Panel" unique_id=2119991312]
+editor_description = "One dot in the slideshow's marker. .slide-dots span: an 8 px white circle at half brightness. slide_show.gd makes the current image's dot 12 px and fully bright."
+modulate = Color(1, 1, 1, 0.5)
+custom_minimum_size = Vector2(8, 8)
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sl6o8")

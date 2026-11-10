@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cc84u6s1hq2lj"]
+
+[node name="Slide" type="TextureRect" unique_id=597921887]
+editor_description = "One slideshow image. img: position absolute + inset 0 = full-rect anchors; object-fit: contain = keep aspect centered; image-rendering: pixelated = nearest filter. slide_show.gd loads the texture and slides it sideways."
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
