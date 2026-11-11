@@ -1,6 +1,9 @@
 class_name Room extends StaticBody3D
 
-# enum for general type
+# This contains all the exhibits that can exist in this room
+@export var exhibits : Array[ Exhibit ]
+
+# pseudo-enum for general type
 const TYPE_NONE = 0
 const TYPE_CORNER_ROOM = 1
 const TYPE_EDGE_ROOM = 2
@@ -18,7 +21,7 @@ const TYPE_CORNER_CONVEX_ROOM = 13
 const TYPE_SINGLE = 14
 
 #region border points enum
-# psuedo-enum for border points; P = positive, Z = zero, N = Negative, X and Z represent axes
+# pseudo-enum for border points; P = positive, Z = zero, N = Negative, X and Z represent axes
 const BORDER_NONE = 0
 const BORDER_PX_ZZ = 1
 const BORDER_PX_PZ = 2
@@ -87,11 +90,13 @@ static func rotate_direction(mask: int, shift: int) -> int:
 	return result
 #endregion
 
+# What type of room is this?
 var type = TYPE_NONE
 # This value represents all edges and corners that have a wall (Black | Gray on the shape index used in map_layout)
 var borders : int = BORDER_ALL
 # This contains references to all rooms (diagonal and orthoganal) that connect to this room
 var neighbors : Dictionary[ Vector2i, Room ]
+
 
 # Return true if added neighbor succesfully, if space already occupide or otherwise failed: false
 func add_neighbor(dir: Vector2i, room_ref: Room) -> bool:

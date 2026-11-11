@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://b1ojuq67yjq6" path="res://assets/images/skyboxes/wasteland_clouds_puresky_4k.hdr" id="1_6l7je"]
 [ext_resource type="PackedScene" uid="uid://bgsgwceyq1l1p" path="res://Player/controller.tscn" id="1_52fb6"]
-[ext_resource type="PackedScene" uid="uid://c241mv4likfbd" path="res://prefabs/Entry.tscn" id="3_jv6wh"]
 [ext_resource type="Script" uid="uid://buxkevr2cvt1y" path="res://Scenes/room_container.gd" id="4_x6ack"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_npwjr"]
@@ -18,6 +17,10 @@ sky = SubResource("Sky_85ri6")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bpmhk"]
 size = Vector3(20, 0, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jv6wh"]
+transparency = 1
+albedo_color = Color(0.32941177, 1, 1, 0.19215687)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_85ri6"]
 
@@ -40,10 +43,8 @@ shape = SubResource("BoxShape3D_bpmhk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1657082734 groups=["Floor"]]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_jv6wh")
 mesh = SubResource("PlaneMesh_85ri6")
-
-[node name="Node2D" parent="." unique_id=1956691089 instance=ExtResource("3_jv6wh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8746071, 0.59600925, -7.234706)
 
 [node name="RoomContainer" type="Node3D" parent="." unique_id=1771802498]
 script = ExtResource("4_x6ack")
