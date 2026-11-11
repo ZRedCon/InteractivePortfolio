@@ -1,8 +1,21 @@
 class_name Room extends StaticBody3D
 
 # enum for general type
-const TYPE_ROOM = 0
-const TYPE_HALL = 1
+const TYPE_NONE = 0
+const TYPE_CORNER_ROOM = 1
+const TYPE_EDGE_ROOM = 2
+const TYPE_ROOM = 3
+const TYPE_INTERSECTION_3_HALL = 4
+const TYPE_END_HALL = 5
+const TYPE_STRAIGHT_HALL = 6
+const TYPE_CORNER_1_EXIT_ROOM = 7
+const TYPE_CORNER_2_EXIT_ROOM = 8
+const TYPE_EDGE_EXIT_ROOM = 9
+const TYPE_CORNER_OVERLAP_ROOM = 10
+const TYPE_INTERSECTION_4_HALL = 11
+const TYPE_CORNER_HALL = 12
+const TYPE_CORNER_CONVEX_ROOM = 13
+const TYPE_SINGLE = 14
 
 #region border points enum
 # psuedo-enum for border points; P = positive, Z = zero, N = Negative, X and Z represent axes
@@ -24,6 +37,21 @@ const BORDER_LEFT = BORDER_NX_PZ | BORDER_NX_ZZ | BORDER_NX_NZ
 const BORDER_UP = BORDER_PX_PZ | BORDER_ZX_PZ | BORDER_NX_PZ
 const BORDER_RIGHT = BORDER_PX_NZ | BORDER_PX_ZZ | BORDER_PX_PZ
 const BORDER_DOWN = BORDER_NX_NZ | BORDER_ZX_NZ | BORDER_PX_NZ
+
+const BORDER_CORNER_ROOM = BORDER_UP | BORDER_LEFT
+const BORDER_EDGE_ROOM = BORDER_UP
+const BORDER_ROOM = BORDER_NONE
+const BORDER_INTERSECTION_3_HALL = BORDER_UP | BORDER_NX_NZ | BORDER_PX_NZ
+const BORDER_END_HALL = BORDER_UP | BORDER_STRAIGHT_HALL
+const BORDER_STRAIGHT_HALL = BORDER_LEFT | BORDER_RIGHT
+const BORDER_CORNER_1_EXIT_ROOM = BORDER_NX_PZ | BORDER_RIGHT 
+const BORDER_CORNER_2_EXIT_ROOM = BORDER_NX_PZ | BORDER_PX_PZ | BORDER_PX_NZ
+const BORDER_EDGE_EXIT_ROOM = BORDER_NX_PZ | BORDER_PX_PZ
+const BORDER_CORNER_OVERLAP_ROOM = BORDER_NX_PZ | BORDER_PX_NZ
+const BORDER_INTERSECTION_4_HALL = BORDER_CORNERS
+const BORDER_CORNER_HALL = BORDER_DOWN | BORDER_RIGHT | BORDER_NX_PZ
+const BORDER_CORNER_CONVEX_ROOM = BORDER_NX_PZ
+const BORDER_SINGLE = BORDER_ALL
 
 const BORDER_TYPE_TO_DIRECTION : Dictionary[ int, Vector2 ] = {
 	BORDER_PX_ZZ: Vector2(+1, 0),
@@ -47,8 +75,19 @@ const DIRECTION_TO_BORDER_TYPE : Dictionary[ Vector2i, int ] = {
 	Vector2i(+1,-1): BORDER_PX_NZ,
 }
 
+static func rotate_direction(mask: int, shift: int) -> int:
+	# Bound shift by [-8,8]
+	var shift_sign = sign(shift)
+	shift = shift_sign * (abs(shift) % 8)
+	# Shifting
+	if shift == 0: return mask
+	var inv_shift = 8 - shift
+	var result = (mask << shift) | (mask >> inv_shift) if shift < 0 else ((mask >> shift) | (mask << inv_shift))
+	result &= 0xFF
+	return result
 #endregion
 
+var type = TYPE_NONE
 # This value represents all edges and corners that have a wall (Black | Gray on the shape index used in map_layout)
 var borders : int = BORDER_ALL
 # This contains references to all rooms (diagonal and orthoganal) that connect to this room

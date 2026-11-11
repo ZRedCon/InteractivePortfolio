@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://t2k1gqlirepv"]
 
 [ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_hulef"]
+[ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="1_sp8qu"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="2_sp8qu"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_w1kd5"]
@@ -14,6 +15,7 @@ size = Vector3(7.5, 0.1, 7.5)
 size = Vector3(10, 0.1, 10)
 
 [node name="CornerConvexRoom" type="StaticBody3D" unique_id=603414453]
+script = ExtResource("1_sp8qu")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=379067312]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)

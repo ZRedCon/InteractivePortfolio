@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b1ojuq67yjq6" path="res://assets/images/skyboxes/wasteland_clouds_puresky_4k.hdr" id="1_6l7je"]
 [ext_resource type="PackedScene" uid="uid://bgsgwceyq1l1p" path="res://Player/controller.tscn" id="1_52fb6"]
 [ext_resource type="PackedScene" uid="uid://c241mv4likfbd" path="res://prefabs/Entry.tscn" id="3_jv6wh"]
+[ext_resource type="Script" uid="uid://buxkevr2cvt1y" path="res://Scenes/room_container.gd" id="4_x6ack"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_npwjr"]
 panorama = ExtResource("1_6l7je")
@@ -45,3 +46,4 @@ mesh = SubResource("PlaneMesh_85ri6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8746071, 0.59600925, -7.234706)
 
 [node name="RoomContainer" type="Node3D" parent="." unique_id=1771802498]
+script = ExtResource("4_x6ack")
