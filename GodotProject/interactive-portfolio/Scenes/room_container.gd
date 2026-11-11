@@ -1,10 +1,5 @@
 extends Node3D
 
-# Builds the museum from the MapLayout tile map. Each tile becomes the room scene for its type, turned
-# (and mirrored, when turning alone can't do it) so its walls line up with the tile's.
-
-# Every room scene fits in a square this wide centered on its origin, so it's also the distance between
-# neighboring rooms
 const ROOM_SIZE := 10.0
 
 const ROOM_SCENES : Dictionary[ int, PackedScene ] = {
@@ -27,10 +22,8 @@ const ROOM_SCENES : Dictionary[ int, PackedScene ] = {
 # Every room that's been built, by the map cell it was built from
 var rooms : Dictionary[ Vector2i, Room ]
 
-
 func _ready() -> void:
 	generate()
-
 
 func generate() -> void:
 	# First pass: build out from the start tile through each room's openings. Tiles it can't reach
@@ -52,7 +45,6 @@ func generate() -> void:
 			if other and not other.borders & Room.DIRECTION_TO_BORDER_TYPE[ -direction ]:
 				room.add_neighbor( direction, other )
 
-
 # Builds the room at a cell, then every room it leads to that hasn't been built yet
 func _build_from(start: Vector2i) -> void:
 	var to_visit : Array[ Vector2i ] = [ start ]
@@ -62,7 +54,6 @@ func _build_from(start: Vector2i) -> void:
 		var room := _spawn_room( cell )
 		for border in Room.BORDER_TYPE_TO_DIRECTION:
 			if not room.borders & border: to_visit.append( cell + Vector2i( Room.BORDER_TYPE_TO_DIRECTION[ border ] ) )
-
 
 func _spawn_room(cell: Vector2i) -> Room:
 	var type : int = MapLayout.get_room_type( cell )
@@ -86,13 +77,11 @@ func _spawn_room(cell: Vector2i) -> Room:
 	rooms[ cell ] = room
 	return room
 
-
 # How many quarter turns clockwise take walls to wanted, or -1 if no number of turns does
 static func _quarter_turns(walls: int, wanted: int) -> int:
 	for turns in 4:
 		if Room.rotate_direction( walls, turns * 2 ) == wanted: return turns
 	return -1
-
 
 # Mirrors a room left to right by moving each piece to its mirrored spot. The pieces keep their own
 # shapes, so nothing gets the negative scale that physics can't handle.

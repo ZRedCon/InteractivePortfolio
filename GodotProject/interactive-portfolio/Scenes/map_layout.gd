@@ -1,7 +1,5 @@
 extends TileMapLayer
 
-# The room type each tile in MuseumSet.png stands for, keyed by its atlas coords (x, y), the way
-# get_cell_atlas_coords() returns them
 const INDEX_TO_ROOM_TYPE : Dictionary[ Vector2i, int ] = {
 	Vector2i(0, 0): Room.TYPE_CORNER_ROOM,
 	Vector2i(1, 0): Room.TYPE_EDGE_ROOM,
@@ -22,13 +20,9 @@ const INDEX_TO_ROOM_TYPE : Dictionary[ Vector2i, int ] = {
 @export var start_tile := Vector2i.ZERO
 
 
-# The Room.TYPE_* of the tile at a cell, or Room.TYPE_NONE if there's no tile there
 func get_room_type(cell: Vector2i) -> int:
 	return INDEX_TO_ROOM_TYPE.get( get_cell_atlas_coords( cell ), Room.TYPE_NONE )
 
-
-# The Room.BORDER_* walls around the tile at a cell: its type's walls, flipped the same way the tile
-# is drawn. Map columns run along +X and rows along +Z, so map directions are room directions.
 func get_borders(cell: Vector2i) -> int:
 	var flips := get_cell_alternative_tile( cell )
 	var walls : int = Room.TYPE_TO_BORDERS[ get_room_type( cell ) ]

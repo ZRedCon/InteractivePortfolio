@@ -21,10 +21,9 @@ const TYPE_CORNER_CONVEX_ROOM = 13
 const TYPE_SINGLE = 14
 
 #region border points enum
-# pseudo-enum for border points; P = positive, Z = zero, N = Negative, X and Z represent axes
-# Directions are as seen from above, the same way MapLayout draws the map: +X is right and +Z is down
-# (one row further down the map), so up is -Z, the way Godot cameras face by default. Counting up
-# through the bits steps clockwise around the room, 45 degrees at a time.
+# pseudo-enum for border points; P = positive, Z = zero, N = Negative, X and Z represent axes.
+# Directions are as seen from above, the same way MapLayout draws the map: +X is right and +Z is down.
+# Counting up through the bits steps clockwise around the room, 45 degrees at a time.
 const BORDER_NONE = 0
 const BORDER_PX_ZZ = 1
 const BORDER_PX_PZ = 2
@@ -44,7 +43,6 @@ const BORDER_UP = BORDER_PX_NZ | BORDER_ZX_NZ | BORDER_NX_NZ
 const BORDER_RIGHT = BORDER_PX_NZ | BORDER_PX_ZZ | BORDER_PX_PZ
 const BORDER_DOWN = BORDER_NX_PZ | BORDER_ZX_PZ | BORDER_PX_PZ
 
-# Each type's walls before it's turned. These match both its scene in prefabs/rooms and its tile in MuseumSet.png
 const BORDER_CORNER_ROOM = BORDER_UP | BORDER_LEFT
 const BORDER_EDGE_ROOM = BORDER_UP
 const BORDER_ROOM = BORDER_NONE
@@ -99,10 +97,8 @@ const DIRECTION_TO_BORDER_TYPE : Dictionary[ Vector2i, int ] = {
 	Vector2i(+1,-1): BORDER_PX_NZ,
 }
 
-# Turns a mask around the room 45 degrees per step: shift = 2 is a quarter turn clockwise (seen from
-# above, or on the map) and shift = -2 is a quarter turn counter-clockwise
+# Rotates 45, +shift = clockwise, -shift = counter-clockwise
 static func rotate_direction(mask: int, shift: int) -> int:
-	# Any shift lands on one of 8 steps, and a counter-clockwise step is 7 clockwise ones
 	shift = posmod( shift, 8 )
 	return ((mask << shift) | (mask >> (8 - shift))) & BORDER_ALL
 
@@ -122,7 +118,6 @@ var type = TYPE_NONE
 var borders : int = BORDER_ALL
 # This contains references to all rooms (diagonal and orthoganal) that connect to this room
 var neighbors : Dictionary[ Vector2i, Room ]
-
 
 # Return true if added neighbor succesfully, if space already occupide or otherwise failed: false
 func add_neighbor(dir: Vector2i, room_ref: Room) -> bool:
