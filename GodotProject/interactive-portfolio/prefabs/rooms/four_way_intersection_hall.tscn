@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://ehfv3by5urnp"]
+
+[ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_egw2v"]
+[ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="2_pt7cb"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6qsta"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c4i18"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x1w70"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qr2sl"]
+size = Vector3(5, 0.1, 10)
+
+[node name="FourWayIntersectionHall" type="StaticBody3D" unique_id=1597239778]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=885198482]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+material_override = ExtResource("1_egw2v")
+mesh = SubResource("PlaneMesh_6qsta")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2099789627]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0044879913, 0.017671585, -0.0147743225)
+shape = SubResource("BoxShape3D_c4i18")
+
+[node name="Carpet2" type="MeshInstance3D" parent="." unique_id=773485659 groups=["Floor"]]
+transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+material_override = ExtResource("2_pt7cb")
+mesh = SubResource("BoxMesh_x1w70")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=857920565 groups=["Floor"]]
+shape = SubResource("BoxShape3D_qr2sl")
+
+[node name="Carpet3" type="MeshInstance3D" parent="." unique_id=2045365369 groups=["Floor"]]
+transform = Transform3D(-2.1855695e-07, 0, -10, 0, 0.1, 0, 5, 0, -4.371139e-07, 0, 0, 0)
+material_override = ExtResource("2_pt7cb")
+mesh = SubResource("BoxMesh_x1w70")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=582165622 groups=["Floor"]]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_qr2sl")

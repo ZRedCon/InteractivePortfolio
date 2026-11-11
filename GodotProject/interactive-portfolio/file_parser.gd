@@ -1,4 +1,4 @@
-extends Node
+class_name FileIO extends Node
 
 const DATA_PATH : String = "assets/data/"
 const DATA_INDEX_PATH : String = "assets/data-index.json"
@@ -7,7 +7,11 @@ const WEBFILES_FROM_PROJECT : String = "../../Webfiles/"
 const WEBFILES_FROM_PAGE : String = "../"
 const JAVASCRIPT_EVAL_LABEL : String = "new URL('" + WEBFILES_FROM_PAGE + "', location.href).href"
 
-# Editor only. The Portfolio Data plugin builds the index from this too, so both see the same files.
+const IMAGES_PATH : String = "assets/images/"
+const IMAGE_EXTENSION : String = ".png"
+
+static var Instance : FileParser
+
 static func list_entry_files() -> PackedStringArray:
 	var data_dir := get_webfiles_dir().path_join( DATA_PATH )
 	return DirAccess.get_files_at( data_dir ) if DirAccess.dir_exists_absolute( data_dir ) else PackedStringArray()
@@ -15,12 +19,39 @@ static func list_entry_files() -> PackedStringArray:
 static func get_webfiles_dir() -> String:
 	return ProjectSettings.globalize_path( "res://" ).path_join( WEBFILES_FROM_PROJECT ).simplify_path()
 
+func get_image(file_path: String) -> Image:
+	file_path = IMAGES_PATH + file_path + IMAGE_EXTENSION
+	var image : Image
+	if _is_web_mode:
+		var request := HTTPRequest.new()
+		add_child( request )
+		var response : Array = []
+		if request.request( JavaScriptBridge.eval( JAVASCRIPT_EVAL_LABEL ) + file_path ) == OK: response = await request.request_completed
+		request.queue_free()
+		
+		var bytes = (PackedByteArray() if (
+			response.is_empty() or 
+			response[ 0 ] != HTTPRequest.RESULT_SUCCESS or 
+			response[ 1 ] != 200
+			) else response[ 3 ])
+		
+		if not bytes.is_empty():
+			image = Image.new()
+			if image.load_png_from_buffer( bytes ) != OK: image = null
+	else:
+		var disk_path := get_webfiles_dir().path_join( file_path )
+		if FileAccess.file_exists( disk_path ): image = Image.load_from_file( disk_path )
+	
+	if image == null: printerr( "Bad image at: ", file_path )
+	return image
+
 var _is_web_mode : bool
 var entries : Array[ Entry ]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_is_web_mode = OS.has_feature( "web" )
+	Instance = self
 	entries = await parse_for_web() if OS.has_feature( "web" ) else parse_for_pc()
 
 #region Web pipeline

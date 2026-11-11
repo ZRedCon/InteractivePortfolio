@@ -20,9 +20,6 @@ size = Vector3(20, 0, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_85ri6"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_jv6wh"]
-viewport_path = NodePath("SubViewport")
-
 [node name="MainScene" type="Node3D" unique_id=217244631]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1382339994]
@@ -46,4 +43,5 @@ mesh = SubResource("PlaneMesh_85ri6")
 
 [node name="Node2D" parent="." unique_id=1956691089 instance=ExtResource("3_jv6wh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8746071, 0.59600925, -7.234706)
-texture = SubResource("ViewportTexture_jv6wh")
+
+[node name="RoomContainer" type="Node3D" parent="." unique_id=1771802498]

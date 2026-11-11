@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b8hdv61qpbgdc"]
+
+[ext_resource type="Texture2D" uid="uid://bke6ip5atdk25" path="res://assets/images/MuseamTextures/debug/carpet.webp" id="1_7y3n2"]
+
+[resource]
+albedo_texture = ExtResource("1_7y3n2")
+uv1_scale = Vector3(15, 20, 0)
+texture_filter = 2

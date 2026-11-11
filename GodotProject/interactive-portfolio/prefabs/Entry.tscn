@@ -1,20 +1,14 @@
 [gd_scene format=3 uid="uid://c241mv4likfbd"]
 
 [ext_resource type="Script" uid="uid://vu2oc6skf33u" path="res://prefabs/entry.gd" id="1_vjtbd"]
-[ext_resource type="PackedScene" uid="uid://c3ie8m45lxi00" path="res://prefabs/ui_exhibit.tscn" id="2_dfqob"]
+[ext_resource type="Texture2D" uid="uid://cycv7nkyk6opa" path="res://icon.svg" id="2_icon"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vjtbd"]
-viewport_path = NodePath("SubViewport")
-
-[node name="EntryNode" type="Sprite3D" unique_id=1943423101]
-pixel_size = 0.004
-texture = SubResource("ViewportTexture_vjtbd")
+[node name="EntryNode" type="Node3D" unique_id=800036504]
 script = ExtResource("1_vjtbd")
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=1043445019]
-editor_description = "The exhibit card. 1200 px wide = .exhibit's CSS max-width (75rem), the width it shows at on desktop. The height only fits this placeholder content."
-transparent_bg = true
-size = Vector2i(1064, 475)
-render_target_update_mode = 4
+[node name="Label3D" type="Label3D" parent="." unique_id=118950599]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8218436, 0)
+text = "Entry Name"
 
-[node name="UIExhibit" parent="SubViewport" unique_id=378705747 instance=ExtResource("2_dfqob")]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1503959665]
+texture = ExtResource("2_icon")

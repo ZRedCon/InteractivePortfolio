@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cjwywcnslbiw2"]
+
+[ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="1_5jymc"]
+[ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_l2vyw"]
+[ext_resource type="Material" uid="uid://gh7rd5ns3sdx" path="res://assets/materials/cobblestone.tres" id="3_fiyc8"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bpmhk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_85ri6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xvq4s"]
+size = Vector3(5, 0.1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_85ri6"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_npwjr"]
+size = Vector3(0, 10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_npwjr"]
+size = Vector3(0, 10, 10)
+
+[node name="StraightRoom" type="StaticBody3D" unique_id=192441953]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=678701066]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+material_override = ExtResource("1_l2vyw")
+mesh = SubResource("PlaneMesh_bpmhk")
+
+[node name="Carpet" type="MeshInstance3D" parent="." unique_id=1706712257 groups=["Floor"]]
+transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+material_override = ExtResource("1_5jymc")
+mesh = SubResource("BoxMesh_85ri6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=857057960 groups=["Floor"]]
+shape = SubResource("BoxShape3D_xvq4s")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=127543716]
+shape = SubResource("BoxShape3D_85ri6")
+
+[node name="WallNX" type="MeshInstance3D" parent="." unique_id=493240368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4.5, 0)
+material_override = ExtResource("3_fiyc8")
+mesh = SubResource("BoxMesh_npwjr")
+
+[node name="WallPX" type="MeshInstance3D" parent="." unique_id=1817386389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4.5, 0)
+material_override = ExtResource("3_fiyc8")
+mesh = SubResource("BoxMesh_npwjr")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1138784880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, 0)
+shape = SubResource("BoxShape3D_npwjr")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=1819711316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0)
+shape = SubResource("BoxShape3D_npwjr")

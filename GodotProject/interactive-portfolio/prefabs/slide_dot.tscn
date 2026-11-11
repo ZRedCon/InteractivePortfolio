@@ -6,6 +6,7 @@ corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 1)
 shadow_size = 2
 
 [node name="SlideDot" type="Panel" unique_id=2119991312]

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://4rn2ef0fesh"]
+
+[ext_resource type="Texture2D" uid="uid://bq4or057utxri" path="res://assets/images/MuseamTextures/debug/Bricks.webp" id="1_3vq05"]
+
+[resource]
+albedo_texture = ExtResource("1_3vq05")
+uv1_scale = Vector3(10, 10, 1)
+texture_filter = 2

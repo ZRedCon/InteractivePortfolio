@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://gh7rd5ns3sdx"]
+
+[ext_resource type="Texture2D" uid="uid://dodp5snfvh2wx" path="res://assets/images/MuseamTextures/debug/cobblestone.webp" id="1_rapp2"]
+
+[resource]
+albedo_texture = ExtResource("1_rapp2")
+uv1_scale = Vector3(30, 20, 1)
+texture_filter = 2

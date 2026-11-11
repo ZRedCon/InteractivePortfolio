@@ -6,27 +6,23 @@ class_name SlideShow extends Control
 
 const SLIDE := preload("res://prefabs/slide.tscn")
 const SLIDE_DOT := preload("res://prefabs/slide_dot.tscn")
-const FileParserScript := preload("res://file_parser.gd")
 
-const IMAGES_PATH : String = "assets/images/"
-const IMAGE_EXTENSION : String = ".png"
-const SLIDE_SECONDS : float = 0.4			# How long one slide animation takes
-const DRAG_SWITCH_FRACTION : float = 0.25	# Dragging further than this much of the width switches images
+
+const SLIDE_SECONDS : float = 0.4
+const DRAG_SWITCH_FRACTION : float = 0.25
 const DOT_SIZE : float = 8.0
 const CURRENT_DOT_SIZE : float = 12.0
-const DOT_ALPHA : float = 0.5				# Brightness of the dots that aren't the current image
+const DOT_ALPHA : float = 0.5
 
 @onready var slides_holder : Control = $Slides
 @onready var dots_holder : Container = $Dots
 @onready var prev_arrow : Button = $PrevArrow
 @onready var next_arrow : Button = $NextArrow
-@onready var timer : Timer = $Timer			# Its wait_time is how long each image stays
+@onready var timer : Timer = $Timer
 
 var _slides : Array[ TextureRect ]
 var _dots : Array[ Control ]
 var _current : int = 0
-# Where the current image sits, in slide widths: 0 = in the frame, 1 = one full width to the right.
-# Switching images starts the new one off to the side it comes from, then eases this back to 0.
 var _offset : float = 0.0:
 	set(value):
 		_offset = value
@@ -41,7 +37,7 @@ func _ready() -> void:
 	next_arrow.pressed.connect( _go.bind( 1 ) )
 	timer.timeout.connect( _go.bind( 1 ) )
 	resized.connect( _place_slides )
-	remove_items()	# The slide and dots in the scene are only placeholders for the editor
+	remove_items()
 
 func add_item(path: String) -> void:
 	var slide := SLIDE.instantiate() as TextureRect
@@ -51,8 +47,8 @@ func add_item(path: String) -> void:
 	dots_holder.add_child( dot )
 	_dots.append( dot )
 	_refresh()
-	if _slides.size() == 2: timer.start()	# Now there's another image to rotate to
-	_load_image( slide, IMAGES_PATH + path + IMAGE_EXTENSION )
+	if _slides.size() == 2: timer.start()
+	_load_image( slide, path )
 
 func remove_items() -> void:
 	for holder in [ slides_holder, dots_holder ]:
@@ -72,7 +68,7 @@ func remove_items() -> void:
 # Shows only the parts that make sense for how many images there are.
 func _refresh() -> void:
 	var can_move := _slides.size() > 1
-	visible = not _slides.is_empty()	# Like the website: no images, no slideshow
+	visible = not _slides.is_empty()
 	prev_arrow.visible = can_move
 	next_arrow.visible = can_move
 	dots_holder.visible = can_move
@@ -86,11 +82,11 @@ func _refresh() -> void:
 func _go(direction: int) -> void:
 	if _slides.size() < 2: return
 	_current = wrapi( _current + direction, 0, _slides.size() )
-	_offset = clampf( _offset + direction, -1.0, 1.0 )	# The new image starts off to that side,
-	_slide_home()										# then slides into the frame
+	_offset = clampf( _offset + direction, -1.0, 1.0 )
+	_slide_home()
 	_update_dots()
 	timer.paused = false
-	timer.start()	# The new image gets its full time
+	timer.start()
 
 func _slide_home() -> void:
 	if _tween: _tween.kill()
@@ -101,7 +97,7 @@ func _slide_home() -> void:
 # beside it in the gap it leaves. All the others are hidden.
 func _place_slides() -> void:
 	if _slides.is_empty(): return
-	var side : int = -1 if _offset > 0.0 else 1	# The neighbor that's coming into view
+	var side : int = -1 if _offset > 0.0 else 1
 	var neighbor : int = wrapi( _current + side, 0, _slides.size() ) if _offset != 0.0 else _current
 	for i in _slides.size():
 		_slides[ i ].visible = i == _current or i == neighbor
@@ -130,7 +126,7 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 
 func _start_drag(x: float) -> void:
-	if _tween: _tween.kill()	# Catches the images wherever they are, even halfway through a slide
+	if _tween: _tween.kill()
 	_dragging = true
 	_drag_start_x = x
 	_drag_start_offset = _offset
@@ -139,10 +135,9 @@ func _start_drag(x: float) -> void:
 func _end_drag() -> void:
 	_dragging = false
 	var moved := _offset - _drag_start_offset
-	# Pulled far enough, toward the image coming into view: switch to it (which resets the timer)
 	if absf( _offset ) > DRAG_SWITCH_FRACTION and signf( moved ) == signf( _offset ):
 		_go( -1 if _offset > 0.0 else 1 )
-	else:	# Otherwise slide back, and the timer carries on from where it paused
+	else:
 		_slide_home()
 		timer.paused = false
 
@@ -150,29 +145,8 @@ func _end_drag() -> void:
 
 #region Image loading
 
-# Editor runs read the image from disk and web builds download it, the same way FileParser reads entries.
 func _load_image(slide: TextureRect, file_path: String) -> void:
-	var image : Image
-	if OS.has_feature( "web" ):
-		var bytes := await _download( JavaScriptBridge.eval( FileParserScript.JAVASCRIPT_EVAL_LABEL ) + file_path )
-		if not bytes.is_empty():
-			image = Image.new()
-			if image.load_png_from_buffer( bytes ) != OK: image = null
-	else:
-		var disk_path := FileParserScript.get_webfiles_dir().path_join( file_path )
-		if FileAccess.file_exists( disk_path ): image = Image.load_from_file( disk_path )
-
-	if image == null: printerr( "Bad image at: ", file_path )
-	elif is_instance_valid( slide ): slide.texture = ImageTexture.create_from_image( image )
-
-func _download(url: String) -> PackedByteArray:
-	var request := HTTPRequest.new()
-	add_child( request )
-	var response : Array = []
-	if request.request( url ) == OK: response = await request.request_completed
-	request.queue_free()
-
-	if response.is_empty() or response[ 0 ] != HTTPRequest.RESULT_SUCCESS or response[ 1 ] != 200: return PackedByteArray()
-	return response[ 3 ]
+	var image : Image = await FileIO.Instance.get_image( file_path )
+	if is_instance_valid( slide ): slide.texture = ImageTexture.create_from_image( image )
 
 #endregion
