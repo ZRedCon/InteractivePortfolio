@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://nisiakgic0vt"]
 
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="1_si0tb"]
+[ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="2_room"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_re7td"]
 
@@ -8,6 +9,7 @@
 size = Vector3(10, 0.1, 10)
 
 [node name="FullRoom" type="StaticBody3D" unique_id=258967468]
+script = ExtResource("2_room")
 
 [node name="Carpet" type="MeshInstance3D" parent="." unique_id=1354914698 groups=["Floor"]]
 transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)

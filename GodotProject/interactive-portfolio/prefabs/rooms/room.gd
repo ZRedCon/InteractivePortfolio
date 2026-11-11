@@ -22,6 +22,9 @@ const TYPE_SINGLE = 14
 
 #region border points enum
 # pseudo-enum for border points; P = positive, Z = zero, N = Negative, X and Z represent axes
+# Directions are as seen from above, the same way MapLayout draws the map: +X is right and +Z is down
+# (one row further down the map), so up is -Z, the way Godot cameras face by default. Counting up
+# through the bits steps clockwise around the room, 45 degrees at a time.
 const BORDER_NONE = 0
 const BORDER_PX_ZZ = 1
 const BORDER_PX_PZ = 2
@@ -37,24 +40,42 @@ const BORDER_CORNERS = BORDER_PX_PZ | BORDER_NX_PZ | BORDER_NX_NZ | BORDER_PX_NZ
 const BORDER_EDGES = BORDER_PX_ZZ | BORDER_ZX_PZ | BORDER_NX_ZZ | BORDER_ZX_NZ
 
 const BORDER_LEFT = BORDER_NX_PZ | BORDER_NX_ZZ | BORDER_NX_NZ
-const BORDER_UP = BORDER_PX_PZ | BORDER_ZX_PZ | BORDER_NX_PZ
+const BORDER_UP = BORDER_PX_NZ | BORDER_ZX_NZ | BORDER_NX_NZ
 const BORDER_RIGHT = BORDER_PX_NZ | BORDER_PX_ZZ | BORDER_PX_PZ
-const BORDER_DOWN = BORDER_NX_NZ | BORDER_ZX_NZ | BORDER_PX_NZ
+const BORDER_DOWN = BORDER_NX_PZ | BORDER_ZX_PZ | BORDER_PX_PZ
 
+# Each type's walls before it's turned. These match both its scene in prefabs/rooms and its tile in MuseumSet.png
 const BORDER_CORNER_ROOM = BORDER_UP | BORDER_LEFT
 const BORDER_EDGE_ROOM = BORDER_UP
 const BORDER_ROOM = BORDER_NONE
-const BORDER_INTERSECTION_3_HALL = BORDER_UP | BORDER_NX_NZ | BORDER_PX_NZ
+const BORDER_INTERSECTION_3_HALL = BORDER_UP | BORDER_NX_PZ | BORDER_PX_PZ
 const BORDER_END_HALL = BORDER_UP | BORDER_STRAIGHT_HALL
 const BORDER_STRAIGHT_HALL = BORDER_LEFT | BORDER_RIGHT
-const BORDER_CORNER_1_EXIT_ROOM = BORDER_NX_PZ | BORDER_RIGHT 
-const BORDER_CORNER_2_EXIT_ROOM = BORDER_NX_PZ | BORDER_PX_PZ | BORDER_PX_NZ
-const BORDER_EDGE_EXIT_ROOM = BORDER_NX_PZ | BORDER_PX_PZ
-const BORDER_CORNER_OVERLAP_ROOM = BORDER_NX_PZ | BORDER_PX_NZ
+const BORDER_CORNER_1_EXIT_ROOM = BORDER_NX_NZ | BORDER_RIGHT
+const BORDER_CORNER_2_EXIT_ROOM = BORDER_NX_NZ | BORDER_PX_NZ | BORDER_PX_PZ
+const BORDER_EDGE_EXIT_ROOM = BORDER_NX_NZ | BORDER_PX_NZ
+const BORDER_CORNER_OVERLAP_ROOM = BORDER_NX_NZ | BORDER_PX_PZ
 const BORDER_INTERSECTION_4_HALL = BORDER_CORNERS
-const BORDER_CORNER_HALL = BORDER_DOWN | BORDER_RIGHT | BORDER_NX_PZ
-const BORDER_CORNER_CONVEX_ROOM = BORDER_NX_PZ
+const BORDER_CORNER_HALL = BORDER_DOWN | BORDER_RIGHT | BORDER_NX_NZ
+const BORDER_CORNER_CONVEX_ROOM = BORDER_NX_NZ
 const BORDER_SINGLE = BORDER_ALL
+
+const TYPE_TO_BORDERS : Dictionary[ int, int ] = {
+	TYPE_CORNER_ROOM: BORDER_CORNER_ROOM,
+	TYPE_EDGE_ROOM: BORDER_EDGE_ROOM,
+	TYPE_ROOM: BORDER_ROOM,
+	TYPE_INTERSECTION_3_HALL: BORDER_INTERSECTION_3_HALL,
+	TYPE_END_HALL: BORDER_END_HALL,
+	TYPE_STRAIGHT_HALL: BORDER_STRAIGHT_HALL,
+	TYPE_CORNER_1_EXIT_ROOM: BORDER_CORNER_1_EXIT_ROOM,
+	TYPE_CORNER_2_EXIT_ROOM: BORDER_CORNER_2_EXIT_ROOM,
+	TYPE_EDGE_EXIT_ROOM: BORDER_EDGE_EXIT_ROOM,
+	TYPE_CORNER_OVERLAP_ROOM: BORDER_CORNER_OVERLAP_ROOM,
+	TYPE_INTERSECTION_4_HALL: BORDER_INTERSECTION_4_HALL,
+	TYPE_CORNER_HALL: BORDER_CORNER_HALL,
+	TYPE_CORNER_CONVEX_ROOM: BORDER_CORNER_CONVEX_ROOM,
+	TYPE_SINGLE: BORDER_SINGLE,
+}
 
 const BORDER_TYPE_TO_DIRECTION : Dictionary[ int, Vector2 ] = {
 	BORDER_PX_ZZ: Vector2(+1, 0),
@@ -78,15 +99,20 @@ const DIRECTION_TO_BORDER_TYPE : Dictionary[ Vector2i, int ] = {
 	Vector2i(+1,-1): BORDER_PX_NZ,
 }
 
+# Turns a mask around the room 45 degrees per step: shift = 2 is a quarter turn clockwise (seen from
+# above, or on the map) and shift = -2 is a quarter turn counter-clockwise
 static func rotate_direction(mask: int, shift: int) -> int:
-	# Bound shift by [-8,8]
-	var shift_sign = sign(shift)
-	shift = shift_sign * (abs(shift) % 8)
-	# Shifting
-	if shift == 0: return mask
-	var inv_shift = 8 - shift
-	var result = (mask << shift) | (mask >> inv_shift) if shift < 0 else ((mask >> shift) | (mask << inv_shift))
-	result &= 0xFF
+	# Any shift lands on one of 8 steps, and a counter-clockwise step is 7 clockwise ones
+	shift = posmod( shift, 8 )
+	return ((mask << shift) | (mask >> (8 - shift))) & BORDER_ALL
+
+# Mirrors a mask left to right, so walls on the -X side end up on the +X side and the other way around
+static func mirror_direction(mask: int) -> int:
+	var result := BORDER_NONE
+	for border in BORDER_TYPE_TO_DIRECTION:
+		if mask & border:
+			var direction := BORDER_TYPE_TO_DIRECTION[ border ]
+			result |= DIRECTION_TO_BORDER_TYPE[ Vector2i( -direction.x, direction.y ) ]
 	return result
 #endregion
 

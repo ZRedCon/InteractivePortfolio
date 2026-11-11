@@ -3,11 +3,12 @@
 [ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_uqlq0"]
 [ext_resource type="Material" uid="uid://gh7rd5ns3sdx" path="res://assets/materials/cobblestone.tres" id="2_3ybmd"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="3_cxjp2"]
+[ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qqv1v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_siajb"]
-size = Vector3(10, 0.1, 10)
+size = Vector3(10, 0.01, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ffpuj"]
 size = Vector3(0, 10, 10)
@@ -21,6 +22,7 @@ size = Vector3(0, 10, 10)
 size = Vector3(10, 0.1, 7.5)
 
 [node name="EdgeRoom" type="StaticBody3D" unique_id=1130750871]
+script = ExtResource("4_room")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=247539311]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -28,16 +30,15 @@ material_override = ExtResource("1_uqlq0")
 mesh = SubResource("PlaneMesh_qqv1v")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2092745986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0044879913, 0.017671585, -0.0147743225)
 shape = SubResource("BoxShape3D_siajb")
 
-[node name="WallPX" type="MeshInstance3D" parent="." unique_id=582220434]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.0044879913, 4.5176716, -5.0147743)
+[node name="WallNZ" type="MeshInstance3D" parent="." unique_id=582220434]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4.5, -5)
 material_override = ExtResource("2_3ybmd")
 mesh = SubResource("BoxMesh_ffpuj")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=401657837]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.0044879913, 5.0176716, -5.0147743)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5, -5)
 shape = SubResource("BoxShape3D_a1cs0")
 
 [node name="Carpet" type="MeshInstance3D" parent="." unique_id=85908618 groups=["Floor"]]

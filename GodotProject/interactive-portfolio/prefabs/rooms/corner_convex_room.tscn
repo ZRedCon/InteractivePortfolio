@@ -12,7 +12,7 @@
 size = Vector3(7.5, 0.1, 7.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xsc5u"]
-size = Vector3(10, 0.1, 10)
+size = Vector3(10, 0.01, 10)
 
 [node name="CornerConvexRoom" type="StaticBody3D" unique_id=603414453]
 script = ExtResource("1_sp8qu")
@@ -41,18 +41,13 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.25
 shape = SubResource("BoxShape3D_qr4as")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1760416722]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0044879913, 0.017671585, -0.0147743225)
 shape = SubResource("BoxShape3D_xsc5u")
 
 [node name="Carpet4" type="MeshInstance3D" parent="." unique_id=184236973 groups=["Floor"]]
-transform = Transform3D(-7.5, 0, 6.556708e-07, 0, 0.1, 0, -6.556708e-07, 0, -7.5, 1.2461475, 0, 1.2479428)
+transform = Transform3D(-7.5, 0, 6.556708e-07, 0, 0.1, 0, -6.556708e-07, 0, -7.5, 1.25, 0, 1.25)
 material_override = ExtResource("2_sp8qu")
 mesh = SubResource("BoxMesh_cadac")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=3490430 groups=["Floor"]]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.2461475, 0, 1.2479428)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.25, 0, 1.25)
 shape = SubResource("BoxShape3D_qr4as")
-
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="." unique_id=1861535620]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.010921859, 0.017671585, -0.006545257)
-shape = SubResource("BoxShape3D_xsc5u")

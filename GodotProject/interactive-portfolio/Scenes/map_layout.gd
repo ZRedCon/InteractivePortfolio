@@ -1,20 +1,44 @@
 extends TileMapLayer
 
+# The room type each tile in MuseumSet.png stands for, keyed by its atlas coords (x, y), the way
+# get_cell_atlas_coords() returns them
 const INDEX_TO_ROOM_TYPE : Dictionary[ Vector2i, int ] = {
-	Vector2i(0, 0): 1,
-	Vector2i(0, 1): 2,
-	Vector2i(0, 2): 3,
-	Vector2i(0, 3): 4,
-	Vector2i(0, 4): 5,
-	Vector2i(0, 5): 6,
-	Vector2i(0, 6): 7,
-	Vector2i(1, 0): 8,
-	Vector2i(1, 1): 9,
-	Vector2i(1, 2): 10,
-	Vector2i(1, 3): 11,
-	Vector2i(1, 4): 12,
-	Vector2i(1, 5): 13,
-	Vector2i(1, 6): 14
+	Vector2i(0, 0): Room.TYPE_CORNER_ROOM,
+	Vector2i(1, 0): Room.TYPE_EDGE_ROOM,
+	Vector2i(2, 0): Room.TYPE_ROOM,
+	Vector2i(3, 0): Room.TYPE_INTERSECTION_3_HALL,
+	Vector2i(4, 0): Room.TYPE_END_HALL,
+	Vector2i(5, 0): Room.TYPE_STRAIGHT_HALL,
+	Vector2i(6, 0): Room.TYPE_CORNER_1_EXIT_ROOM,
+	Vector2i(0, 1): Room.TYPE_CORNER_2_EXIT_ROOM,
+	Vector2i(1, 1): Room.TYPE_EDGE_EXIT_ROOM,
+	Vector2i(2, 1): Room.TYPE_CORNER_OVERLAP_ROOM,
+	Vector2i(3, 1): Room.TYPE_INTERSECTION_4_HALL,
+	Vector2i(4, 1): Room.TYPE_CORNER_HALL,
+	Vector2i(5, 1): Room.TYPE_CORNER_CONVEX_ROOM,
+	Vector2i(6, 1): Room.TYPE_SINGLE
 }
 
 @export var start_tile := Vector2i.ZERO
+
+
+# The Room.TYPE_* of the tile at a cell, or Room.TYPE_NONE if there's no tile there
+func get_room_type(cell: Vector2i) -> int:
+	return INDEX_TO_ROOM_TYPE.get( get_cell_atlas_coords( cell ), Room.TYPE_NONE )
+
+
+# The Room.BORDER_* walls around the tile at a cell: its type's walls, flipped the same way the tile
+# is drawn. Map columns run along +X and rows along +Z, so map directions are room directions.
+func get_borders(cell: Vector2i) -> int:
+	var flips := get_cell_alternative_tile( cell )
+	var walls : int = Room.TYPE_TO_BORDERS[ get_room_type( cell ) ]
+	var borders := Room.BORDER_NONE
+	for border in Room.BORDER_TYPE_TO_DIRECTION:
+		if not walls & border: continue
+		# A tile swaps x and y first, then mirrors
+		var direction := Vector2i( Room.BORDER_TYPE_TO_DIRECTION[ border ] )
+		if flips & TileSetAtlasSource.TRANSFORM_TRANSPOSE: direction = Vector2i( direction.y, direction.x )
+		if flips & TileSetAtlasSource.TRANSFORM_FLIP_H: direction.x = -direction.x
+		if flips & TileSetAtlasSource.TRANSFORM_FLIP_V: direction.y = -direction.y
+		borders |= Room.DIRECTION_TO_BORDER_TYPE[ direction ]
+	return borders

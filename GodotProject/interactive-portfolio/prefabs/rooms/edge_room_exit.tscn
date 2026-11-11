@@ -2,11 +2,12 @@
 
 [ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_fupfw"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="3_s3gbs"]
+[ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h8ugf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fequd"]
-size = Vector3(10, 0.1, 10)
+size = Vector3(10, 0.01, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8012f"]
 
@@ -19,6 +20,7 @@ size = Vector3(10, 0.1, 7.5)
 size = Vector3(5, 0.1, 10)
 
 [node name="EdgeRoomExit" type="StaticBody3D" unique_id=330329479]
+script = ExtResource("4_room")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=700541884]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -26,7 +28,6 @@ material_override = ExtResource("1_fupfw")
 mesh = SubResource("PlaneMesh_h8ugf")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1981111569]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0044879913, 0.017671585, -0.0147743225)
 shape = SubResource("BoxShape3D_fequd")
 
 [node name="Carpet" type="MeshInstance3D" parent="." unique_id=807715401 groups=["Floor"]]

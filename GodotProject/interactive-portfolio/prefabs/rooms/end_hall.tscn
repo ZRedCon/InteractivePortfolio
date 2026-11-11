@@ -3,11 +3,12 @@
 [ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_uvisv"]
 [ext_resource type="Material" uid="uid://gh7rd5ns3sdx" path="res://assets/materials/cobblestone.tres" id="2_1mk8w"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="3_arfv5"]
+[ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1mk8w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_arfv5"]
-size = Vector3(10, 0.1, 10)
+size = Vector3(10, 0.01, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_arfv5"]
 size = Vector3(0, 10, 10)
@@ -19,9 +20,10 @@ size = Vector3(0, 10, 10)
 size = Vector3(1, 1, 7.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p2hpq"]
-size = Vector3(5, 0.1, 5)
+size = Vector3(5, 0.1, 7.5)
 
 [node name="EndHall" type="StaticBody3D" unique_id=238031762]
+script = ExtResource("4_room")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=629442254]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -29,34 +31,33 @@ material_override = ExtResource("1_uvisv")
 mesh = SubResource("PlaneMesh_1mk8w")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1584179562]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0044879913, 0.017671585, -0.0147743225)
 shape = SubResource("BoxShape3D_arfv5")
 
-[node name="WallPX" type="MeshInstance3D" parent="." unique_id=1569346888]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.008975983, 4.535343, -5.0295486)
+[node name="WallNZ" type="MeshInstance3D" parent="." unique_id=1569346888]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 4.5, -5)
 material_override = ExtResource("2_1mk8w")
 mesh = SubResource("BoxMesh_arfv5")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=1982165741]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.008975983, 5.035343, -5.0295486)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5, -5)
 shape = SubResource("BoxShape3D_26a0a")
 
-[node name="WallPX2" type="MeshInstance3D" parent="." unique_id=906320386]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.004488, 4.5176716, -0.0147743225)
+[node name="WallNX" type="MeshInstance3D" parent="." unique_id=906320386]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5, 4.5, 0)
 material_override = ExtResource("2_1mk8w")
 mesh = SubResource("BoxMesh_arfv5")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=1798831127]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.004488, 5.0176716, -0.0147743225)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5, 5, 0)
 shape = SubResource("BoxShape3D_26a0a")
 
-[node name="WallPX3" type="MeshInstance3D" parent="." unique_id=504600535]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.995512, 4.5176716, -0.0147743225)
+[node name="WallPX" type="MeshInstance3D" parent="." unique_id=504600535]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4.5, 0)
 material_override = ExtResource("2_1mk8w")
 mesh = SubResource("BoxMesh_arfv5")
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="." unique_id=168955156]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.995512, 5.0176716, -0.0147743225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0)
 shape = SubResource("BoxShape3D_26a0a")
 
 [node name="Carpet" type="MeshInstance3D" parent="." unique_id=1780180885 groups=["Floor"]]
@@ -65,5 +66,5 @@ material_override = ExtResource("3_arfv5")
 mesh = SubResource("BoxMesh_26a0a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1950297427 groups=["Floor"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
 shape = SubResource("BoxShape3D_p2hpq")
