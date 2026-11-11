@@ -37,7 +37,7 @@ func _handle_floor_cast() -> void:
 	telenode.visible = bool(teleport_state) and collided
 	if not collided: return
 	var collider := camera_ray.get_collider() as Node3D
-	var on_floor := collider.is_in_group("Floor")
+	var on_floor := _is_floor(collider, camera_ray.get_collider_shape())
 	material.albedo_color = VALID_COLOR if on_floor else INVALID_COLOR
 	material.emission = VALID_COLOR if on_floor else INVALID_COLOR
 	if teleport_state == 1:
@@ -47,6 +47,15 @@ func _handle_floor_cast() -> void:
 		telenode.global_position = _tele_data.hit_point
 	elif teleport_state == 2 and on_floor:
 		global_position = _tele_data.hit_point
+
+# get_collider() only gives the body the ray hit, and for a room that's the whole Room. The "Floor"
+# group is on the carpet's own CollisionShape3D, so this also looks up which of the body's shapes was hit.
+static func _is_floor(collider: Node3D, shape_index: int) -> bool:
+	if collider.is_in_group("Floor"): return true
+	var body := collider as CollisionObject3D
+	if not body: return false
+	var shape := body.shape_owner_get_owner(body.shape_find_owner(shape_index)) as Node
+	return shape != null and shape.is_in_group("Floor")
 
 func _process(delta: float) -> void:
 	if PIH.is_paused: return
