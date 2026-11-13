@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/exhibit_editor/preview/godot/preview_host.gd" id="1_host"]
+
+[node name="PreviewHost" type="Node"]
+editor_description = "The Exhibit Editor's preview helper. The editor runs this scene by itself, in a second windowless copy of the game, to show an entry in the real exhibit scenes. See preview_host.gd."
+script = ExtResource("1_host")

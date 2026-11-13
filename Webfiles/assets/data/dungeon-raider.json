@@ -1,0 +1,32 @@
+{
+	"name": "Dungeon Raider",
+	"time": [ "2/2025", "5/2025" ],
+	"description": "In dungeon raider you are a dwarf hunting for treasure in some very haszardous mines; stuck in a cycle of making gains and spending on upgrades for the rest of your life.",
+	"related-skills": 119,
+	"contribution": [
+		"I did some heavy boilerplate work, the biggest things was a sort of sequencer/timer/animator that allowed for more dynamic behaviors and animations.",
+		"I was also the only one to do enemy work, so the design, implemtation, and sprites for the 3 enemies (seen on slide 3) were designed by me!",
+		"I was the only person who worked on audio, so all sfx, and the OST were done by me."
+	],
+	"notes": [
+		"This is the project where I learned that it's not wise to grind out an entire audio engine and sound effects in one day, I have no idea how I managed to finish it and get sleep the same night."
+	],
+	"main-image": "Dungeon Raider/GamePlay1",
+	"slide-show": [
+		"Dungeon Raider/Shop1",
+		"Dungeon Raider/GamePlay2",
+		"Dungeon Raider/GamePlay3",
+		"Dungeon Raider/Main",
+		"Dungeon Raider/GamePlay1"
+	],
+	"related-links": [
+		{
+			"display-text": "Itch.io",
+			"url": "https://genuinesanta.itch.io/dungeon-raider"
+		},
+		{
+			"display-text": "Github Repo",
+			"url": "https://github.com/ActuallySanta/Dungeon-Raider"
+		}
+	]
+}

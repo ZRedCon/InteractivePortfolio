@@ -23,5 +23,6 @@ func face_forward(dir: Vector3) -> void:
 
 func set_entry(entry: Entry) -> void:
 	var image = await FileIO.Instance.get_image( entry.main_image )
+	if image == null: return
 	sprite.texture = ImageTexture.create_from_image( image )
 	label.text = entry.name

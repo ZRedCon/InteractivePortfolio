@@ -147,6 +147,7 @@ func _end_drag() -> void:
 
 func _load_image(slide: TextureRect, file_path: String) -> void:
 	var image : Image = await FileIO.Instance.get_image( file_path )
+	if image == null: return
 	if is_instance_valid( slide ): slide.texture = ImageTexture.create_from_image( image )
 
 #endregion
