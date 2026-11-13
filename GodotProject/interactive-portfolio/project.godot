@@ -34,6 +34,9 @@ enabled=PackedStringArray("res://addons/map_painter/plugin.cfg")
 
 Floor="Something the player is expected to be able to stand on"
 Clickable="Something that the player can click"
+LeftClickable="Something that can be left clicked"
+MiddleClickable="Something that can be middle clicked"
+RightClickable="Something that can be right clicked"
 
 [input]
 

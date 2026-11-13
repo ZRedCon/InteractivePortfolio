@@ -20,6 +20,9 @@ const INDEX_TO_ROOM_TYPE : Dictionary[ Vector2i, int ] = {
 @export var start_tile := Vector2i.ZERO
 
 
+func _ready() -> void:
+	visible = false
+
 func get_room_type(cell: Vector2i) -> int:
 	return INDEX_TO_ROOM_TYPE.get( get_cell_atlas_coords( cell ), Room.TYPE_NONE )
 

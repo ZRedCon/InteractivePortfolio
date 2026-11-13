@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b1ojuq67yjq6" path="res://assets/images/skyboxes/wasteland_clouds_puresky_4k.hdr" id="1_6l7je"]
 [ext_resource type="PackedScene" uid="uid://bgsgwceyq1l1p" path="res://Player/controller.tscn" id="1_52fb6"]
+[ext_resource type="PackedScene" uid="uid://c241mv4likfbd" path="res://prefabs/Entry.tscn" id="4_iacmt"]
 [ext_resource type="Script" uid="uid://buxkevr2cvt1y" path="res://Scenes/room_container.gd" id="4_x6ack"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_npwjr"]
@@ -28,6 +29,7 @@ albedo_color = Color(0.32941177, 1, 1, 0.19215687)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1382339994]
 transform = Transform3D(0.7807294, 0.25082657, -0.57231784, 0, 0.91590005, 0.40140644, 0.62486935, -0.3133898, 0.71507007, -1.4758582, 2.302283, 5.1300287)
+shadow_bias = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=414343593]
 environment = SubResource("Environment_bpmhk")
@@ -49,3 +51,6 @@ mesh = SubResource("PlaneMesh_85ri6")
 [node name="RoomContainer" type="Node3D" parent="." unique_id=1771802498]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 script = ExtResource("4_x6ack")
+
+[node name="EntryNode" parent="." unique_id=800036504 instance=ExtResource("4_iacmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2281742, 0.45007867, -5.6062264)
