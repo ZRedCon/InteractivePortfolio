@@ -8,8 +8,8 @@ const NEG_X := 3
 
 const ROT_DEGREE : Array[ int ] = [ 0, 90, 180, 270 ]
 
-@onready var label := $Label3D
-@onready var sprite := $Sprite3D
+@onready var label := $Name
+@onready var sprite := $MainImage
 
 var entry_data : Entry
 
