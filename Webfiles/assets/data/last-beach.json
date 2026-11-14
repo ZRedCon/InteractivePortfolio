@@ -1,0 +1,28 @@
+{
+	"name": "The Last Beach",
+	"time": [ "10/2025", "12/13/2025" ],
+	"description": "The Last Beach was the final project for my \"3D Animation and Asst Production\" class. You are a citizen who has been gifted a ticket to the last beach, yet not even herer you're allowed peace.",
+	"related-skills": 338,
+	"contribution": [
+		"Created all models and textures except for the water which was yoinked off the Unity Asset store.",
+		"Uploaded the project to itch.io",
+		"I had to write a shocking amount of code for this project."
+	],
+	"notes": [
+		"I am quite proud of this one as a work of art. I have always loved these gritter environments, but this one also captures the a real sense of scale that combines with it's supernatural undertones to give it a real lovecraftian feeling I adore.",
+		"The manniquine remains one of my favorite creations, his name is Bob."
+	],
+	"main-image": "LastBeach/CityView",
+	"slide-show": [
+		"LastBeach/Innerds",
+		"LastBeach/Ominous",
+		"LastBeach/CityView",
+		"LastBeach/OminousPier"
+	],
+	"related-links": [
+		{
+			"display-text": "Itch.io",
+			"url": "https://zredcon.itch.io/the-last-beach"
+		}
+	]
+}
