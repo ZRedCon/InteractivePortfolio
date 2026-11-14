@@ -20,6 +20,7 @@ var _library : ImageLibrary
 var _browse : Callable
 var _line : LineEdit
 var _picture : TextureRect
+var _browse_button : Button
 
 # `browse` is func(current_name: String, on_picked: Callable): it opens the file dialog and later
 # calls on_picked with the picked image's name. `picture_size` 0 leaves the picture out.
@@ -34,12 +35,15 @@ func _init(library: ImageLibrary, browse: Callable, picture_size: int = 0) -> vo
 	_line.placeholder_text = "Image name, like Debug/Debug1/pair0"
 	_line.text_changed.connect( _on_typed )
 	add_child( _line )
-	var button := UiKit.make_icon_button( &"Folder", "Pick the image file", "..." )
-	button.pressed.connect( func() -> void: _browse.call( _line.text, _on_picked ) )
-	add_child( button )
+	_browse_button = UiKit.make_icon_button( &"Folder", "Pick the image file", "..." )
+	_browse_button.pressed.connect( func() -> void: _browse.call( _line.text, _on_picked ) )
+	add_child( _browse_button )
 
 func grab_text_focus() -> void:
 	_line.grab_focus()
+
+func set_browse_tooltip(tooltip: String) -> void:
+	_browse_button.tooltip_text = tooltip
 
 # A square that shows an image whole, with hard pixel edges the way the exhibits draw them.
 static func make_picture(picture_size: int) -> TextureRect:

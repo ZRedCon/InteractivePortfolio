@@ -1,0 +1,30 @@
+{
+	"name": "Reverberations",
+	"time": [ "11/2025", "12/2025" ],
+	"description": "You are a survivor in the zombie apocalypse, your only source of light agianst the monsters of the night is your own gun as you traverse these randomly generated mazes.",
+	"related-skills": 47,
+	"contribution": [
+		"Handled the enemy scripting",
+		"Handled the maze generation scripting",
+		"Player movement",
+		"All sfx"
+	],
+	"notes": [
+		"Considering how simple the gameplay loop ended up being, I am really happy with how fun this little arcade style game turned out.",
+		"The was the final project for my \"Intro to Game Web Tech\" class.",
+		"Looking back at this project reminds me of the days when I thought Javascript was fun to code in, admittedly that's probably because I've just been having more fun making games then websites."
+	],
+	"main-image": "Reverberations/Gameplay",
+	"slide-show": [
+		"Reverberations/Gameplay",
+		"Reverberations/Flash",
+		"Reverberations/Title",
+		"Reverberations/Trapped"
+	],
+	"related-links": [
+		{
+			"display-text": "Play it",
+			"url": "https://people.rit.edu/ztc6977/235/Project3/Build/"
+		}
+	]
+}

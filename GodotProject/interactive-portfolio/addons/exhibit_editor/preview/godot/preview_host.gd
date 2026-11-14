@@ -229,6 +229,9 @@ func _instantiate(pane: Pane) -> void:
 
 func _apply(pane: Pane) -> void:
 	pane.applied_rev = _entry_rev
+	# The editor counts the pane as up to date when it gets a state for this entry, so one is sent even if
+	# the scene comes out exactly as before (a change it doesn't show, or a fill function that stops early).
+	pane.last_state = PackedByteArray()
 	_send_reports() # Anything caught before now isn't this scene's doing
 	_busy_pane = pane.id
 	_busy_frames = 0

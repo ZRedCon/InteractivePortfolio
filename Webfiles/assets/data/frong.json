@@ -1,0 +1,33 @@
+{
+	"name": "Frong",
+	"time": [ "10/2025", "10/2025" ],
+	"description": "For my personal take on \"Pong,\" I went for a more chaotic party game. First to 7 wins!",
+	"related-skills": 51,
+	"contribution": [
+		"Developed a dynamic music system that fades certain tracks in or out depending on the situation",
+		"Created highly maluable dev tools so I didn't have to re design the entire game whenever I added a new ability",
+		"Art, Music, and sfx"
+	],
+	"notes": [
+		"This game is the second entry in my minigames' collection",
+		"I am super proud of the music engine used in this game. In fact this game was on the chopping block for exhibits here before I remembered it's existence.",
+		"Because of this games two-player nature I ended up playing this with my roommate a fair bit over the course of it's development",
+		"The term 'Frong' is a portmanteau of 'Frog' and 'Pong'"
+	],
+	"main-image": "202/FrongChoas",
+	"slide-show": [
+		"202/FrongChoas",
+		"202/FrongWin",
+		"202/FrongGame"
+	],
+	"related-links": [
+		{
+			"display-text": "Play it",
+			"url": "https://igme-202-2251.github.io/202-work-ZRedCon/Project_02/"
+		},
+		{
+			"display-text": "202 - Minigame Collection",
+			"url": "https://zredcon.itch.io/zredcons-minigames"
+		}
+	]
+}

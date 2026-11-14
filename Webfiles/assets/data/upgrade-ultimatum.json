@@ -1,0 +1,21 @@
+{
+	"name": "Upgrade Ultimatum",
+	"time": [ "2/2026", "4/2026" ],
+	"description": "Upgrade Ultimatum is a card game that requires 4 players. Each player controls a faction that is specialized for certain types towards a certain category of card: upgrade, random, attack, and defence. Last man standing wins.",
+	"related-skills": 65,
+	"contribution": [
+		"Card art",
+		"Card design and concept",
+		"Gameplay concepting",
+		"Playtesting note-taker"
+	],
+	"notes": [
+		"This remains the first and only card game I've ever worked on",
+		"Balancing this game was incredibly difficult due to its asymetric nature, but doubly so that one of the card groups is just whatever funny idea the team could come up with at the moment."
+	],
+	"main-image": "UpgradeUltimatum/image",
+	"slide-show": [
+		"UpgradeUltimatum/image"
+	],
+	"related-links": [ ]
+}

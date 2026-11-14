@@ -2,6 +2,8 @@
 extends RefCounted
 
 # Turns a date picked on the calendar into text and back, following a format like "M/D/YY".
+# The calendar has a format for each kind of date it picks: a full date ("M/D/YY"), just a month
+# ("M/YYYY") and just a year ("YYYY"). A format can leave out the day, or the day and month.
 #
 # An entry's dates are plain text (so "Present" or "Spring 2024" are fine too). This only decides
 # what the calendar writes, and lets the calendar open on the date that's already in the field.
@@ -32,16 +34,28 @@ static func format_date(year: int, month: int, day: int, format: String) -> Stri
 			_: text += part
 	return text
 
+# Which parts of a date a format writes, as some of "D", "M" and "Y" in that order:
+# "M/D/YY" gives "DMY", "M/YYYY" gives "MY", "YYYY" gives "Y".
+static func get_parts(format: String) -> String:
+	var split := _split_format( format )
+	var parts := ""
+	for letter : String in [ "D", "M", "Y" ]:
+		for part in split:
+			if TOKENS.has( part ) and part.begins_with( letter ):
+				parts += letter
+				break
+	return parts
+
 # { "year", "month", "day" } if the text is a date written in this format, otherwise an empty Dictionary.
 static func parse_date(text: String, format: String) -> Dictionary:
 	var pattern := "^\\s*"
 	var order : Array[ String ] = []
 	for part in _split_format( format ):
 		match part:
-			"YYYY":
-				pattern += "(\\d{4})"
-			"YY":
-				pattern += "(\\d{2})"
+			"YYYY", "YY":
+				# Either way of writing a year is read, so a date typed as 12/13/2025 or 12/13/25 opens the
+				# calendar on that day whichever one the format writes.
+				pattern += "(\\d{4}|\\d{2})"
 			"MMMM", "MMM":
 				pattern += "([A-Za-z]+)\\.?"
 			"MM", "M", "DD", "D":
@@ -58,10 +72,11 @@ static func parse_date(text: String, format: String) -> Dictionary:
 	for i in order.size():
 		var piece := found.get_string( i + 1 )
 		match order[ i ]:
-			"YYYY": date[ "year" ] = piece.to_int()
-			"YY":
-				var year : int = (today[ "year" ] / 100) * 100 + piece.to_int()
-				if year > today[ "year" ] + TWO_DIGIT_YEAR_REACH: year -= 100
+			"YYYY", "YY":
+				var year := piece.to_int()
+				if piece.length() == 2:
+					year += (today[ "year" ] / 100) * 100
+					if year > today[ "year" ] + TWO_DIGIT_YEAR_REACH: year -= 100
 				date[ "year" ] = year
 			"MMMM", "MMM":
 				var month := _find_month( piece )

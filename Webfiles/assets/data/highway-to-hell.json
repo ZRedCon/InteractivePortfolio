@@ -1,0 +1,33 @@
+{
+	"name": "Highway to Hell",
+	"time": [ "10/2026", "10/2026" ],
+	"description": "Highway to hell is an endless runner style game where you must manage your speed, the freezer's temperature, and where you are on the road. Oh yeah and avoid looking at your passenger Jerome, he doesn't like that very much.",
+	"related-skills": 182,
+	"contribution": [
+		"Camera movement",
+		"Steering wheel and pedal selection",
+		"Jerome concept art",
+		"All SFX and the OST"
+	],
+	"notes": [
+		"Highway to hell was a small weekend project between me and 3 other people for the 2025 Scream Jam hosted on Itch.io.",
+		"This project was my first real foray into 3D sound design and because of the limited time, I found myself having to really flex my audio design skills to make things work. The truck's idle drive sound is just a washing machine with some brownian noise layered on top.",
+		"This project was what really kicked off the trend of me getting super into an idea and wanting to continue something past its technical 'due date', only for the entire team to not want that and not be able to finish it on my own."
+	],
+	"main-image": "HTH/Jerome",
+	"slide-show": [
+		"HTH/Freezer",
+		"HTH/Jerome",
+		"HTH/Title"
+	],
+	"related-links": [
+		{
+			"display-text": "Itch.io",
+			"url": "https://gfeldman120.itch.io/highway-to-hell-all-truck-no-treat"
+		},
+		{
+			"display-text": "Github Repo",
+			"url": "https://github.com/rsamoyedny/2025-Scream-Jam"
+		}
+	]
+}

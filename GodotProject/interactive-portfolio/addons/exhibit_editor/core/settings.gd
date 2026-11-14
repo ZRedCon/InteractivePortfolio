@@ -11,6 +11,7 @@ extends RefCounted
 signal changed(key: String)
 
 const JsonText := preload( "json_text.gd" )
+const DateText := preload( "date_text.gd" )
 
 const FILE_PATH := "res://addons/exhibit_editor/settings.cfg"
 const SECTION := "exhibit_editor"
@@ -43,6 +44,8 @@ const PARSER_SCRIPT := "parser_script"
 const PARSER_METHOD := "parser_method"
 const GAME_SKILLS := "game_skills_script"
 const DATE_FORMAT := "date_format"
+const MONTH_FORMAT := "month_format"
+const YEAR_FORMAT := "year_format"
 
 const GROUP_FILES := "Website files"
 const GROUP_SITE := "Website previews"
@@ -89,8 +92,12 @@ const DEFINITIONS : Array[ Dictionary ] = [
 	{ "key": GAME_SKILLS, "group": GROUP_GAME, "label": "Game skill list", "default": "res://game_entry.gd", "kind": KIND_RES_FILE,
 		"help": "The script whose SKILLS = [ ... ] list the game uses. The Skills field offers these." },
 
-	{ "key": DATE_FORMAT, "group": GROUP_EDITING, "label": "Calendar date format", "default": "M/D/YY", "kind": KIND_TEXT,
-		"help": "How a date picked from the calendar is written. D DD = day, M MM = month number, MMM MMMM = month name, YY YYYY = year. Typing a date by hand isn't affected." },
+	{ "key": DATE_FORMAT, "group": GROUP_EDITING, "label": "Calendar: full date", "default": "M/D/YYYY", "kind": KIND_TEXT,
+		"help": "How the calendar writes a whole date (its Full date bullet). D DD = day, M MM = month number, MMM MMMM = month name, YY YYYY = year. Dates typed by hand are kept as they're typed." },
+	{ "key": MONTH_FORMAT, "group": GROUP_EDITING, "label": "Calendar: month", "default": "M/YYYY", "kind": KIND_TEXT,
+		"help": "How the calendar writes a date that's only a month (its Month bullet). The year has four digits by default, because 11/26 would read as November 26th." },
+	{ "key": YEAR_FORMAT, "group": GROUP_EDITING, "label": "Calendar: year", "default": "YYYY", "kind": KIND_TEXT,
+		"help": "How the calendar writes a date that's only a year (its Year bullet)." },
 ]
 
 const BROWSER_CANDIDATES : Array[ String ] = [
@@ -283,7 +290,11 @@ func find_problem(key: String) -> String:
 		PARSER_METHOD:
 			return _find_script_method_problem( get_value( PARSER_SCRIPT ), value )
 		DATE_FORMAT:
-			if not RegEx.create_from_string( "[DMY]" ).search( value ): return "Needs at least one of D, M or Y."
+			return _find_format_problem( value, "DMY", "a day, a month and a year" )
+		MONTH_FORMAT:
+			return _find_format_problem( value, "MY", "a month and a year, and no day" )
+		YEAR_FORMAT:
+			return _find_format_problem( value, "Y", "only a year" )
 	return ""
 
 # Which settings can't be used right now: { key: what's wrong }
@@ -293,6 +304,11 @@ func find_problems() -> Dictionary[ String, String ]:
 		var problem := find_problem( definition[ "key" ] )
 		if not problem.is_empty(): problems[ definition[ "key" ] ] = problem
 	return problems
+
+# "" when a calendar format writes exactly the parts it should (`wanted`, like "MY"; see DateText.get_parts).
+static func _find_format_problem(format: String, wanted: String, described: String) -> String:
+	if DateText.get_parts( format ) == wanted: return ""
+	return "Should write %s. (D DD = day, M MM MMM MMMM = month, YY YYYY = year.)" % described
 
 static func _find_scene_method_problem(scene_path: String, method: String) -> String:
 	if method.is_empty(): return "The previews need a function to call."

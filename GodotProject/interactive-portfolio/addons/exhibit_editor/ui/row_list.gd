@@ -48,6 +48,13 @@ func add_value(value: Variant) -> void:
 	_rebuild()
 	changed.emit()
 
+# Several at the end at once, with one rebuild and one `changed` for all of them.
+func add_values(values: Array) -> void:
+	if values.is_empty(): return
+	_values.append_array( values )
+	_rebuild()
+	changed.emit()
+
 # For a row's own controls to call as they're edited. The row isn't rebuilt, so typing isn't interrupted.
 func set_value(index: int, value: Variant) -> void:
 	if index < 0 or index >= _values.size() or (typeof( _values[ index ] ) == typeof( value ) and _values[ index ] == value): return

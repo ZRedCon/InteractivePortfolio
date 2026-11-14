@@ -66,6 +66,8 @@ var _skills_problem : String
 var _image_dialog : EditorFileDialog
 var _folder_dialog : EditorFileDialog
 var _on_image_picked : Callable
+var _on_images_picked : Callable
+var _last_pick_dir : String # Where the last image was picked from, so a batch can be picked from the same place
 var _message_dialog : AcceptDialog
 # Text the website would read as HTML: a tag like <b>, or a symbol code like &amp;
 var _html_pattern := RegEx.create_from_string( "<[A-Za-z/!]|&#?[A-Za-z0-9]+;" )
@@ -157,7 +159,7 @@ func _build_list_fields() -> void:
 	_main_info.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	picture_row.add_child( _main_info )
 
-	_slides = SlideListField.new( _library, _browse_image )
+	_slides = SlideListField.new( _library, _browse_image, _browse_images )
 	_slides.changed.connect( _on_edited )
 	_slides.own_problem_changed.connect( validate )
 	_add_field( FIELD_SLIDES, _slides )
@@ -292,29 +294,61 @@ func _browse_folder() -> void:
 
 # Given to every image field. Opens the file dialog, and later hands the picked image's name to on_picked.
 func _browse_image(current_name: String, on_picked: Callable) -> void:
+	_on_image_picked = on_picked
+	# Opens where the current image is, if it's somewhere real.
+	var folder := _settings.get_image_path( current_name ).get_base_dir() if not current_name.is_empty() else ""
+	_open_image_dialog( EditorFileDialog.FILE_MODE_OPEN_FILE, "Pick an image", folder )
+
+# Given to the slideshow. Opens the file dialog with several files allowed, and later hands all the
+# picked images' names to on_picked.
+func _browse_images(on_picked: Callable) -> void:
+	_on_images_picked = on_picked
+	_open_image_dialog( EditorFileDialog.FILE_MODE_OPEN_FILES, "Pick images (hold Ctrl or Shift to pick several)", "" )
+
+func _open_image_dialog(mode: EditorFileDialog.FileMode, title: String, folder: String) -> void:
 	if _image_dialog == null:
 		_image_dialog = EditorFileDialog.new()
-		_image_dialog.file_mode = EditorFileDialog.FILE_MODE_OPEN_FILE
 		_image_dialog.access = EditorFileDialog.ACCESS_FILESYSTEM
-		_image_dialog.title = "Pick an image"
 		_image_dialog.file_selected.connect( pick_image_file )
+		_image_dialog.files_selected.connect( pick_image_files )
 		add_child( _image_dialog )
-	_on_image_picked = on_picked
+	_image_dialog.file_mode = mode
+	_image_dialog.title = title
 	_image_dialog.clear_filters()
 	_image_dialog.add_filter( "*" + _settings.get_value( Settings.IMAGE_EXTENSION ), "Images" )
-	# Opens where the current image is, if it's somewhere real. Otherwise at the top of the images folder.
-	var folder := _settings.get_image_path( current_name ).get_base_dir()
-	_image_dialog.current_dir = folder if not current_name.is_empty() and DirAccess.dir_exists_absolute( folder ) else _settings.get_images_dir()
+	# Failing `folder`, where the last image was picked from, and failing that the top of the images folder.
+	for candidate : String in [ folder, _last_pick_dir, _settings.get_images_dir() ]:
+		if not candidate.is_empty() and DirAccess.dir_exists_absolute( candidate ):
+			_image_dialog.current_dir = candidate
+			break
 	_image_dialog.popup_file_dialog()
 
 # A file was picked in the dialog. Entries store images by a name inside the images folder, so a file
 # from anywhere else can't be used, and that's said instead of filling the field with something broken.
 func pick_image_file(path: String) -> void:
+	_last_pick_dir = path.get_base_dir()
 	var found := _settings.get_image_name( path )
 	if not found[ "error" ].is_empty():
 		show_message( "That image can't be used", found[ "error" ] )
 		return
 	if _on_image_picked.is_valid(): _on_image_picked.call( found[ "name" ] )
+
+# Several files were picked at once. They're handed over in name order ("shot2" before "shot10"),
+# and any that can't be used are listed in a message instead.
+func pick_image_files(paths: PackedStringArray) -> void:
+	var sorted := Array( paths )
+	sorted.sort_custom( func(a: String, b: String) -> bool: return a.naturalnocasecmp_to( b ) < 0 )
+	var names : PackedStringArray = []
+	var refused : PackedStringArray = []
+	for path : String in sorted:
+		_last_pick_dir = path.get_base_dir()
+		var found := _settings.get_image_name( path )
+		if found[ "error" ].is_empty(): names.append( found[ "name" ] )
+		else: refused.append( "%s: %s" % [ path.get_file(), found[ "error" ] ] )
+	if not names.is_empty() and _on_images_picked.is_valid(): _on_images_picked.call( names )
+	if not refused.is_empty():
+		var title := "Those images can't be used" if names.is_empty() else "%d of the images weren't added" % refused.size()
+		show_message( title, "\n\n".join( refused ) )
 
 func show_message(title: String, text: String) -> void:
 	if _message_dialog == null:
@@ -323,7 +357,9 @@ func show_message(title: String, text: String) -> void:
 		add_child( _message_dialog )
 	_message_dialog.title = title
 	_message_dialog.dialog_text = text
-	_message_dialog.popup_centered( Vector2i( Vector2( 460, 0 ) * UiKit.get_scale() ) )
+	# Waits for the end of the frame: when a file dialog reports what was picked it hasn't closed yet,
+	# and only one dialog can be open at a time.
+	_message_dialog.popup_centered.call_deferred( Vector2i( Vector2( 460, 0 ) * UiKit.get_scale() ) )
 
 #endregion
 
@@ -468,9 +504,11 @@ func _on_edited() -> void:
 	changed.emit()
 
 func _on_setting_changed(key: String) -> void:
-	if key == Settings.DATE_FORMAT: _apply_date_format()
+	if key in [ Settings.DATE_FORMAT, Settings.MONTH_FORMAT, Settings.YEAR_FORMAT ]: _apply_date_format()
 	validate()
 
+# The calendar's three formats, in the order of its bullets: full date, month, year.
 func _apply_date_format() -> void:
-	_start_date.date_format = _settings.get_value( Settings.DATE_FORMAT )
-	_end_date.date_format = _settings.get_value( Settings.DATE_FORMAT )
+	var formats : Array[ String ] = [ _settings.get_value( Settings.DATE_FORMAT ), _settings.get_value( Settings.MONTH_FORMAT ), _settings.get_value( Settings.YEAR_FORMAT ) ]
+	_start_date.formats = formats
+	_end_date.formats = formats

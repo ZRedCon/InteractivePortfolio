@@ -15,6 +15,12 @@ static func get_icon(icon_name: StringName) -> Texture2D:
 	var theme := EditorInterface.get_editor_theme()
 	return theme.get_icon( icon_name, &"EditorIcons" ) if theme.has_icon( icon_name, &"EditorIcons" ) else null
 
+static func get_accent_color() -> Color:
+	var fallback := Color( 0.44, 0.73, 0.98 )
+	if not Engine.is_editor_hint(): return fallback
+	var theme := EditorInterface.get_editor_theme()
+	return theme.get_color( &"accent_color", &"Editor" ) if theme.has_color( &"accent_color", &"Editor" ) else fallback
+
 static func get_level_color(level: int) -> Color:
 	var fallback := Color( 1.0, 0.47, 0.42 ) if level == LEVEL_ERROR else Color( 1.0, 0.87, 0.4 )
 	if not Engine.is_editor_hint(): return fallback

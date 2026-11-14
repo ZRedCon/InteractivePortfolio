@@ -10,6 +10,7 @@ extends ScrollContainer
 const UiKit := preload( "ui_kit.gd" )
 const Settings := preload( "../core/settings.gd" )
 const SkillList := preload( "../core/skill_list.gd" )
+const DateText := preload( "../core/date_text.gd" )
 
 const LABEL_WIDTH : int = 190
 const APPLY_DELAY_MSEC : int = 700
@@ -140,6 +141,9 @@ func _get_info(key: String) -> String:
 			return _settings.get_webfiles_dir()
 		Settings.BROWSER_PATH:
 			if _settings.get_value( key ).is_empty(): return "Using " + _settings.find_browser()
+		Settings.DATE_FORMAT, Settings.MONTH_FORMAT, Settings.YEAR_FORMAT:
+			var today := DateText.get_today()
+			return "Today comes out as " + DateText.format_date( today[ "year" ], today[ "month" ], today[ "day" ], _settings.get_value( key ) )
 		Settings.GAME_SKILLS:
 			return _describe_skills( SkillList.read( _settings.get_value( key ) ) )
 		Settings.SITE_SKILLS:

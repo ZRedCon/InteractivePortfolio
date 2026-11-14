@@ -1,0 +1,31 @@
+{
+	"name": "Hideous Instakill",
+	"time": [ "12/2025", "12/2025" ],
+	"description": "This \"I Wanna be The Guy\" inspired fps contains light metroidvania elements, a ton of flashing lights, and a lot of rage in your future.",
+	"related-skills": 7,
+	"contribution": [
+		"This was what taught me ProBuilder's new interface in Unity!~",
+		"Pretty much all coding beyond what unity gave out of the box",
+		"While I didn't write the song FOR this game I did write it a few years ago"
+	],
+	"notes": [
+		"Honestly this one's here because it's technically the first game I made that has a win condition / end to it.",
+		"This is THE MOST CRUNCHED project here with almost the entire thing being made in less than 3 days and a combined 8 hours of sleep."
+	],
+	"main-image": "202/HIFinalBoss",
+	"slide-show": [
+		"202/HISewers",
+		"202/HISword",
+		"202/HIFinalBoss"
+	],
+	"related-links": [
+		{
+			"display-text": "Play It",
+			"url": "https://igme-202-2251.github.io/202-work-ZRedCon/Project_04/"
+		},
+		{
+			"display-text": "202 - Minigame Collection",
+			"url": "https://zredcon.itch.io/zredcons-minigames"
+		}
+	]
+}

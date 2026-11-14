@@ -52,6 +52,9 @@ const MAX_SCALE : float = 2.0
 const MAX_CAPTURE_PIXELS : int = 12000000
 const MAX_REPORTS : int = 12
 const SWEEP_DELAY_MSEC : int = 5000
+const ABORTED_ERROR := "net::ERR_ABORTED"
+const LOAD_RETRIES : int = 5
+const LOAD_RETRY_SECONDS : float = 0.2
 # Sweeps go on every SWEEP_DELAY_MSEC until no old profile is left, up to this many times. A browser
 # that was only just closed can hold on to its folder for a few seconds.
 const SWEEPS_AFTER_START : int = 6
@@ -120,6 +123,7 @@ class Page:
 	var last_picture_at : int
 	var seen_changes : int = -1
 	var wants_picture : bool # Something outside the page's own count changed: its size, its scale, or it was clicked
+	var metrics_pending : int # Window size changes waiting to be sent (see _apply_metrics)
 	var reports : Array[ Dictionary ]
 	var scroll : Vector2
 	var input_queue : Array[ Dictionary ]
@@ -276,7 +280,7 @@ func _start(run: int) -> void:
 	_sweeps_left = SWEEPS_AFTER_START
 	_pid = OS.create_process( browser, PackedStringArray( [
 		"--headless=new", "--remote-debugging-port=0", "--user-data-dir=" + _profile_dir,
-		"--no-first-run", "--no-default-browser-check", "--disable-extensions", "--disable-sync",
+		"--no-first-run", "--no-default-browser-check", "--disable-extensions", "--disable-sync", "--disable-default-apps",
 		"--disable-background-networking", "--disable-component-update", "--mute-audio", "--hide-scrollbars",
 		"about:blank",
 	] ) )
@@ -443,7 +447,7 @@ func _process(_delta: float) -> void:
 			for page : Page in _pages.values(): _load( page )
 			return
 	for page : Page in _pages.values():
-		if page.loading or page.capturing: continue
+		if page.loading or page.capturing or page.metrics_pending > 0: continue
 		var since_last := now - page.last_capture_at
 		if (page.wants_picture and since_last >= CAPTURE_INTERVAL_MSEC) or since_last >= QUIET_CHECK_MSEC: _capture( page )
 
@@ -454,12 +458,18 @@ func _serve_entry() -> void:
 	_http.set_virtual_file( Settings.clean_path( _settings.get_value( Settings.DATA_DIR ) ).path_join( PREVIEW_FILE ), _entry_json.to_utf8_buffer() )
 
 func _apply_metrics(page: Page) -> void:
+	# A picture of the whole exhibit borrows the window's size while it's taken, then puts back the size
+	# it found, which would undo a change made in between. So this waits for any picture being taken,
+	# and no new one starts until the change is in.
+	page.metrics_pending += 1
+	while page.capturing and state == RUNNING: await get_tree().process_frame
 	await _cdp.request( "Emulation.setDeviceMetricsOverride", { "width": page.viewport_size.x, "height": page.viewport_size.y, "deviceScaleFactor": page.scale, "mobile": false }, page.session )
+	page.metrics_pending -= 1
 	page.last_capture_at = 0 # Take a new picture right away
 	page.wants_picture = true
 
 # Opens the page from scratch and waits for the exhibit to show up on it.
-func _load(page: Page) -> void:
+func _load(page: Page, attempt: int = 0) -> void:
 	page.load_count += 1
 	var load_id := page.load_count
 	var rev := _entry_rev
@@ -474,8 +484,15 @@ func _load(page: Page) -> void:
 	var navigated := await _cdp.request( "Page.navigate", { "url": _http.get_url( _settings.get_value( Settings.SITE_PAGE ) ) }, page.session )
 	if load_id != page.load_count: return
 	if CdpClient.failed( navigated ) or navigated.has( "errorText" ):
+		var error_text : String = navigated.get( "errorText", navigated.get( CdpClient.ERROR_KEY, "" ) )
+		# The browser cuts a load short when another starts right behind it (like the new window's own
+		# first page finishing). That's nobody's mistake, so it just goes again.
+		if error_text == ABORTED_ERROR and attempt < LOAD_RETRIES:
+			await get_tree().create_timer( LOAD_RETRY_SECONDS ).timeout
+			if load_id == page.load_count: _load( page, attempt + 1 )
+			return
 		page.loading = false
-		_add_report( page, "error", "Couldn't open the page: %s" % navigated.get( "errorText", navigated.get( CdpClient.ERROR_KEY, "" ) ), "" )
+		_add_report( page, "error", "Couldn't open the page: %s" % error_text, "" )
 		return
 
 	var deadline := Time.get_ticks_msec() + EXHIBIT_TIMEOUT_MSEC
@@ -546,11 +563,14 @@ func _capture(page: Page) -> void:
 	var was_up_to_date := page.captured_rev == rev
 	page.captured_rev = rev
 	var data : String = shot.get( "data", "" )
+	var image := Image.new()
+	if image.load_png_from_buffer( Marshalls.base64_to_raw( data ) ) != OK: return
+	# A new window size or drawing scale takes the browser a frame to apply, and a picture taken in
+	# between still has the old one. When the size doesn't match yet, another picture follows shortly.
+	if absi( image.get_width() - roundi( clip.size.x * page.scale * shrink ) ) > 2: page.wants_picture = true
 	if data == page.last_capture and clip == page.clip:
 		if not was_up_to_date: changed.emit()
 		return
-	var image := Image.new()
-	if image.load_png_from_buffer( Marshalls.base64_to_raw( data ) ) != OK: return
 	page.last_capture = data
 	page.clip = clip
 	if page.texture and page.texture.get_size() == Vector2( image.get_size() ): page.texture.update( image )

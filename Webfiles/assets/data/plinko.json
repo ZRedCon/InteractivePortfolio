@@ -1,0 +1,31 @@
+{
+	"name": "202 - Plinko",
+	"time": [ "9/2025", "9/2025" ],
+	"description": "In this iteration of the classic game \"Plinko\" you must work your way up the totem pole of chips to collect the rarest of them all! ",
+	"related-skills": 215,
+	"contribution": [
+		"Pixel art for the chips and pegs",
+		"Music",
+		"Onboarding / tutorial pop up",
+		"UI setup"
+	],
+	"notes": [
+		"This game is part of my 202 - minigames collection pack.",
+		"I love the song I wrote for this game to the point I actively listen to it as I am working on tasks to this very day!"
+	],
+	"main-image": "202/PlinkoGame",
+	"slide-show": [
+		"202/PlinkoGame",
+		"202/PlinkoMenu"
+	],
+	"related-links": [
+		{
+			"display-text": "Play it",
+			"url": "https://igme-202-2251.github.io/202-work-ZRedCon/Project_01/"
+		},
+		{
+			"display-text": "202 - Minigame Collection",
+			"url": "https://zredcon.itch.io/zredcons-minigames"
+		}
+	]
+}
