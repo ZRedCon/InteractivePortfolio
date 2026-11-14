@@ -37,13 +37,13 @@ environment = SubResource("Environment_bpmhk")
 [node name="Controller" parent="." unique_id=471476447 instance=ExtResource("1_52fb6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.076747894, 1.8733559, 2.142113)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=843604182]
+[node name="EyeInTheSky" type="StaticBody3D" parent="." unique_id=843604182 groups=["Floor"]]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=911317543]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EyeInTheSky" unique_id=911317543]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, -1, 0)
 shape = SubResource("BoxShape3D_bpmhk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1657082734 groups=["Floor"]]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EyeInTheSky" unique_id=1657082734 groups=["Floor"]]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_jv6wh")
 mesh = SubResource("PlaneMesh_85ri6")

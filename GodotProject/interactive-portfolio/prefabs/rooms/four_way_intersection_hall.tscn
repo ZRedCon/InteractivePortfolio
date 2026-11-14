@@ -3,6 +3,7 @@
 [ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_egw2v"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="2_pt7cb"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="3_room"]
+[ext_resource type="PackedScene" uid="uid://d3msxdbxllyqn" path="res://prefabs/Props/pillar.tscn" id="4_6qsta"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6qsta"]
 
@@ -41,3 +42,15 @@ mesh = SubResource("BoxMesh_x1w70")
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=582165622 groups=["Floor"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_qr2sl")
+
+[node name="Pillar" parent="." unique_id=186650993 instance=ExtResource("4_6qsta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+
+[node name="Pillar2" parent="." unique_id=1055422154 instance=ExtResource("4_6qsta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="Pillar3" parent="." unique_id=1896568629 instance=ExtResource("4_6qsta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+
+[node name="Pillar4" parent="." unique_id=1914570603 instance=ExtResource("4_6qsta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)

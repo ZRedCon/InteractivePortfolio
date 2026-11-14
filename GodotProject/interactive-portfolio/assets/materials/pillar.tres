@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d215hocjx843a"]
+
+[ext_resource type="Texture2D" uid="uid://cl624ab1x7apo" path="res://assets/textures/Pillar/Material_Base_color.png" id="1_rj7ln"]
+[ext_resource type="Texture2D" uid="uid://jkjajrb6q7ke" path="res://assets/textures/Pillar/Material_Normal_OpenGL.png" id="2_gqxyg"]
+[ext_resource type="Texture2D" uid="uid://ccwunpdnfdwhq" path="res://assets/textures/Pillar/Material_Roughness.png" id="3_p8i5n"]
+
+[resource]
+albedo_texture = ExtResource("1_rj7ln")
+roughness_texture = ExtResource("3_p8i5n")
+normal_enabled = true
+normal_texture = ExtResource("2_gqxyg")

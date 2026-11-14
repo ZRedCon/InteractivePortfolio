@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://d3msxdbxllyqn"]
+
+[ext_resource type="PackedScene" uid="uid://ijbuop5haj37" path="res://assets/models/Pillar.fbx" id="1_1omj1"]
+[ext_resource type="Script" uid="uid://cx03auuyr2esr" path="res://prefabs/Props/pillar.gd" id="2_12g3m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bpmhk"]
+size = Vector3(2.664, 2, 2.664)
+
+[node name="Pillar" unique_id=186650993 instance=ExtResource("1_1omj1")]
+script = ExtResource("2_12g3m")
+
+[node name="Base" parent="." index="0" unique_id=609595319]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 1, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=1210880495]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=922913984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_bpmhk")
