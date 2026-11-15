@@ -26,15 +26,13 @@ async function loadEntry(fileName) {
 window.onload = async () => {
     console.log("Starting parse...");
     const fileNames = await fetchJson(DATA_INDEX_PATH);
-    // Downloads every file at once; the results keep the index's order.
     const entries = await Promise.all(fileNames.map(loadEntry));
     objects = entries.filter((entry) => entry !== null);
     console.log("Parsed objects: ", objects);
     const exhibits = document.querySelector("#exhibits");
+    
     for (const item of objects) {
         let conversion = ToHTML.getHTMLFromEntry( item );
-        // Adds the exhibit after the others without rebuilding them. (innerHTML += rebuilds every
-        // exhibit already there, and the rebuilt slideshows would lose their clicks and drags.)
         exhibits.insertAdjacentHTML("beforeend", conversion);
         new SlideShow(exhibits.lastElementChild.querySelector(".slide-show"));
     }

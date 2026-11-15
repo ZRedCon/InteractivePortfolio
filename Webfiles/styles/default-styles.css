@@ -34,6 +34,17 @@ h1 {
     text-align: center;
 }
 
+#warning {
+    background-color: #d4cf85;
+    border-radius: 15px;
+    border-color: #000000;
+    border-style: dashed;
+    padding: 5%;
+    margin: 10%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
 #godot-frame {
     display: block;
     width: min(100%, calc(80vh * 16 / 9));
@@ -41,4 +52,14 @@ h1 {
     margin: 0 auto;
     border: none;
     background-color: black;
+}
+
+@media (min-width: 60em) {
+    h1::before {
+        content: "====== ";
+    }
+
+    h1::after {
+        content: " ======";
+    }
 }

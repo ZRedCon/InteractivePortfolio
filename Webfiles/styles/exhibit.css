@@ -248,11 +248,12 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.75rem;
+    text-decoration: underline;
 }
 
 /* Outlined buttons: easy to spot, and big enough to tap on a phone. */
 .links a {
-    padding: 0.375em 1em;
+    padding: 0.5em 1em;
     border: 1px solid var(--color-accent);
     border-radius: 6px;
     color: var(--color-accent);
