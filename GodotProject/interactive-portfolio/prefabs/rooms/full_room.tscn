@@ -2,6 +2,7 @@
 
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="1_si0tb"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="2_room"]
+[ext_resource type="PackedScene" uid="uid://d4lgav52vcr6t" path="res://prefabs/rooms/ceiling.tscn" id="3_nqaw8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_re7td"]
 
@@ -18,3 +19,5 @@ mesh = SubResource("BoxMesh_re7td")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1672119466 groups=["Floor"]]
 shape = SubResource("BoxShape3D_nqaw8")
+
+[node name="Ceiling" parent="CollisionShape3D" unique_id=217736034 instance=ExtResource("3_nqaw8")]

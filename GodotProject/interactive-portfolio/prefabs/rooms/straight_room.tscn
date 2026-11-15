@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_l2vyw"]
 [ext_resource type="Material" uid="uid://gh7rd5ns3sdx" path="res://assets/materials/cobblestone.tres" id="3_fiyc8"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
+[ext_resource type="PackedScene" uid="uid://d4lgav52vcr6t" path="res://prefabs/rooms/ceiling.tscn" id="5_u1reo"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bpmhk"]
 
@@ -41,12 +42,12 @@ shape = SubResource("BoxShape3D_xvq4s")
 shape = SubResource("BoxShape3D_85ri6")
 
 [node name="WallNX" type="MeshInstance3D" parent="." unique_id=493240368]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, 0)
 material_override = ExtResource("3_fiyc8")
 mesh = SubResource("BoxMesh_npwjr")
 
 [node name="WallPX" type="MeshInstance3D" parent="." unique_id=1817386389]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0)
 material_override = ExtResource("3_fiyc8")
 mesh = SubResource("BoxMesh_npwjr")
 
@@ -57,3 +58,5 @@ shape = SubResource("BoxShape3D_npwjr")
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=1819711316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0)
 shape = SubResource("BoxShape3D_npwjr")
+
+[node name="Ceiling" parent="." unique_id=217736034 instance=ExtResource("5_u1reo")]

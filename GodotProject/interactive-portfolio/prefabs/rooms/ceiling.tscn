@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://d4lgav52vcr6t"]
+
+[ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_tro04"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bhdgq"]
+size = Vector3(2, 0, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85ri6"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_bpmhk"]
+size = Vector3(1, 0.80078125, 1)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" unique_id=217736034]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 10, 0)
+material_override = ExtResource("1_tro04")
+mesh = SubResource("BoxMesh_bhdgq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1149019079]
+transform = Transform3D(-0.20000005, 0, 0, 0, 0.13665336, 0, 0, 0, 0.7, 0, 0.013612032, 0)
+material_override = SubResource("StandardMaterial3D_85ri6")
+mesh = SubResource("BoxMesh_bpmhk")
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=372287465]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.1970768, 0)
+light_energy = 4.118
+light_specular = 0.0
+light_bake_mode = 1
+area_attenuation = 0.415
+area_size = Vector2(0.8284178, 4.917779)
+
+[node name="AreaLight3D2" type="AreaLight3D" parent="." unique_id=1563472847]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_energy = 2.0
+area_range = 15.0

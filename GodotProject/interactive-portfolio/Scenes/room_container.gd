@@ -22,8 +22,63 @@ const ROOM_SCENES : Dictionary[ int, PackedScene ] = {
 # Every room that's been built, by the map cell it was built from
 var rooms : Dictionary[ Vector2i, Room ]
 
+# The web build (Compatibility renderer) draws at most this many lights of each kind per frame and
+# drops the rest in no useful order, which is what made whole rooms go dark. So only the rooms near
+# the camera get their lights on, and never more lights than this. Raise Project Settings > Rendering >
+# Limits > OpenGL > Max Renderable Lights to light more rooms at once. Lights that aren't in a room
+# aren't counted here, but they use up the same limit.
+var light_budget : int = ProjectSettings.get_setting( "rendering/limits/opengl/max_renderable_lights" )
+# The cell the camera was in when the lit rooms were last picked
+var _lit_from := Vector2i.MAX
+
 func _ready() -> void:
 	generate()
+	light_rooms_near_camera()
+
+func _process(_delta: float) -> void:
+	light_rooms_near_camera()
+
+# Picks the rooms to light again whenever the camera moves into another cell
+func light_rooms_near_camera() -> void:
+	var camera := get_viewport().get_camera_3d()
+	if not camera: return
+	var at := to_local( camera.global_position ) / ROOM_SIZE
+	# Wait until the camera is a meter past the edge, so walking along an edge doesn't keep switching rooms
+	var lit_center := Vector2( _lit_from - MapLayout.start_tile )
+	if absf( at.x - lit_center.x ) < 0.6 and absf( at.z - lit_center.y ) < 0.6: return
+	var cell := Vector2i( roundi( at.x ), roundi( at.z ) ) + MapLayout.start_tile
+	_lit_from = cell
+
+	# Count the steps out from the camera's room through the openings, the way you'd see down a hall
+	var steps : Dictionary[ Room, int ]
+	var to_visit : Array[ Room ]
+	if rooms.has( cell ):
+		steps[ rooms[ cell ] ] = 0
+		to_visit.append( rooms[ cell ] )
+	while not to_visit.is_empty():
+		var room : Room = to_visit.pop_front()
+		for other : Room in room.neighbors.values():
+			if steps.has( other ): continue
+			steps[ other ] = steps[ room ] + 1
+			to_visit.append( other )
+	# Light passes through walls, so every room touching the camera's room helps light it
+	for direction in Room.DIRECTION_TO_BORDER_TYPE:
+		if rooms.has( cell + direction ): steps[ rooms[ cell + direction ] ] = 1
+
+	# Fewest steps first, then nearest. Rooms the steps never reached come last, nearest first.
+	var from := Vector3( at.x, 0, at.z ) * ROOM_SIZE
+	var comes_first := func(a: Room, b: Room) -> bool:
+		var steps_a : int = steps.get( a, rooms.size() )
+		var steps_b : int = steps.get( b, rooms.size() )
+		if steps_a != steps_b: return steps_a < steps_b
+		return a.position.distance_squared_to( from ) < b.position.distance_squared_to( from )
+	var order : Array = rooms.values()
+	order.sort_custom( comes_first )
+	var lights_on := 0
+	for room : Room in order:
+		var fits := lights_on + room.light_count() <= light_budget
+		room.set_lit( fits )
+		if fits: lights_on += room.light_count()
 
 func generate() -> void:
 	# First pass: build out from the start tile through each room's openings. Tiles it can't reach

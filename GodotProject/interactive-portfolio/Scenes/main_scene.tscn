@@ -29,6 +29,7 @@ albedo_color = Color(0.32941177, 1, 1, 0.19215687)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1382339994]
 transform = Transform3D(0.7807294, 0.25082657, -0.57231784, 0, 0.91590005, 0.40140644, 0.62486935, -0.3133898, 0.71507007, -1.4758582, 2.302283, 5.1300287)
+shadow_enabled = true
 shadow_bias = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=414343593]

@@ -124,3 +124,38 @@ func add_neighbor(dir: Vector2i, room_ref: Room) -> bool:
 	if neighbors.has( dir ): return false
 	neighbors[ dir ] = room_ref
 	return true
+
+#region lights
+# How long this room's lights take to fade in when RoomContainer turns them on
+const LIGHT_FADE_TIME := 0.5
+
+# Whether this room's lights are on. RoomContainer switches rooms on and off as the camera moves.
+var lit := true
+# Every light in this room (the ceiling's, and any added later) that starts out visible, with its color
+var _lights : Array[ Light3D ]
+var _light_colors : Array[ Color ]
+var _light_fade : Tween
+
+func _ready() -> void:
+	for light : Light3D in find_children( "*", "Light3D", true, false ):
+		if not light.visible: continue # Hidden on purpose, leave it alone
+		_lights.append( light )
+		_light_colors.append( light.light_color )
+
+func light_count() -> int:
+	return _lights.size()
+
+# Turns this room's lights off at once, or back on with a fade.
+# The fade goes through the color, not the energy: Godot picks the lights for each mesh partly by
+# energy when a light switches on, so a light switched on at zero energy could lose its spot.
+func set_lit(on: bool) -> void:
+	if on == lit: return
+	lit = on
+	if _light_fade: _light_fade.kill()
+	for light in _lights: light.visible = on
+	if not on or _lights.is_empty(): return
+	_light_fade = create_tween().set_parallel()
+	for i in _lights.size():
+		_lights[ i ].light_color = Color.BLACK
+		_light_fade.tween_property( _lights[ i ], "light_color", _light_colors[ i ], LIGHT_FADE_TIME )
+#endregion

@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="2_gxwgk"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="3_room"]
 [ext_resource type="PackedScene" uid="uid://d3msxdbxllyqn" path="res://prefabs/Props/pillar.tscn" id="4_dqnjt"]
+[ext_resource type="PackedScene" uid="uid://d4lgav52vcr6t" path="res://prefabs/rooms/ceiling.tscn" id="5_amtso"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dqnjt"]
 
@@ -49,3 +50,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
 
 [node name="Pillar2" parent="." unique_id=1086317773 instance=ExtResource("4_dqnjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="Ceiling" parent="." unique_id=217736034 instance=ExtResource("5_amtso")]
