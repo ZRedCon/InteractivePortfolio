@@ -15,7 +15,8 @@
 <body>
     <h1>Welcome to the interactive Portfolio!</h1>
     <!-- Godot game window (Godot's Web export writes into the godot/ folder) -->
-    <iframe id="godot-frame" src="godot/index.html" title="Interactive Portfolio" allowfullscreen></iframe>
+    <!-- loading="lazy": the frame only loads once it's on screen, so on phones (where CSS hides it) the game never downloads -->
+    <iframe id="godot-frame" src="godot/index.html" title="Interactive Portfolio" loading="lazy" allowfullscreen></iframe>
     <article id="warning">
         <h1>Hey There!</h1>
         <p>If you can read this there is a very good chance the interactive portfolio (above) isn't working properly. Below is the exact same info, just as a simple website instead!</p>

@@ -22,7 +22,7 @@ const CdpClient := preload( "cdp_client.gd" )
 const PAGE_WIDE := "wide"
 const PAGE_THIN := "thin"
 const PAGE_IDS : Array[ String ] = [ PAGE_WIDE, PAGE_THIN ]
-# The browser window each preview pretends to be. exhibit.css switches layout at 960 pixels wide.
+# The browser window each preview pretends to be: a desktop window and a phone held upright.
 const DEFAULT_SIZES : Dictionary[ String, Vector2i ] = { PAGE_WIDE: Vector2i( 1280, 800 ), PAGE_THIN: Vector2i( 390, 844 ) }
 
 const STOPPED := 0

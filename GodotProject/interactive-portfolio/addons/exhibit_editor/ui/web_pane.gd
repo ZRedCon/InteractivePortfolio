@@ -14,7 +14,7 @@ func _init(preview: WebPreview, page_id: String, pane_title: String) -> void:
 	_preview = preview
 	_page_id = page_id
 	title = pane_title
-	add_size_boxes( _preview.get_viewport_size( page_id ), "The browser window size the page is shown at, in pixels. exhibit.css switches between its thin and wide layouts at 960 wide." )
+	add_size_boxes( _preview.get_viewport_size( page_id ), "The browser window size the page is shown at, in pixels. The exhibit grows with the window up to 1200 wide." )
 	_preview.changed.connect( refresh )
 	_preview.frame_ready.connect( func(id: String) -> void:
 		if id == _page_id: _update_layout() )

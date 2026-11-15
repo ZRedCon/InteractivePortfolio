@@ -54,6 +54,15 @@ h1 {
     background-color: black;
 }
 
+/* Phone-sized windows: the game would be too small to use, so it's hidden and the warning below
+   it shows instead. Because the frame has loading="lazy" (index.html), a hidden frame doesn't
+   download or run the game at all. 37.5em = 600px at the browser's default text size. */
+@media (max-width: 37.5em) {
+    #godot-frame {
+        display: none;
+    }
+}
+
 @media (min-width: 60em) {
     h1::before {
         content: "====== ";

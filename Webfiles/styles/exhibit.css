@@ -2,9 +2,10 @@
    Exhibit: one portfolio entry, laid out from the reference images in
    assets/images/exhibit-layout-refs/.
 
-   The rules at the top are the THIN (mobile) layout. The @media block at the
-   bottom switches to the WIDE layout once the window is at least 60em wide
-   (960px at the browser's default text size).
+   One layout at every window size: name and date, skills, then a big
+   slideshow, with the description and contributions side by side under it,
+   then notes and links. It grows with the window up to 1200px wide. The
+   images are the centerpiece, so the slideshow always gets the full width.
 
    Class -> reference color:
      .entry-name     red        .date           pink       .skills  orange
@@ -36,7 +37,7 @@
 
 /* ---- Red + pink: entry name and date ------------------------------------- */
 
-/* Thin: name on one line, date on the line below it. */
+/* Name on one line, date on the line below it. */
 .header {
     display: flex;
     flex-direction: column;
@@ -128,9 +129,14 @@
     inside it (centered, never cropped). Because everything inside is positioned "absolute",
     image sizes never push the layout around. src/slideShow.js slides the images sideways. */
 .slide-show {
-    order: -1;                  /* thin: the slideshow comes first in the content */
+    order: -1;                  /* comes first in the content, though the HTML lists it after the text */
     position: relative;
     aspect-ratio: 16 / 9;
+    /* As wide as the content, but never taller than 80% of the window (the same rule as the
+       game frame in default-styles.css), so the whole image fits on a short screen like a
+       laptop's or a phone turned sideways. When that makes it narrower, it stays centered. */
+    width: min(100%, calc(80vh * 16 / 9));
+    margin-inline: auto;
     overflow: hidden;           /* cuts images off at the frame's edge while they slide */
     background-color: #000;     /* fills the space beside images that aren't 16:9 */
     touch-action: pan-y;        /* phones: swiping up/down scrolls the page, sideways drags the images */
@@ -264,62 +270,4 @@
 .links a:hover {
     background-color: var(--color-accent);
     color: var(--color-surface);
-}
-
-/* =============================================================================
-   WIDE layout
-   Between 960px and 1200px the exhibit shrinks with the window; past 1200px
-   it stops growing (see max-width on .exhibit).
-   ============================================================================= */
-@media (min-width: 60em) {
-    .exhibit {
-        --exhibit-gap: 1.5rem;
-        --exhibit-pad: 2rem;
-    }
-
-    /* Name on the far left, date on the far right, both centered on the same line. */
-    .header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .entry-name {
-        font-size: 1.75rem;
-    }
-
-    .date {
-        font-size: 1.125rem;
-    }
-
-    /* Three columns: [description over contribution] [slideshow] [notes]. */
-    .content {
-        flex-direction: row;
-    }
-
-    .text-important {
-        flex: 1 1 0;
-        flex-direction: column;
-        flex-wrap: nowrap;
-    }
-
-    /* In a column the 16rem basis from above would set their HEIGHT, so turn it off. */
-    .proj-desc,
-    .contribution {
-        flex: none;
-    }
-
-    /* Exactly a third of the content's width, and it never shrinks. The two text columns
-       split what's left evenly, so the slideshow sits dead center, right above the links.
-       Its height stretches to match the tallest text column; the 16:9 aspect-ratio from
-       above now only acts as a minimum, so a short entry can't squash the image. */
-    .slide-show {
-        order: 0;
-        flex: 0 0 calc(100% / 3);
-    }
-
-    .text-unimportant {
-        flex: 1 1 0;
-    }
 }
