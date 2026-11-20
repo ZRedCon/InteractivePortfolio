@@ -128,6 +128,9 @@ func add_neighbor(dir: Vector2i, room_ref: Room) -> bool:
 #region lights
 # How long this room's lights take to fade in when RoomContainer turns them on
 const LIGHT_FADE_TIME := 0.5
+# Render layer for lightmapped meshes. Lightmaps replace the sky's ambient light, so RoomContainer's sky
+# fill lights light only this layer to put it back.
+const BAKED_LIGHT_LAYER := 20
 
 # Whether this room's lights are on. RoomContainer switches rooms on and off as the camera moves.
 var lit := true
@@ -141,7 +144,13 @@ func _ready() -> void:
 	# only need to exist in the editor: hiding them keeps them out of the web build's live light limit.
 	var baked_under : Array[ Node ]
 	for lightmap : LightmapGI in find_children( "*", "LightmapGI", true, false ):
-		if lightmap.light_data: baked_under.append( lightmap.get_parent() )
+		if not lightmap.light_data: continue
+		baked_under.append( lightmap.get_parent() )
+		# user_data lists each baked mesh as [path, uv rect, slice, sub-instance]
+		var users : Array = lightmap.light_data.get( "user_data" )
+		for i in range( 0, users.size(), 4 ):
+			var mesh := lightmap.get_node_or_null( users[ i ] ) as VisualInstance3D
+			if mesh: mesh.set_layer_mask_value( BAKED_LIGHT_LAYER, true )
 	for light : Light3D in find_children( "*", "Light3D", true, false ):
 		if not light.visible: continue # Hidden on purpose, leave it alone
 		if light.light_bake_mode == Light3D.BAKE_STATIC and baked_under.any( func(node: Node) -> bool: return node.is_ancestor_of( light ) ):
