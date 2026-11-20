@@ -1,8 +1,13 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://4rn2ef0fesh"]
 
-[ext_resource type="Texture2D" uid="uid://bq4or057utxri" path="res://assets/images/MuseamTextures/debug/Bricks.webp" id="1_3vq05"]
+[ext_resource type="Texture2D" uid="uid://dkypt8gry6lcy" path="res://assets/textures/Floor/512_floor_0.png" id="1_0u07k"]
+[ext_resource type="Texture2D" uid="uid://c5c6ljm6ahnnm" path="res://assets/textures/Floor/512_floor_1.png" id="2_7y05r"]
+[ext_resource type="Texture2D" uid="uid://jlv13a1wp2wo" path="res://assets/textures/Floor/cobblestone_roughness.png" id="3_7y05r"]
 
 [resource]
-albedo_texture = ExtResource("1_3vq05")
-uv1_scale = Vector3(10, 10, 1)
+albedo_texture = ExtResource("1_0u07k")
+roughness_texture = ExtResource("3_7y05r")
+normal_enabled = true
+normal_scale = 2.0
+normal_texture = ExtResource("2_7y05r")
 texture_filter = 2

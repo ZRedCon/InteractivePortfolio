@@ -1,8 +1,14 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://b8hdv61qpbgdc"]
 
-[ext_resource type="Texture2D" uid="uid://bke6ip5atdk25" path="res://assets/images/MuseamTextures/debug/carpet.webp" id="1_7y3n2"]
+[ext_resource type="Texture2D" uid="uid://c48700d5sx87d" path="res://assets/textures/Carpet/64_carpet_0.png" id="1_y1x40"]
+[ext_resource type="Texture2D" uid="uid://bnwdjle517t1e" path="res://assets/textures/Carpet/64_carpet_1.png" id="2_j6pjd"]
+[ext_resource type="Texture2D" uid="uid://cdhb8wnxyp0ly" path="res://assets/textures/Carpet/64_carpet_2.png" id="3_d377d"]
 
 [resource]
-albedo_texture = ExtResource("1_7y3n2")
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("1_y1x40")
+roughness_texture = ExtResource("3_d377d")
+normal_enabled = true
+normal_texture = ExtResource("2_j6pjd")
 uv1_scale = Vector3(15, 20, 0)
 texture_filter = 2

@@ -131,14 +131,22 @@ const LIGHT_FADE_TIME := 0.5
 
 # Whether this room's lights are on. RoomContainer switches rooms on and off as the camera moves.
 var lit := true
-# Every light in this room (the ceiling's, and any added later) that starts out visible, with its color
+# Every live light in this room (the ceiling's, and any added later) that starts out visible, with its color
 var _lights : Array[ Light3D ]
 var _light_colors : Array[ Color ]
 var _light_fade : Tween
 
 func _ready() -> void:
+	# A LightmapGI bakes the Static lights under its parent (like the ceiling's up-light). Once baked, they
+	# only need to exist in the editor: hiding them keeps them out of the web build's live light limit.
+	var baked_under : Array[ Node ]
+	for lightmap : LightmapGI in find_children( "*", "LightmapGI", true, false ):
+		if lightmap.light_data: baked_under.append( lightmap.get_parent() )
 	for light : Light3D in find_children( "*", "Light3D", true, false ):
 		if not light.visible: continue # Hidden on purpose, leave it alone
+		if light.light_bake_mode == Light3D.BAKE_STATIC and baked_under.any( func(node: Node) -> bool: return node.is_ancestor_of( light ) ):
+			light.visible = false
+			continue
 		_lights.append( light )
 		_light_colors.append( light.light_color )
 
