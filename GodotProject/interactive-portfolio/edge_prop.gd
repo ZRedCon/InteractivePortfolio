@@ -9,15 +9,16 @@ const NEG_X := 3
 
 const ROT_DEGREE : Array[ int ] = [ 0, 90, 180, 270 ]
 
-@export_enum("Face Down", "Face Left", "Face Right", "Face Up") var start_direction : int
+# The prop's front is its +Z side. On the map +Z is down and +X is right, so the names follow the constants above.
+@export_enum("Face Down", "Face Right", "Face Up", "Face Left") var start_direction : int
 
 func _face_dir(dir: int) -> void:
 	rotation_degrees.y = ROT_DEGREE[ clamp(dir,0,3) ]
 
+# Turns the prop's front toward whichever of the four directions is closest to dir
 func _face_forward(dir: Vector3) -> void:
-	var z0_x1 := int( abs( dir.x ) > abs( dir.z ) )
-	var mag : int = ( sign( dir.x ) if z0_x1 == 1 else sign( dir.z ) ) + 1
-	_face_dir( z0_x1 + mag ) 
+	if abs( dir.x ) > abs( dir.z ): _face_dir( POS_X if dir.x > 0 else NEG_X )
+	else: _face_dir( POS_Z if dir.z > 0 else NEG_Z )
 
 func _category_ready() -> void:
 	_face_dir( start_direction )

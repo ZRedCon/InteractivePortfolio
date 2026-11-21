@@ -47,12 +47,23 @@ func get_image(file_path: String) -> Image:
 
 var _is_web_mode : bool
 var entries : Array[ Entry ]
+# Emitted once entries holds every entry. Web builds download them, so they arrive a moment after startup.
+signal entries_loaded
+var loaded : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_is_web_mode = OS.has_feature( "web" )
 	Instance = self
 	entries = await parse_for_web() if OS.has_feature( "web" ) else parse_for_pc()
+	loaded = true
+	entries_loaded.emit()
+
+## The entry loaded from this file in the entry folder (like "frong.json"), or null
+func get_entry(file: String) -> Entry:
+	for entry in entries:
+		if entry.file == file: return entry
+	return null
 
 #region Web pipeline
 
@@ -86,7 +97,7 @@ func parse_for_web() -> Array[ Entry ]:
 	
 	for file in files_to_load:
 		var data = await _web_read_json( DATA_PATH + file )
-		if data is Dictionary: caught_entries.append( _make_entry_from_dict( data ) )
+		if data is Dictionary: caught_entries.append( _make_entry_from_dict( data, file ) )
 	
 	return caught_entries
 
@@ -114,15 +125,17 @@ func parse_for_pc() -> Array[ Entry ]:
 	
 	for file in files_to_load:
 		var data = _pc_read_json( DATA_PATH + file )
-		if data is Dictionary: caught_entries.append( _make_entry_from_dict( data ) )
+		if data is Dictionary: caught_entries.append( _make_entry_from_dict( data, file ) )
 	
 	return caught_entries
 
 #endregion
 
-func _make_entry_from_dict(dict: Dictionary) -> Entry:
-	return Entry.new(dict[ "name" ], dict[ "description" ],
+func _make_entry_from_dict(dict: Dictionary, file: String = "") -> Entry:
+	var entry := Entry.new(dict[ "name" ], dict[ "description" ],
 					dict[ "time" ], dict[ "related-skills" ],
 					dict[ "contribution" ],dict[ "notes" ],
 					dict[ "main-image" ],dict[ "slide-show" ],
 					dict[ "related-links" ] )
+	entry.file = file
+	return entry

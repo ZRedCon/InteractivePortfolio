@@ -9,10 +9,10 @@
 		"Art, Music, and sfx"
 	],
 	"notes": [
+		"The term 'Frong' is a portmanteau of 'Frog' and 'Pong'",
 		"This game is the second entry in my minigames' collection",
-		"I am super proud of the music engine used in this game. In fact this game was on the chopping block for exhibits here before I remembered it's existence.",
-		"Because of this games two-player nature I ended up playing this with my roommate a fair bit over the course of it's development",
-		"The term 'Frong' is a portmanteau of 'Frog' and 'Pong'"
+		"I used to think this one of the \"weaker\" entries here, but when I took a look at just how useful the music engine was I decided it earned a place among the exhibits, as I also shamelessly stole my own code to use as the blueprint in almost all my other projects.",
+		"Because of this games two-player nature I ended up playing this with my roommate a fair bit over the course of it's development"
 	],
 	"main-image": "202/FrongChoas",
 	"slide-show": [

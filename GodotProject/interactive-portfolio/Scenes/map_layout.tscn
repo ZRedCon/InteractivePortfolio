@@ -2,9 +2,567 @@
 
 [ext_resource type="TileSet" uid="uid://d0bq6v6qxln82" path="res://museum_tiles.tres" id="1_6rv64"]
 [ext_resource type="Script" uid="uid://ded5uiec1i8j4" path="res://Scenes/map_layout.gd" id="2_lsxtm"]
+[ext_resource type="Script" uid="uid://d3xw82pn7xwms" path="res://Scenes/room_group.gd" id="3_3arg3"]
+[ext_resource type="Script" uid="uid://vf4hovurf4px" path="res://exhibit_display.gd" id="3_m64cp"]
+[ext_resource type="Script" uid="uid://b54r5mlop3w6n" path="res://entry_group.gd" id="4_3arg3"]
+
+[sub_resource type="Resource" id="Resource_qvry0"]
+script = ExtResource("4_3arg3")
+entries = Array[String](["320.json", "ritual-realties.json", "highway-to-hell.json", "plinko.json", "hideous-instakill.json", "last-beach.json", "dungeon-raider.json", "frong.json", "reverberations.json", "secret-santa.json", "upgrade-ultimatum.json"])
+color = Color(0.114193834, 0.45933396, 0.99999994, 1)
+metadata/_custom_type_script = "uid://b54r5mlop3w6n"
+
+[sub_resource type="Resource" id="Resource_m64cp"]
+script = ExtResource("4_3arg3")
+entries = Array[String](["highway-to-hell.json", "ritual-realties.json", "upgrade-ultimatum.json", "last-beach.json", "hideous-instakill.json", "reverberations.json", "secret-santa.json", "frong.json", "plinko.json", "dungeon-raider.json", "", "", "", "", "", "", ""])
+color = Color(0.39999998, 1, 0.53434646, 1)
+metadata/_custom_type_script = "uid://b54r5mlop3w6n"
 
 [node name="MapLayout" type="TileMapLayer" unique_id=1318426567]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAEABAAEAAAADAAAAAEABAAAAAAADAAAAAHABAP//AAADAAAAAEACAAEAAAAEAAEAAAACAAAAAAADAAAAAEACAP//AAAEAAEAAGADAAAAAAAFAAAAAEADAAEAAAAEAAEAADADAAIAAAAEAAEAAFAEAAAAAAAFAAAAAEAEAAEAAAAFAAAAAEAEAAIAAAAFAAAAAEAFAAAAAAAEAAEAAGAFAAEAAAAEAAEAAAAFAAIAAAAFAAAAAEAGAAAAAAAEAAEAADAGAAEAAAADAAAAAEAGAAIAAAAEAAEAAAAHAAAAAAAFAAAAAEAHAAEAAAADAAAAAAAHAAIAAAAEAAEAAFAIAAAAAAAEAAEAAGAIAAEAAAAEAAEAAAAIAAIAAAAFAAAAAEAJAAAAAAAEAAEAADAJAAEAAAADAAAAAEAJAAIAAAADAAAAADAKAAAAAAAFAAAAAEAKAAEAAAAFAAAAAEAKAAIAAAAFAAAAAEALAAAAAAAFAAAAAEALAAEAAAAEAAAAAHALAAIAAAAEAAAAAHAMAAAAAAADAAAAAAAMAAEAAAAFAAAAAAAMAAIAAAAEAAEAAFANAAAAAAAGAAAAAGANAAEAAAABAAAAAEANAAIAAAAGAAAAAEAOAAAAAAAAAAAAAFAOAAEAAAABAAEAAHAOAAIAAAAAAAAAADAPAAAAAAAEAAEAADAPAAEAAAADAAAAAHAPAAIAAAAEAAEAAFAQAAAAAAAFAAAAAEAQAAIAAAAFAAAAAEARAAAAAAAFAAAAAEARAAIAAAAEAAAAAHASAAAAAAADAAAAAAASAAEAAAAFAAAAAAASAAIAAAAEAAEAAFATAAAAAAAFAAAAAEATAAIAAAAFAAAAAEAUAAAAAAAEAAEAAGAUAAEAAAAFAAAAAAAUAAIAAAADAAAAADAVAAAAAAAEAAEAADAVAAEAAAAFAAAAAAAVAAIAAAAEAAEAAAAWAAAAAAAEAAEAAGAWAAEAAAAFAAAAAAAWAAIAAAAEAAEAAFAXAAAAAAAEAAAAAAAXAAEAAAAFAAAAAAAXAAIAAAAEAAEAAAABAAIAAAAFAAAAAAABAAMAAAABAAEAAAABAP7/AAAFAAAAAAABAP3/AAAEAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAABAAAAAEABAAQAAAACAAAAAAAAAAUAAAAAAAAAAGABAAUAAAABAAAAADACAAMAAAAAAAAAAFACAAQAAAABAAAAAHACAAUAAAAAAAAAADA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAEABAAEAAAADAAAAAEABAAAAAAADAAAAAHABAP//AAADAAAAAEACAAEAAAAEAAEAAAACAAAAAAADAAAAAEACAP//AAAEAAEAAGADAAAAAAAFAAAAAEADAAEAAAAEAAEAADADAAIAAAAEAAEAAFAEAAAAAAAFAAAAAEAEAAEAAAAFAAAAAEAEAAIAAAAFAAAAAEAFAAAAAAAEAAEAAGAFAAEAAAAEAAEAAAAFAAIAAAAFAAAAAEAGAAAAAAAEAAEAADAGAAEAAAADAAAAAEAGAAIAAAAEAAEAAAAHAAAAAAAFAAAAAEAHAAEAAAADAAAAAAAHAAIAAAAEAAEAAFAIAAAAAAAEAAEAAGAIAAEAAAAEAAEAAAAIAAIAAAAFAAAAAEAJAAAAAAAEAAEAADAJAAEAAAADAAAAAEAJAAIAAAADAAAAADAKAAAAAAAFAAAAAEAKAAEAAAAFAAAAAEAKAAIAAAAFAAAAAEALAAAAAAAFAAAAAEALAAEAAAAEAAAAAHALAAIAAAAEAAAAAHAMAAAAAAADAAAAAAAMAAEAAAAFAAAAAAAMAAIAAAAEAAEAAFANAAAAAAAGAAAAAGANAAEAAAABAAAAAEANAAIAAAAGAAAAAEAOAAAAAAAAAAAAAFAOAAEAAAABAAEAAHAOAAIAAAAAAAAAADAPAAAAAAAEAAEAADAPAAEAAAADAAAAAHAPAAIAAAAEAAEAAFAQAAAAAAAFAAAAAEAQAAIAAAAFAAAAAEARAAAAAAAFAAAAAEARAAIAAAAEAAAAAHASAAAAAAADAAAAAAASAAEAAAAFAAAAAAASAAIAAAAEAAEAAFATAAAAAAAFAAAAAEATAAIAAAAFAAAAAEAUAAAAAAAEAAEAAGAUAAEAAAAFAAAAAAAUAAIAAAADAAAAADAVAAAAAAAEAAEAADAVAAEAAAAFAAAAAAAVAAIAAAAEAAEAAAAWAAAAAAAEAAEAAGAWAAEAAAAFAAAAAAAWAAIAAAAEAAEAAFAXAAAAAAAEAAAAAAAXAAEAAAAFAAAAAAAXAAIAAAAEAAEAAAABAAIAAAAFAAAAAAABAP7/AAAFAAAAAAABAP3/AAAGAAAAADAAAAMAAAAAAAAAAAAAAAQAAAABAAAAAEABAAQAAAACAAAAAAAAAAUAAAAAAAAAAGABAAUAAAABAAAAADACAAMAAAAAAAAAAFACAAQAAAABAAAAAHACAAUAAAAAAAAAADABAAMAAAABAAEAAAABAPz/AAAAAAAAAAACAPz/AAAAAAAAAFACAP3/AAAAAAAAADA=")
 tile_set = ExtResource("1_6rv64")
 script = ExtResource("2_lsxtm")
+
+[node name="RoomGroups" type="Node2D" parent="." unique_id=399163803]
+metadata/_edit_lock_ = true
+
+[node name="RoomGroup" type="TileMapLayer" parent="RoomGroups" unique_id=629661919]
+self_modulate = Color(0.25, 0.77499986, 1, 1)
+tile_map_data = PackedByteArray("AAABAP3/AQAAAAAAAGACAP3/AQAAAAAAADABAPz/AQAAAAAAAAACAPz/AQAAAAAAAFA=")
+tile_set = ExtResource("1_6rv64")
+script = ExtResource("3_3arg3")
+metadata/_edit_lock_ = true
+
+[node name="Props" type="Node2D" parent="." unique_id=571000573]
+metadata/_edit_lock_ = true
+
+[node name="Exhibit" type="Node2D" parent="Props" unique_id=1822993142]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(44.5, 56)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit2" type="Node2D" parent="Props" unique_id=755097511]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(40, 51.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit3" type="Node2D" parent="Props" unique_id=1927634471]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(8, 51.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit4" type="Node2D" parent="Props" unique_id=299939735]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(3.5, 56)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit5" type="Node2D" parent="Props" unique_id=1153285509]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(3.5, 88)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit6" type="Node2D" parent="Props" unique_id=1743465520]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(3.5, 72)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit7" type="Node2D" parent="Props" unique_id=1661822464]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(8, 92.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit8" type="Node2D" parent="Props" unique_id=985893287]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(24, 92.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit9" type="Node2D" parent="Props" unique_id=1228122664]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(40, 92.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit10" type="Node2D" parent="Props" unique_id=1419606036]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(44.5, 88)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit11" type="Node2D" parent="Props" unique_id=2061958542]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_qvry0")
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(44.5, 72)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit13" type="Node2D" parent="Props" unique_id=174506659]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 8
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(140.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit14" type="Node2D" parent="Props" unique_id=627624269]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 7
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(140.5, 8)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit15" type="Node2D" parent="Props" unique_id=864512555]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 6
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(120, 12.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit16" type="Node2D" parent="Props" unique_id=2012501501]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 9
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(120, 19.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit17" type="Node2D" parent="Props" unique_id=403702738]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 4
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(99.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit18" type="Node2D" parent="Props" unique_id=1212196266]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 5
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(99.5, 8)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit19" type="Node2D" parent="Props" unique_id=276015245]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 1
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(92.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit20" type="Node2D" parent="Props" unique_id=439613280]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(92.5, 8)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit21" type="Node2D" parent="Props" unique_id=1305742797]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 2
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(51.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit22" type="Node2D" parent="Props" unique_id=1268421557]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 3
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(51.5, 40)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit24" type="Node2D" parent="Props" unique_id=825183775]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 18
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(204.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit25" type="Node2D" parent="Props" unique_id=1156385751]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 19
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(211.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit26" type="Node2D" parent="Props" unique_id=1312982150]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 20
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(236.5, 8)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit27" type="Node2D" parent="Props" unique_id=992810072]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 21
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(236.5, 40)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit28" type="Node2D" parent="Props" unique_id=1962790149]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 22
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(243.5, 40)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit29" type="Node2D" parent="Props" unique_id=740100765]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 24
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(284.5, 40)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit30" type="Node2D" parent="Props" unique_id=1177428268]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 23
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(264, 44.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit31" type="Node2D" parent="Props" unique_id=599950469]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 25
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(264, 35.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit32" type="Node2D" parent="Props" unique_id=842508352]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 26
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(243.5, 8)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit33" type="Node2D" parent="Props" unique_id=204464744]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 12
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(147.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit34" type="Node2D" parent="Props" unique_id=616436146]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 15
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(147.5, 8)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit35" type="Node2D" parent="Props" unique_id=629994640]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 16
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(168, 12.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit36" type="Node2D" parent="Props" unique_id=2014670800]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 17
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(184, 12.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit12" type="Node2D" parent="Props" unique_id=1420721196]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 14
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(184, 28.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit23" type="Node2D" parent="Props" unique_id=484143127]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 13
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(168, 28.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit37" type="Node2D" parent="Props" unique_id=568201058]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 10
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(168, 44.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit38" type="Node2D" parent="Props" unique_id=1264564708]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 11
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(184, 44.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit39" type="Node2D" parent="Props" unique_id=1237335882]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 28
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(300.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit40" type="Node2D" parent="Props" unique_id=979954876]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 30
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(312, 35.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit41" type="Node2D" parent="Props" unique_id=1990480568]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 32
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(323.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit42" type="Node2D" parent="Props" unique_id=333938424]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 34
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(312, 3.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit43" type="Node2D" parent="Props" unique_id=618385249]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 33
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(312, 12.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit44" type="Node2D" parent="Props" unique_id=628093042]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 31
+start_direction = 3
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(332.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit45" type="Node2D" parent="Props" unique_id=363977325]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 29
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(312, 44.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit46" type="Node2D" parent="Props" unique_id=1099542159]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 27
+start_direction = 1
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(291.5, 24)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit48" type="Node2D" parent="Props" unique_id=714849176]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 35
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(344, 3.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit49" type="Node2D" parent="Props" unique_id=1462784625]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 36
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(360, 3.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit47" type="Node2D" parent="Props" unique_id=213586219]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 37
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(360, 44.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
+
+[node name="Exhibit50" type="Node2D" parent="Props" unique_id=90189014]
+script = ExtResource("3_m64cp")
+entry_mode = 2
+entry_group = SubResource("Resource_m64cp")
+queue = 38
+start_direction = 2
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(376, 44.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true

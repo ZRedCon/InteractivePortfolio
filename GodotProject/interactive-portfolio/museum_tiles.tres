@@ -1,6 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://d0bq6v6qxln82"]
 
 [ext_resource type="Texture2D" uid="uid://dq8bpourgg48p" path="res://assets/images/MuseumSet.png" id="1_7pcns"]
+[ext_resource type="Texture2D" uid="uid://b3uvuaqakom3p" path="res://assets/images/RoomGroups.png" id="2_3m4v5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lsxtm"]
 texture = ExtResource("1_7pcns")
@@ -19,5 +20,23 @@ texture = ExtResource("1_7pcns")
 5:1/0 = 0
 6:1/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rs8vg"]
+texture = ExtResource("2_3m4v5")
+6:1/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+4:1/0 = 0
+3:0/0 = 0
+3:1/0 = 0
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+5:1/0 = 0
+2:1/0 = 0
+1:1/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_lsxtm")
+sources/1 = SubResource("TileSetAtlasSource_rs8vg")

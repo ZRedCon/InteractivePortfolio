@@ -39,3 +39,15 @@ func get_borders(cell: Vector2i) -> int:
 		if flips & TileSetAtlasSource.TRANSFORM_FLIP_V: direction.y = -direction.y
 		borders |= Room.DIRECTION_TO_BORDER_TYPE[ direction ]
 	return borders
+
+# Every room group on the map (see room_group.gd)
+func get_room_groups() -> Array[ RoomGroup ]:
+	var groups : Array[ RoomGroup ] = []
+	groups.assign( find_children( "*", "RoomGroup", true, false ) )
+	return groups
+
+# Every prop on the map (see map_prop_icon.gd)
+func get_props() -> Array[ PropDisplay ]:
+	var props : Array[ PropDisplay ] = []
+	props.assign( find_children( "*", "PropDisplay", true, false ) )
+	return props

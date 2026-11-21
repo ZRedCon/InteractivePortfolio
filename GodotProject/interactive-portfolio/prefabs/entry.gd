@@ -1,5 +1,7 @@
 class_name Exhibit extends EdgeProp
 
+const SPRITE_HEIGHT_MAX = 
+
 @onready var label := $Name
 @onready var sprite := $MainImage
 

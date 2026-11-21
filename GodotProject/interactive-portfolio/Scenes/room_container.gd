@@ -21,6 +21,8 @@ const ROOM_SCENES : Dictionary[ int, PackedScene ] = {
 
 # Every room that's been built, by the map cell it was built from
 var rooms : Dictionary[ Vector2i, Room ]
+# The room group each grouped cell belongs to. Those cells get their group's scene instead of rooms.
+var group_cells : Dictionary[ Vector2i, RoomGroup ]
 
 # The web build (Compatibility renderer) draws at most this many lights of each kind per frame and
 # drops the rest in no useful order, which is what made whole rooms go dark. So only the rooms near
@@ -135,6 +137,9 @@ func light_rooms_near_camera() -> void:
 		if fits: lights_on += room.light_count()
 
 func generate() -> void:
+	for group : RoomGroup in MapLayout.get_room_groups():
+		for cell in group.get_used_cells(): group_cells[ cell ] = group
+
 	# First pass: build out from the start tile through each room's openings. Tiles it can't reach
 	# get built afterwards, so the whole map is there to look over.
 	_build_from( MapLayout.start_tile )
@@ -154,15 +159,66 @@ func generate() -> void:
 			if other and not other.borders & Room.DIRECTION_TO_BORDER_TYPE[ -direction ]:
 				room.add_neighbor( direction, other )
 
-# Builds the room at a cell, then every room it leads to that hasn't been built yet
+	_build_room_groups()
+	_build_props()
+
+# Builds the room at a cell, then every room it leads to that hasn't been built yet. A room group's cells
+# aren't built, but the walk goes through them every way, since where its scene has doors isn't known.
 func _build_from(start: Vector2i) -> void:
 	var to_visit : Array[ Vector2i ] = [ start ]
+	var walked : Dictionary[ Vector2i, bool ] # Grouped cells already walked through
 	while not to_visit.is_empty():
 		var cell : Vector2i = to_visit.pop_back()
-		if rooms.has( cell ) or MapLayout.get_room_type( cell ) == Room.TYPE_NONE: continue
-		var room := _spawn_room( cell )
+		if rooms.has( cell ) or walked.has( cell ): continue
+		var walls := Room.BORDER_NONE
+		if group_cells.has( cell ): walked[ cell ] = true
+		elif MapLayout.get_room_type( cell ) != Room.TYPE_NONE: walls = _spawn_room( cell ).borders
+		else: continue
 		for border in Room.BORDER_TYPE_TO_DIRECTION:
-			if not room.borders & border: to_visit.append( cell + Vector2i( Room.BORDER_TYPE_TO_DIRECTION[ border ] ) )
+			if not walls & border: to_visit.append( cell + Vector2i( Room.BORDER_TYPE_TO_DIRECTION[ border ] ) )
+
+# Builds each room group's scene, unturned, with its origin at the group's top-left corner
+func _build_room_groups() -> void:
+	for group : RoomGroup in MapLayout.get_room_groups():
+		var problems := group.get_problems()
+		if not problems.is_empty():
+			push_error( "%s: %s" % [ group.describe(), ", ".join( problems ) ] )
+			continue
+		var built := group.scene.instantiate()
+		if not built is Node3D:
+			push_error( "%s: its scene, %s, needs a Node3D at its root" % [ group.describe(), group.scene.resource_path ] )
+			built.free()
+			continue
+		built.position = _map_to_local( Vector2( group.get_top_left() ) )
+		built.name = "%s %s" % [ group.name, group.get_top_left() ]
+		add_child( built )
+
+# Builds every prop placed on the map. It waits for the entries first, since exhibits show them and web
+# builds download them after startup.
+func _build_props() -> void:
+	if not FileIO.Instance.loaded: await FileIO.Instance.entries_loaded
+	for display : PropDisplay in MapLayout.get_props():
+		var problems := display.get_problems()
+		var cell := display.get_cell()
+		if not rooms.has( cell ) and not group_cells.has( cell ):
+			problems.append( "there's no room in that cell" )
+		elif display is EdgePropDisplay and rooms.has( cell ) and rooms[ cell ].borders & Room.DIRECTION_TO_BORDER_TYPE[ Vector2i( (display as EdgePropDisplay).get_wall() ) ] == 0:
+			problems.append( "that side of the room has no wall" )
+		if not problems.is_empty():
+			push_error( "%s: %s" % [ display.describe(), ", ".join( problems ) ] )
+			continue
+		if not display.is_built(): continue
+		var prop := display.make_prop()
+		prop.position = _map_to_local( display.get_map_point() )
+		prop.name = "%s %s" % [ display.name, cell ] # Shows which prop it is in the remote scene tree
+		add_child( prop )
+		display.setup_prop( prop )
+	ExhibitDisplay.check_groups( MapLayout )
+
+# A point on the map, in cells (( 2.5, 0.5 ) is the middle of cell ( 2, 0 )), on the floor in this node's space
+func _map_to_local(point: Vector2) -> Vector3:
+	var offset := point - Vector2( 0.5, 0.5 ) - Vector2( MapLayout.start_tile )
+	return Vector3( offset.x, 0.0, offset.y ) * ROOM_SIZE
 
 func _spawn_room(cell: Vector2i) -> Room:
 	var type : int = MapLayout.get_room_type( cell )

@@ -57,14 +57,22 @@ static func _static_init() -> void:
 
 #region Tiles
 
-# The id of the MuseumSet.png atlas in the layer's tile set, or -1 if it doesn't have one.
-static func find_source(layer: TileMapLayer) -> int:
+# The id of the MuseumSet.png atlas (or another texture's) in the layer's tile set, or -1 if it doesn't have one.
+static func find_source(layer: TileMapLayer, texture: Texture2D = TEXTURE) -> int:
 	if layer.tile_set == null: return -1
 	for i in layer.tile_set.get_source_count():
 		var source_id := layer.tile_set.get_source_id( i )
 		var source := layer.tile_set.get_source( source_id ) as TileSetAtlasSource
-		if source and source.texture == TEXTURE: return source_id
+		if source and source.texture == texture: return source_id
 	return -1
+
+# Adds an atlas of a texture laid out like MuseumSet.png (the tiles in TILES) to a tile set, and returns its id.
+static func add_source(tile_set: TileSet, texture: Texture2D) -> int:
+	var source := TileSetAtlasSource.new()
+	source.texture = texture
+	source.texture_region_size = tile_set.tile_size
+	for atlas in TILES: source.create_tile( atlas )
+	return tile_set.add_source( source )
 
 # A cell's tile as [ source_id, atlas_coords, alternative_tile ], or [] for an empty cell.
 static func get_tile(layer: TileMapLayer, cell: Vector2i) -> Array:

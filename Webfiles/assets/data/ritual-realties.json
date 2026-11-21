@@ -1,0 +1,28 @@
+{
+	"name": "Ritual Realties",
+	"time": [ "12/2025", "4/2026" ],
+	"description": "Ritual Realties is a game where you must take photos of property you are going to sell. The problem is all the houses are haunted and you need to make the photos as innocent as possible while also making them look appealing enough to get offers. All while trying to not die from the horrors at each house. ",
+	"related-skills": 55,
+	"contribution": [
+		"Barty Concept Art",
+		"Sound effects and music",
+		"Enemy AI and pathfinding",
+		"Title screen design",
+		"House floor plan"
+	],
+	"notes": [
+		"While it never got past it's prototype phase this project is probably my second favorite one in here! The idea is one I got really attached to and I am super proud of both enemies that got in. The only thing I regret is that at the time I lacked the art skills to help even out the load.",
+		"My dream outcome is to eventually own a game studio, if that were to ever happen I feel like this is one of the games I will go back to and give the idea the justice it very much so deserves.",
+		"While coming up with the layout for the house, a core idea I had in mind was for things to always be slightly against normal real estate philosophy, like how the kitchen and dining room aren't directly attached to each other, but the bedroom and garage are. This among other things do a very good job at creating an unsetteling atmosphere in spite of it's limited graphical capabilities."
+	],
+	"main-image": "RitualRealties/Title",
+	"slide-show": [
+		"RitualRealties/Jerome",
+		"RitualRealties/Reuslts",
+		"RitualRealties/Title",
+		"RitualRealties/ConceptJerome",
+		"RitualRealties/Dining",
+		"RitualRealties/Kitchen"
+	],
+	"related-links": [ ]
+}

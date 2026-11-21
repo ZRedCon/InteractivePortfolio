@@ -1,6 +1,6 @@
 class_name Entry extends RefCounted
 
-static var SKILLS : Array[ String ] = [
+const SKILLS : Array[ String ] = [
 	"Game Design",
 	"Game Dev",
 	"Programming",
@@ -59,6 +59,8 @@ var notes : PackedStringArray
 var main_image : String
 var slide_show_images : PackedStringArray
 var supplementary_links : Array[ Dictionary ]
+# The entry folder file this came from, like "frong.json" ("" for a CustomEntry)
+var file : String
 
 func _init(_name: String, _decsr: String, 
 	time: PackedStringArray, _skills: Variant, 
