@@ -1,48 +1,50 @@
 [gd_scene format=3 uid="uid://dtrg5tc7cipxp"]
 
-[ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_rg2mo"]
+[ext_resource type="LightmapGIData" uid="uid://b50kk0p8jkob6" path="res://prefabs/rooms/lightmaps/corner_room_two_exit_turn0.lmbake" id="2_tfml3"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="2_xoahv"]
+[ext_resource type="LightmapGIData" uid="uid://dqsxtgvg7db32" path="res://prefabs/rooms/lightmaps/corner_room_two_exit_turn1.lmbake" id="3_ou6x3"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="3_room"]
+[ext_resource type="LightmapGIData" uid="uid://nxx03kg325lu" path="res://prefabs/rooms/lightmaps/corner_room_two_exit_turn2.lmbake" id="4_kyuow"]
 [ext_resource type="PackedScene" uid="uid://d3msxdbxllyqn" path="res://prefabs/Props/pillar.tscn" id="4_w0417"]
-[ext_resource type="PackedScene" uid="uid://d4lgav52vcr6t" path="res://prefabs/rooms/ceiling.tscn" id="5_gd0r8"]
+[ext_resource type="LightmapGIData" uid="uid://di7f2ngjhgpx6" path="res://prefabs/rooms/lightmaps/corner_room_two_exit_turn3.lmbake" id="5_ued7j"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_w0417"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_gd0r8"]
+[sub_resource type="BoxMesh" id="BoxMesh_tfml3"]
+lightmap_size_hint = Vector2i(83, 50)
+add_uv2 = true
+uv2_padding = 4.0
+size = Vector3(7.5, 0.1, 7.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fswyj"]
 size = Vector3(7.5, 0.1, 7.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tfml3"]
-size = Vector3(10, 0.01, 10)
-
 [sub_resource type="BoxMesh" id="BoxMesh_ou6x3"]
+lightmap_size_hint = Vector2i(83, 63)
+add_uv2 = true
+uv2_padding = 4.0
+size = Vector3(5, 0.1, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kyuow"]
 size = Vector3(5, 0.1, 10)
 
 [node name="CornerRoomTwoExit" type="StaticBody3D" unique_id=839138769]
 script = ExtResource("3_room")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2067645815]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("1_rg2mo")
-mesh = SubResource("PlaneMesh_w0417")
+light_bakes = Dictionary[int, LightmapGIData]({
+42: ExtResource("4_kyuow"),
+138: ExtResource("3_ou6x3"),
+162: ExtResource("2_tfml3"),
+168: ExtResource("5_ued7j")
+})
 
 [node name="Carpet" type="MeshInstance3D" parent="." unique_id=1665735631 groups=["Floor"]]
-transform = Transform3D(7.5, 0, 0, 0, 0.1, 0, 0, 0, 7.5, -1.25, 0, 1.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 1.25)
 material_override = ExtResource("2_xoahv")
-mesh = SubResource("BoxMesh_gd0r8")
+mesh = SubResource("BoxMesh_tfml3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1096844276 groups=["Floor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 1.25)
 shape = SubResource("BoxShape3D_fswyj")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=319683350]
-shape = SubResource("BoxShape3D_tfml3")
-
 [node name="Carpet2" type="MeshInstance3D" parent="." unique_id=1677558643 groups=["Floor"]]
-transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
 material_override = ExtResource("2_xoahv")
 mesh = SubResource("BoxMesh_ou6x3")
 
@@ -50,7 +52,7 @@ mesh = SubResource("BoxMesh_ou6x3")
 shape = SubResource("BoxShape3D_kyuow")
 
 [node name="Carpet3" type="MeshInstance3D" parent="." unique_id=1657134835 groups=["Floor"]]
-transform = Transform3D(-2.1855695e-07, 0, -10, 0, 0.1, 0, 5, 0, -4.371139e-07, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 material_override = ExtResource("2_xoahv")
 mesh = SubResource("BoxMesh_ou6x3")
 
@@ -66,5 +68,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 
 [node name="Pillar3" parent="." unique_id=654848836 instance=ExtResource("4_w0417")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
-
-[node name="Ceiling" parent="." unique_id=217736034 instance=ExtResource("5_gd0r8")]

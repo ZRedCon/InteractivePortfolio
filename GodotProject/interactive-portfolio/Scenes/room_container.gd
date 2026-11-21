@@ -19,6 +19,9 @@ const ROOM_SCENES : Dictionary[ int, PackedScene ] = {
 	Room.TYPE_SINGLE: preload( "res://prefabs/rooms/single_room.tscn" ),
 }
 
+## Moved to the middle of the start tile once the museum is built
+@export var player : Node3D
+
 # Every room that's been built, by the map cell it was built from
 var rooms : Dictionary[ Vector2i, Room ]
 # The room group each grouped cell belongs to. Those cells get their group's scene instead of rooms.
@@ -33,10 +36,32 @@ var light_budget : int = ProjectSettings.get_setting( "rendering/limits/opengl/m
 # The cell the camera was in when the lit rooms were last picked
 var _lit_from := Vector2i.MAX
 
+## How strongly the floors and carpets shine under the baked ceiling lights (see _add_sheen). 0.5 came
+## closest to the live lights when renders of the two were compared.
+const SHEEN := 0.5
+
 func _ready() -> void:
 	generate()
+	# The start tile's middle is this node's origin. Just above the carpet (0.05 m), so the player lands on it.
+	if player: player.global_position = to_global( Vector3.UP * 0.1 )
 	light_rooms_near_camera()
 	_add_sky_fill()
+	_add_sheen()
+
+# A lightmap only holds the light a surface soaks up, not the shine of the ceiling lights reflecting off it
+# (that changes with where you stand), so the carpet looked deeper red and the stone floor flat once baked.
+# This light shines straight down on the baked meshes with almost no energy but a huge specular, so it adds
+# that shine and next to nothing else.
+func _add_sheen() -> void:
+	var sheen := DirectionalLight3D.new()
+	sheen.name = "Sheen"
+	sheen.basis = Basis.looking_at( Vector3.DOWN, Vector3.FORWARD )
+	sheen.light_energy = 0.001
+	sheen.light_specular = SHEEN / sheen.light_energy
+	sheen.light_bake_mode = Light3D.BAKE_DISABLED
+	sheen.light_cull_mask = 1 << ( Room.BAKED_LIGHT_LAYER - 1 )
+	sheen.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+	add_child( sheen )
 
 # Lightmapped surfaces don't get the sky's ambient light (its warm side is what tints the walls). So the
 # sky is measured once at startup, by rendering a white quad lit only by it, off screen, facing each way a
@@ -147,6 +172,9 @@ func generate() -> void:
 	for cell in MapLayout.get_used_cells(): _build_from( cell )
 	if rooms.size() > reachable:
 		push_warning( "%d of the map's %d tiles can't be reached from start_tile %s" % [ rooms.size() - reachable, rooms.size(), MapLayout.start_tile ] )
+	var unbaked := rooms.values().filter( func(room: Room) -> bool: return not room.light_bakes.has( room.borders ) )
+	if not unbaked.is_empty():
+		push_warning( "%d rooms have no baked light for the way their walls face, so their lights are live. Run Project > Tools > Bake Room Lighting." % unbaked.size() )
 
 	# Second pass: a room's neighbors are the rooms it opens into, diagonals included
 	for cell : Vector2i in rooms:
@@ -210,6 +238,9 @@ func _build_props() -> void:
 		if not display.is_built(): continue
 		var prop := display.make_prop()
 		prop.position = _map_to_local( display.get_map_point() )
+		if display is EdgePropDisplay and rooms.has( cell ): # On the wall where it's drawn, a little inside the room
+			var facing : Vector2 = EdgePropDisplay.FACING[ ( display as EdgePropDisplay ).start_direction ]
+			prop.position += Vector3( facing.x, 0.0, facing.y ) * Room.WALL_INSET
 		prop.name = "%s %s" % [ display.name, cell ] # Shows which prop it is in the remote scene tree
 		add_child( prop )
 		display.setup_prop( prop )
@@ -234,9 +265,12 @@ func _spawn_room(cell: Vector2i) -> Room:
 		_mirror( room )
 		turns = _quarter_turns( Room.mirror_direction( walls ), room.borders )
 
+	room.inset_walls()
+
 	var offset : Vector2i = cell - MapLayout.start_tile
 	room.position = Vector3( offset.x, 0, offset.y ) * ROOM_SIZE
 	room.rotation.y = -turns * PI / 2 # Our turns are clockwise seen from above, Godot's are counter-clockwise
+	room.add_floor_and_ceiling( turns ) # These don't turn, so they line up from room to room
 	room.name = "%s %s" % [ room.name, cell ] # Shows which tile each room came from in the remote scene tree
 	add_child( room )
 	rooms[ cell ] = room
@@ -248,17 +282,10 @@ static func _quarter_turns(walls: int, wanted: int) -> int:
 		if Room.rotate_direction( walls, turns * 2 ) == wanted: return turns
 	return -1
 
-# Mirrors a room left to right. What you see becomes a true mirror image, so its baked light lands on the
-# mirrored side too. Collision only moves to its mirrored spot and keeps its own shape, because physics
-# can't handle the negative scale a true mirror image needs.
-static func _mirror(room: Room) -> void:
+# Mirrors a room left to right by moving each piece to its mirrored spot. The pieces keep their own shape
+# (their walls, carpets and pillars look the same mirrored), since physics and the light baker can't handle
+# the negative scale of a true mirror image. Room Baker bakes mirrored rooms posed by this same function.
+static func _mirror(room: Node3D) -> void:
 	for child in room.get_children():
 		var piece := child as Node3D
-		if not piece: continue
-		if piece is CollisionShape3D or piece is CollisionObject3D:
-			piece.transform = Transform3D.FLIP_X * piece.transform * Transform3D.FLIP_X
-			continue
-		piece.transform = Transform3D.FLIP_X * piece.transform
-		# Physics bodies inside a piece (like a pillar's) get flipped back, so they come out unmirrored
-		for body : CollisionObject3D in piece.find_children( "*", "CollisionObject3D", true, false ):
-			body.transform = body.transform * Transform3D.FLIP_X
+		if piece: piece.transform = Transform3D.FLIP_X * piece.transform * Transform3D.FLIP_X

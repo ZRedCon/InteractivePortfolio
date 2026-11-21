@@ -1,43 +1,44 @@
 [gd_scene format=3 uid="uid://bs8ak550stqpb"]
 
-[ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_uqlq0"]
+[ext_resource type="LightmapGIData" uid="uid://th2oblsdb545" path="res://prefabs/rooms/lightmaps/edge_room_turn0.lmbake" id="2_3edwk"]
 [ext_resource type="Material" uid="uid://gh7rd5ns3sdx" path="res://assets/materials/cobblestone.tres" id="2_3ybmd"]
+[ext_resource type="LightmapGIData" uid="uid://cdvu74wvvwiqt" path="res://prefabs/rooms/lightmaps/edge_room_turn1.lmbake" id="3_8vrbg"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="3_cxjp2"]
-[ext_resource type="PackedScene" uid="uid://d4lgav52vcr6t" path="res://prefabs/rooms/ceiling.tscn" id="3_mv3et"]
+[ext_resource type="LightmapGIData" uid="uid://tuft38nfdba7" path="res://prefabs/rooms/lightmaps/edge_room_turn2.lmbake" id="4_ot2cn"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_qqv1v"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_siajb"]
-size = Vector3(10, 0.01, 10)
+[ext_resource type="LightmapGIData" uid="uid://b8w8bch8rqkvn" path="res://prefabs/rooms/lightmaps/edge_room_turn3.lmbake" id="5_4gj70"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ffpuj"]
+lightmap_size_hint = Vector2i(58, 162)
+add_uv2 = true
+uv2_padding = 4.0
 size = Vector3(0, 10, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a1cs0"]
 size = Vector3(0, 10, 10)
 
-[sub_resource type="BoxMesh" id="BoxMesh_uq02q"]
+[sub_resource type="BoxMesh" id="BoxMesh_3edwk"]
+lightmap_size_hint = Vector2i(95, 63)
+add_uv2 = true
+uv2_padding = 4.0
+size = Vector3(10, 0.1, 7.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o67fy"]
 size = Vector3(10, 0.1, 7.5)
 
 [node name="EdgeRoom" type="StaticBody3D" unique_id=1130750871]
 script = ExtResource("4_room")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=247539311]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("1_uqlq0")
-mesh = SubResource("PlaneMesh_qqv1v")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2092745986]
-shape = SubResource("BoxShape3D_siajb")
-
-[node name="Ceiling" parent="CollisionShape3D2" unique_id=217736034 instance=ExtResource("3_mv3et")]
+light_bakes = Dictionary[int, LightmapGIData]({
+14: ExtResource("4_ot2cn"),
+56: ExtResource("5_4gj70"),
+131: ExtResource("3_8vrbg"),
+224: ExtResource("2_3edwk")
+})
 
 [node name="WallNZ" type="MeshInstance3D" parent="." unique_id=582220434]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5, -5)
 material_override = ExtResource("2_3ybmd")
+gi_lightmap_texel_scale = 1.9
 mesh = SubResource("BoxMesh_ffpuj")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=401657837]
@@ -45,9 +46,9 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5
 shape = SubResource("BoxShape3D_a1cs0")
 
 [node name="Carpet" type="MeshInstance3D" parent="." unique_id=85908618 groups=["Floor"]]
-transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 7.5, 0, 0, 1.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
 material_override = ExtResource("3_cxjp2")
-mesh = SubResource("BoxMesh_uq02q")
+mesh = SubResource("BoxMesh_3edwk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1395092467 groups=["Floor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)

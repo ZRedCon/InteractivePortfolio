@@ -1,7 +1,7 @@
 @tool
 extends "preview_pane.gd"
 
-# A preview of one of the game's own scenes: ui_exhibit.tscn or Entry.tscn. The picture is the
+# A preview of one of the game's own scenes: ui_exhibit.tscn or exhibit.tscn. The picture is the
 # PreviewStage that godot_preview.gd keeps up to date from the preview helper.
 
 const GodotPreview := preload( "../preview/godot/godot_preview.gd" )

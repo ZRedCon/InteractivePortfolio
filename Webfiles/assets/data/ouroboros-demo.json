@@ -1,0 +1,37 @@
+{
+	"name": "Space Station: Ouroboros (HYS version)",
+	"time": [ "6/2026", "8/2026" ],
+	"description": "Due to sheer difference in responsibilities compared to when I was working with a team to working on it solo: I am spliting SS: Ouroboros between the two (Also gives me the opportunity to talk about it more",
+	"related-skills": 247,
+	"contribution": [
+		"Helped with player movement",
+		"Audio and music",
+		"Created all but one of the tilemaps for the levels",
+		"Designed and implemented the two flying drone enemies",
+		"Level Designer"
+	],
+	"notes": [
+		"It's an interesting experience to go back to this version of the project, I can really see why I wanted to continue this after everyone moved onto other things",
+		"This is the project that really gave me confidence that I can be a good artist. The docking bay tileset in particular is one I've grown SUPER attached to, which is probably why it was the first area I completely reworked when I got my hands on it compeletly"
+	],
+	"main-image": "SSOuroborus/Demo/TitleScreen",
+	"slide-show": [
+		"SSOuroborus/Demo/CrewQuarters",
+		"SSOuroborus/Demo/DockingBay",
+		"SSOuroborus/Demo/RottingBay"
+	],
+	"related-links": [
+		{
+			"display-text": "Demo",
+			"url": "https://genuinesanta.itch.io/space-station-ouroboros-demo"
+		},
+		{
+			"display-text": "HYS build",
+			"url": "https://genuinesanta.itch.io/space-station-ouroboros"
+		},
+		{
+			"display-text": "Devlogs",
+			"url": "https://youtube.com/playlist?list=PLbpb8Yzvl_QA&si=Mu1h__gEzxORZ_Y4"
+		}
+	]
+}

@@ -3,11 +3,8 @@ class_name ExhibitDisplay extends EdgePropDisplay
 
 ## An Exhibit on a wall of the museum map. When the museum is built it shows one entry, picked by entry_mode.
 
-const SCENE : PackedScene = preload( "res://prefabs/Entry.tscn" )
-## The Exhibit's picture is centered on its origin, so it's hung this high up its wall (meters)...
-const HANG_HEIGHT := 1.6
-## ...and this far out from it, so the two don't flicker through each other
-const WALL_GAP := 0.05
+## Built where its wall meets the floor. The Exhibit places its own pieces from there: up is +Y, out from the wall is +Z.
+const SCENE : PackedScene = preload( "res://prefabs/exhibit.tscn" )
 
 # pseudo-enum for entry_mode
 const CUSTOM := 0
@@ -149,8 +146,12 @@ static func check_groups(map: Node) -> void:
 		if line.size() < group.entries.size():
 			push_error( "%s: it has %d entries but only %d exhibits take from it, so %s won't be shown" % [
 					label, group.entries.size(), line.size(), ", ".join( group.entries.slice( line.size() ) ) ] )
-		for file in group.entries:
-			if not has_entry( file ): push_error( "%s: its entry \"%s\" isn't in the entry folder" % [ label, file ] )
+		var blank : PackedStringArray = []
+		for i in group.entries.size():
+			if group.entries[ i ].is_empty(): blank.append( str( i ) )
+			elif not has_entry( group.entries[ i ] ): push_error( "%s: its entry \"%s\" isn't in the entry folder" % [ label, group.entries[ i ] ] )
+		if not blank.is_empty():
+			push_error( "%s: entries %s are blank, so the exhibits at those places in its queue aren't built" % [ label, ", ".join( blank ) ] )
 		for i in range( 1, line.size() ):
 			if line[ i ].queue == line[ i - 1 ].queue:
 				push_error( "%s: %s and %s are both at queue %d, so their order is a guess" % [ label, line[ i - 1 ].describe(), line[ i ].describe(), line[ i ].queue ] )
@@ -178,8 +179,6 @@ func get_prop_scene() -> PackedScene:
 	return SCENE
 
 func setup_prop(prop: Node3D) -> void:
-	var facing := FACING[ start_direction ]
-	prop.position += Vector3.UP * HANG_HEIGHT + Vector3( facing.x, 0.0, facing.y ) * WALL_GAP
 	var entry := get_entry()
 	if prop is Exhibit and entry: prop.set_entry( entry )
 

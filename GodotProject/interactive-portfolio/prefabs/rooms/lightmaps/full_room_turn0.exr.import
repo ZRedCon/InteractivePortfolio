@@ -1,0 +1,29 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://ct4s77vi72dyp"
+path.bptc="res://.godot/imported/full_room_turn0.exr-53cf9feb338a2c3dcb464b4ac9f615ca.bptc.ctexarray"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://prefabs/rooms/lightmaps/full_room_turn0.exr"
+dest_files=["res://.godot/imported/full_room_turn0.exr-53cf9feb338a2c3dcb464b4ac9f615ca.bptc.ctexarray"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=1
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=4

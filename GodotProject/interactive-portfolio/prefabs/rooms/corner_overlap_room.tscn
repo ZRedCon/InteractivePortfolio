@@ -1,31 +1,29 @@
 [gd_scene format=3 uid="uid://ie4rkako571x"]
 
-[ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_joff6"]
+[ext_resource type="LightmapGIData" uid="uid://cxtgsvxwlexi5" path="res://prefabs/rooms/lightmaps/corner_overlap_room_turn0.lmbake" id="2_amtso"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="2_gxwgk"]
+[ext_resource type="LightmapGIData" uid="uid://bov8da7x0wkgg" path="res://prefabs/rooms/lightmaps/corner_overlap_room_turn1.lmbake" id="3_nkc4p"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="3_room"]
 [ext_resource type="PackedScene" uid="uid://d3msxdbxllyqn" path="res://prefabs/Props/pillar.tscn" id="4_dqnjt"]
-[ext_resource type="PackedScene" uid="uid://d4lgav52vcr6t" path="res://prefabs/rooms/ceiling.tscn" id="5_amtso"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_dqnjt"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_amtso"]
+lightmap_size_hint = Vector2i(83, 50)
+add_uv2 = true
+uv2_padding = 4.0
+size = Vector3(7.5, 0.1, 7.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nkc4p"]
 size = Vector3(7.5, 0.1, 7.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gnl8j"]
-size = Vector3(10, 0.01, 10)
-
 [node name="CornerOverlapRoom" type="StaticBody3D" unique_id=1935471881]
 script = ExtResource("3_room")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=242485647]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("1_joff6")
-mesh = SubResource("PlaneMesh_dqnjt")
+light_bakes = Dictionary[int, LightmapGIData]({
+34: ExtResource("2_amtso"),
+136: ExtResource("3_nkc4p")
+})
 
 [node name="Carpet" type="MeshInstance3D" parent="." unique_id=619672680 groups=["Floor"]]
-transform = Transform3D(-3.278354e-07, 0, -7.5, 0, 0.1, 0, 7.5, 0, -3.278354e-07, -1.25, 0, 1.25)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.25, 0, 1.25)
 material_override = ExtResource("2_gxwgk")
 mesh = SubResource("BoxMesh_amtso")
 
@@ -34,7 +32,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.2
 shape = SubResource("BoxShape3D_nkc4p")
 
 [node name="Carpet2" type="MeshInstance3D" parent="." unique_id=222438494 groups=["Floor"]]
-transform = Transform3D(-3.278354e-07, 0, -7.5, 0, 0.1, 0, 7.5, 0, -3.278354e-07, 1.25, 0, -1.25)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.25, 0, -1.25)
 material_override = ExtResource("2_gxwgk")
 mesh = SubResource("BoxMesh_amtso")
 
@@ -42,13 +40,8 @@ mesh = SubResource("BoxMesh_amtso")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.25, 0, -1.25)
 shape = SubResource("BoxShape3D_nkc4p")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1262755466]
-shape = SubResource("BoxShape3D_gnl8j")
-
 [node name="Pillar" parent="." unique_id=186650993 instance=ExtResource("4_dqnjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
 
 [node name="Pillar2" parent="." unique_id=1086317773 instance=ExtResource("4_dqnjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
-
-[node name="Ceiling" parent="." unique_id=217736034 instance=ExtResource("5_amtso")]

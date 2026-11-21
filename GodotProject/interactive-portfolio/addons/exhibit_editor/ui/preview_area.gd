@@ -3,12 +3,12 @@ extends HSplitContainer
 
 # The four previews, all on show at once:
 #
-#     +-----------------------+-------------+
-#     |  Website, wide        |  Website,   |
-#     +-----------------------+  thin       |
-#     |  ui_exhibit.tscn      +-------------+
-#     |                       |  Entry.tscn |
-#     +-----------------------+-------------+
+#     +-----------------------+---------------+
+#     |  Website, wide        |  Website,     |
+#     +-----------------------+  thin         |
+#     |  ui_exhibit.tscn      +---------------+
+#     |                       |  exhibit.tscn |
+#     +-----------------------+---------------+
 #
 # The wide ones share the left column and the tall ones the right. Every line between two previews
 # can be dragged, and where they're left is remembered. A preview's maximize button hides the other
@@ -48,7 +48,7 @@ func _init(godot_preview: GodotPreview, web_preview: WebPreview, settings_names:
 	_add_pane( right, WebPane.new( web_preview, WebPreview.PAGE_THIN, "Website, thin" ) )
 	_add_pane( right, GodotPane.new( godot_preview, GodotPreview.PANE_ENTRY, settings_names.get( "entry", "3D exhibit" ), false ) )
 
-# The scene names in the pane titles follow the settings ("ui_exhibit.tscn", "Entry.tscn").
+# The scene names in the pane titles follow the settings ("ui_exhibit.tscn", "exhibit.tscn").
 func set_scene_titles(ui_title: String, entry_title: String) -> void:
 	_panes[ 1 ].title = ui_title
 	_panes[ 3 ].title = entry_title

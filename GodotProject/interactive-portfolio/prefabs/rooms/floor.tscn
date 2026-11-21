@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://6jasubgrodfh"]
+
+[ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_bricks"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+lightmap_size_hint = Vector2i(54, 54)
+add_uv2 = true
+uv2_padding = 4.0
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(10, 0.01, 10)
+
+[node name="Floor" type="StaticBody3D" unique_id=1812783312]
+editor_description = "Every room's floor, under its carpet. Each room gets one (Room.make_floor_and_ceiling), never turned with the room, so the floor lines up from room to room.
+Only carpet is in the Floor group, so this can't be teleported onto. Its top sits below the carpet's, so the teleport ray finds the carpet."
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=801397462]
+material_override = ExtResource("1_bricks")
+mesh = SubResource("PlaneMesh_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1665653367]
+shape = SubResource("BoxShape3D_floor")

@@ -81,7 +81,7 @@ const DEFINITIONS : Array[ Dictionary ] = [
 		"help": "The scene the game shows an entry's full details in." },
 	{ "key": UI_METHOD, "group": GROUP_GAME, "label": "Its fill function", "default": "set_values_from_entry", "kind": KIND_TEXT,
 		"help": "The function on that scene's root that takes an Entry and fills the scene in." },
-	{ "key": ENTRY_SCENE, "group": GROUP_GAME, "label": "3D exhibit scene", "default": "res://prefabs/Entry.tscn", "kind": KIND_RES_FILE,
+	{ "key": ENTRY_SCENE, "group": GROUP_GAME, "label": "3D exhibit scene", "default": "res://prefabs/exhibit.tscn", "kind": KIND_RES_FILE,
 		"help": "The scene that stands in the museum for an entry." },
 	{ "key": ENTRY_METHOD, "group": GROUP_GAME, "label": "Its fill function", "default": "set_entry", "kind": KIND_TEXT,
 		"help": "The function on that scene's root that takes an Entry and fills the scene in." },

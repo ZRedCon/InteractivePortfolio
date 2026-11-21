@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c3ie8m45lxi00"]
 
-[ext_resource type="Script" uid="uid://sd66iqa6282x" path="res://prefabs/exhibit.gd" id="1_fwjg3"]
+[ext_resource type="Script" uid="uid://sd66iqa6282x" path="res://prefabs/ui_exhibit.gd" id="1_fwjg3"]
 [ext_resource type="Texture2D" uid="uid://cycv7nkyk6opa" path="res://icon.svg" id="1_px4js"]
 [ext_resource type="Script" uid="uid://creqf0jqum84g" path="res://prefabs/content.gd" id="1_qit8j"]
 [ext_resource type="Script" uid="uid://58dgn7tedg3f" path="res://prefabs/skillsManager.gd" id="1_xnv4v"]

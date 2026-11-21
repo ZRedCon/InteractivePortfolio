@@ -1,48 +1,54 @@
 [gd_scene format=3 uid="uid://b361dki52dkfs"]
 
-[ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_tw2kr"]
+[ext_resource type="LightmapGIData" uid="uid://dv5qa4qgqvxas" path="res://prefabs/rooms/lightmaps/t_intersection_hall_turn0.lmbake" id="2_6eqqu"]
 [ext_resource type="Material" uid="uid://gh7rd5ns3sdx" path="res://assets/materials/cobblestone.tres" id="2_mibef"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="3_2ae7a"]
+[ext_resource type="LightmapGIData" uid="uid://ctxew3iysdvjn" path="res://prefabs/rooms/lightmaps/t_intersection_hall_turn1.lmbake" id="3_ypy12"]
+[ext_resource type="LightmapGIData" uid="uid://c64fspdbeqpye" path="res://prefabs/rooms/lightmaps/t_intersection_hall_turn2.lmbake" id="4_k5vmk"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
+[ext_resource type="LightmapGIData" uid="uid://b5lrqjxyyqqpy" path="res://prefabs/rooms/lightmaps/t_intersection_hall_turn3.lmbake" id="5_jehg1"]
 [ext_resource type="PackedScene" uid="uid://d3msxdbxllyqn" path="res://prefabs/Props/pillar.tscn" id="5_nhhxc"]
-[ext_resource type="PackedScene" uid="uid://d4lgav52vcr6t" path="res://prefabs/rooms/ceiling.tscn" id="6_y5lpm"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_mibef"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2ae7a"]
-size = Vector3(10, 0.01, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2ae7a"]
+lightmap_size_hint = Vector2i(58, 162)
+add_uv2 = true
+uv2_padding = 4.0
 size = Vector3(0, 10, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ef7sp"]
 size = Vector3(0, 10, 10)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ef7sp"]
-size = Vector3(1, 1, 2.5)
+[sub_resource type="BoxMesh" id="BoxMesh_6eqqu"]
+lightmap_size_hint = Vector2i(45, 37)
+add_uv2 = true
+uv2_padding = 4.0
+size = Vector3(5, 0.1, 2.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nhhxc"]
 size = Vector3(5, 0.1, 2.5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_nhhxc"]
+[sub_resource type="BoxMesh" id="BoxMesh_ypy12"]
+lightmap_size_hint = Vector2i(83, 63)
+add_uv2 = true
+uv2_padding = 4.0
+size = Vector3(5, 0.1, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y5lpm"]
 size = Vector3(5, 0.1, 10)
 
 [node name="TIntersectionHall" type="StaticBody3D" unique_id=58526443]
 script = ExtResource("4_room")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1110670525]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("1_tw2kr")
-mesh = SubResource("PlaneMesh_mibef")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=335683755]
-shape = SubResource("BoxShape3D_2ae7a")
+light_bakes = Dictionary[int, LightmapGIData]({
+171: ExtResource("3_ypy12"),
+174: ExtResource("4_k5vmk"),
+186: ExtResource("5_jehg1"),
+234: ExtResource("2_6eqqu")
+})
 
 [node name="WallNZ" type="MeshInstance3D" parent="." unique_id=1147628755]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5, -5)
 material_override = ExtResource("2_mibef")
+gi_lightmap_texel_scale = 1.9
 mesh = SubResource("BoxMesh_2ae7a")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=143517306]
@@ -50,18 +56,18 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5
 shape = SubResource("BoxShape3D_ef7sp")
 
 [node name="Carpet" type="MeshInstance3D" parent="." unique_id=1973562175 groups=["Floor"]]
-transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 3.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.75)
 material_override = ExtResource("3_2ae7a")
-mesh = SubResource("BoxMesh_ef7sp")
+mesh = SubResource("BoxMesh_6eqqu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1357742492 groups=["Floor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.75)
 shape = SubResource("BoxShape3D_nhhxc")
 
 [node name="Carpet2" type="MeshInstance3D" parent="." unique_id=245827855 groups=["Floor"]]
-transform = Transform3D(-2.1855695e-07, 0, 10, 0, 0.1, 0, -5, 0, -4.371139e-07, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 material_override = ExtResource("3_2ae7a")
-mesh = SubResource("BoxMesh_nhhxc")
+mesh = SubResource("BoxMesh_ypy12")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=2088728855 groups=["Floor"]]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
@@ -72,5 +78,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 
 [node name="Pillar2" parent="." unique_id=1985896298 instance=ExtResource("5_nhhxc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
-
-[node name="Ceiling" parent="." unique_id=217736034 instance=ExtResource("6_y5lpm")]

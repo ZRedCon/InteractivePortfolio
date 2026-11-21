@@ -1,7 +1,7 @@
 @tool
 extends RefCounted
 
-# The Props tool. The left button places a prop of the chosen type (a PropDisplay, see map_prop_icon.gd):
+# The Props tool. The left button places a prop of the chosen type (a PropDisplay, see prop_display.gd):
 # a wall prop by pressing on a tile and dragging toward one of its walls, any other prop where the button
 # comes up. Pressing on a prop selects it instead. The right button removes the prop it went down on, but
 # only once it comes back up over that prop, and after asking first unless Alt is held. Props go under the

@@ -1,42 +1,44 @@
 [gd_scene format=3 uid="uid://mfhitphyjduo"]
 
-[ext_resource type="Material" uid="uid://4rn2ef0fesh" path="res://assets/materials/bricks.tres" id="1_uvisv"]
 [ext_resource type="Material" uid="uid://gh7rd5ns3sdx" path="res://assets/materials/cobblestone.tres" id="2_1mk8w"]
+[ext_resource type="LightmapGIData" uid="uid://bnlp8u8x8i8i7" path="res://prefabs/rooms/lightmaps/end_hall_turn0.lmbake" id="2_jswcj"]
+[ext_resource type="LightmapGIData" uid="uid://b5bhg4g2osrbu" path="res://prefabs/rooms/lightmaps/end_hall_turn1.lmbake" id="3_6pv0c"]
 [ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="3_arfv5"]
+[ext_resource type="LightmapGIData" uid="uid://itr1x72fk5f3" path="res://prefabs/rooms/lightmaps/end_hall_turn2.lmbake" id="4_1y3f2"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
-[ext_resource type="PackedScene" uid="uid://d4lgav52vcr6t" path="res://prefabs/rooms/ceiling.tscn" id="5_p2hpq"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_1mk8w"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_arfv5"]
-size = Vector3(10, 0.01, 10)
+[ext_resource type="LightmapGIData" uid="uid://b2q5834r52kgk" path="res://prefabs/rooms/lightmaps/end_hall_turn3.lmbake" id="5_08ekb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_arfv5"]
+lightmap_size_hint = Vector2i(58, 162)
+add_uv2 = true
+uv2_padding = 4.0
 size = Vector3(0, 10, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_26a0a"]
 size = Vector3(0, 10, 10)
 
-[sub_resource type="BoxMesh" id="BoxMesh_26a0a"]
-size = Vector3(1, 1, 7.5)
+[sub_resource type="BoxMesh" id="BoxMesh_jswcj"]
+lightmap_size_hint = Vector2i(70, 50)
+add_uv2 = true
+uv2_padding = 4.0
+size = Vector3(5, 0.1, 7.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p2hpq"]
 size = Vector3(5, 0.1, 7.5)
 
 [node name="EndHall" type="StaticBody3D" unique_id=238031762]
 script = ExtResource("4_room")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=629442254]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("1_uvisv")
-mesh = SubResource("PlaneMesh_1mk8w")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1584179562]
-shape = SubResource("BoxShape3D_arfv5")
+light_bakes = Dictionary[int, LightmapGIData]({
+191: ExtResource("4_1y3f2"),
+239: ExtResource("3_6pv0c"),
+251: ExtResource("2_jswcj"),
+254: ExtResource("5_08ekb")
+})
 
 [node name="WallNZ" type="MeshInstance3D" parent="." unique_id=1569346888]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5, -5)
 material_override = ExtResource("2_1mk8w")
+gi_lightmap_texel_scale = 1.9
 mesh = SubResource("BoxMesh_arfv5")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=1982165741]
@@ -46,6 +48,7 @@ shape = SubResource("BoxShape3D_26a0a")
 [node name="WallNX" type="MeshInstance3D" parent="." unique_id=906320386]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5, 5, 0)
 material_override = ExtResource("2_1mk8w")
+gi_lightmap_texel_scale = 1.9
 mesh = SubResource("BoxMesh_arfv5")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=1798831127]
@@ -55,6 +58,7 @@ shape = SubResource("BoxShape3D_26a0a")
 [node name="WallPX" type="MeshInstance3D" parent="." unique_id=504600535]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0)
 material_override = ExtResource("2_1mk8w")
+gi_lightmap_texel_scale = 1.9
 mesh = SubResource("BoxMesh_arfv5")
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="." unique_id=168955156]
@@ -62,12 +66,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0)
 shape = SubResource("BoxShape3D_26a0a")
 
 [node name="Carpet" type="MeshInstance3D" parent="." unique_id=1780180885 groups=["Floor"]]
-transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 1.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
 material_override = ExtResource("3_arfv5")
-mesh = SubResource("BoxMesh_26a0a")
+mesh = SubResource("BoxMesh_jswcj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1950297427 groups=["Floor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
 shape = SubResource("BoxShape3D_p2hpq")
-
-[node name="Ceiling" parent="." unique_id=217736034 instance=ExtResource("5_p2hpq")]

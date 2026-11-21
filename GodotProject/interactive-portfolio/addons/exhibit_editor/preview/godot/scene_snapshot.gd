@@ -2,7 +2,7 @@ extends RefCounted
 
 # Runs in the preview helper process (see preview_host.gd), never in the editor.
 #
-# Turns a live scene (ui_exhibit.tscn or Entry.tscn after the game's own scripts filled it in) into
+# Turns a live scene (ui_exhibit.tscn or exhibit.tscn after the game's own scripts filled it in) into
 # plain data: for every node its class, its name and each stored property that isn't at its default.
 # The editor rebuilds the same nodes from that data (scene_mirror.gd) and draws them itself, so
 # nothing the game's scripts do can ever run inside the editor.

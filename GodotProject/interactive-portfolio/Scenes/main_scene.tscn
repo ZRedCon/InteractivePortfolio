@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://b1ojuq67yjq6" path="res://assets/images/skyboxes/wasteland_clouds_puresky_4k.hdr" id="1_6l7je"]
 [ext_resource type="PackedScene" uid="uid://bgsgwceyq1l1p" path="res://Player/controller.tscn" id="1_52fb6"]
-[ext_resource type="PackedScene" uid="uid://c241mv4likfbd" path="res://prefabs/Entry.tscn" id="4_iacmt"]
 [ext_resource type="Script" uid="uid://buxkevr2cvt1y" path="res://Scenes/room_container.gd" id="4_x6ack"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_npwjr"]
@@ -16,15 +15,6 @@ sky_material = SubResource("PanoramaSkyMaterial_npwjr")
 background_mode = 2
 sky = SubResource("Sky_85ri6")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bpmhk"]
-size = Vector3(20, 0, 20)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jv6wh"]
-transparency = 1
-albedo_color = Color(0.32941177, 1, 1, 0.19215687)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_85ri6"]
-
 [node name="MainScene" type="Node3D" unique_id=217244631]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1382339994]
@@ -36,22 +26,7 @@ shadow_bias = 0.0
 environment = SubResource("Environment_bpmhk")
 
 [node name="Controller" parent="." unique_id=471476447 instance=ExtResource("1_52fb6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.076747894, 1.8733559, 2.142113)
 
-[node name="EyeInTheSky" type="StaticBody3D" parent="." unique_id=843604182 groups=["Floor"]]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="EyeInTheSky" unique_id=911317543]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, -1, 0)
-shape = SubResource("BoxShape3D_bpmhk")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="EyeInTheSky" unique_id=1657082734 groups=["Floor"]]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0)
-material_override = SubResource("StandardMaterial3D_jv6wh")
-mesh = SubResource("PlaneMesh_85ri6")
-
-[node name="RoomContainer" type="Node3D" parent="." unique_id=1771802498]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+[node name="RoomContainer" type="Node3D" parent="." unique_id=1771802498 node_paths=PackedStringArray("player")]
 script = ExtResource("4_x6ack")
-
-[node name="EntryNode" parent="." unique_id=800036504 instance=ExtResource("4_iacmt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2281742, 0.45007867, -5.6062264)
+player = NodePath("../Controller")

@@ -1,0 +1,35 @@
+{
+	"name": "Space Station: Ouroboros",
+	"time": [ "8/2026", "Ongoing" ],
+	"description": "You are the mechanic for the UNSS-Iliad, which has docked with the titular SS-Ouroboros to try and figure out why the distress signal was fired and then immedietly turned off. Can you are irrelevent  you belong here  just keep going  find me  answer the call  heed eterntity  I need you  I need you  I need you  I",
+	"related-skills": 503,
+	"contribution": [
+		"Level Designer",
+		"Audio and Music",
+		"Recorded and managed Devlogs",
+		"Enemy designer",
+		"Art lead",
+		"Reworked player movement"
+	],
+	"notes": [
+		"I am making this game almost entirely for my dad, and there's a lot of little references to our interests / history in the background if you really search for them, like for example, a lot of the sound effects use Quake 3's sfx as a base to build on. The first gaming I can experience I can remember was my dad playing through the Metroid series while I watched him, so I'm very glad my first real \"big\" project lives in the same genre",
+		"As it turns out it's hard to keep track of all the responsibilities of a game by yourself, one of the things I'm proudest of with this game is how much developer tooling there is, things like notes and TODO's stored in the actual project have gone a long way in both making my goals seem reachable, and also helping me stay on track.",
+		"The docking bay rework is probably my greatest achivement in game design, you can play the original version at the HYS build, but sadly he only way you're going to be able to check it out yourself is through my Devlogs as I'm probably going to wait for the 2nd area to be complete before I push out the demo to itch (Though if you ask me through email, I'd be happy to show off the work in progress build!)"
+	],
+	"main-image": "SSOuroborus/Main/_____",
+	"slide-show": [
+		"SSOuroborus/Main/Containment",
+		"SSOuroborus/Main/ContainmentWeak",
+		"SSOuroborus/Main/DockingBay",
+		"SSOuroborus/Main/DockingBayMiner",
+		"SSOuroborus/Main/DockingBayPower",
+		"SSOuroborus/Main/Logbook",
+		"SSOuroborus/Main/Map"
+	],
+	"related-links": [
+		{
+			"display-text": "Devlogs",
+			"url": "https://youtube.com/playlist?list=PLbpb8Yzvl_QA&si=Mu1h__gEzxORZ_Y4"
+		}
+	]
+}

@@ -46,7 +46,7 @@ func get_room_groups() -> Array[ RoomGroup ]:
 	groups.assign( find_children( "*", "RoomGroup", true, false ) )
 	return groups
 
-# Every prop on the map (see map_prop_icon.gd)
+# Every prop on the map (see prop_display.gd)
 func get_props() -> Array[ PropDisplay ]:
 	var props : Array[ PropDisplay ] = []
 	props.assign( find_children( "*", "PropDisplay", true, false ) )

@@ -1,0 +1,29 @@
+{
+	"name": "Lumen Vitae",
+	"time": [ "8/2026", "Ongoing" ],
+	"description": "Lumen Vitae is a 2D game about choices. You are an alchemist with a very limited pool of resources trying to help as many people as possible, meaning you're going to need to be picky with who you help. However if you run out of resources, you can always burn away chunks of your own soul to cover the debts.",
+	"related-skills": 119,
+	"contribution": [
+		".ini File Parsing for characters",
+		"Audio and Music engine",
+		"Voice Actor",
+		"Procedural animations designer and implementation",
+		"made the candle's flame model",
+		"Character datatypes and internal representation",
+		"Background and Shop sprites"
+	],
+	"notes": [
+		"This project is really fun to work on, things like procedural animation was really though to figure out and very fun to work on. It actually also marks the first time I worked with heavily with Godot's shader system!",
+		"Despire all the procedural animations you can see in gameplay there are actually only two in total, a gradient interperlator used by the background and shop sprites, and a vertex offset shader used to create the sun and candle's flame.",
+		"I usually consider myself to be the \"audio person\" for projects I work on, but usually I end up spending most of my time learning how to make the sounds I want rather than perfecting them; this game is one of the few times I felt my vision for the audio system could be truly realised, even though my voice acting skills aren't the greatest."
+	],
+	"main-image": "LumenVitae/Night",
+	"slide-show": [
+		"LumenVitae/CandleDemo",
+		"LumenVitae/Dusk",
+		"LumenVitae/Inspector",
+		"LumenVitae/Night",
+		"LumenVitae/NoonWill"
+	],
+	"related-links": [ ]
+}

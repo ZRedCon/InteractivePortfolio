@@ -125,6 +125,56 @@ func add_neighbor(dir: Vector2i, room_ref: Room) -> bool:
 	neighbors[ dir ] = room_ref
 	return true
 
+#region walls, floor and ceiling
+## Two rooms that share a side both have a wall there, in the same spot, and each is lit from its own side.
+## Drawn on top of each other they flicker (and an exhibit on one shows through the other), so every room
+## draws its walls this far inside itself. Props against a wall go on it where it's drawn.
+const WALL_INSET := 0.05
+const FLOOR_SCENE : PackedScene = preload( "res://prefabs/rooms/floor.tscn" )
+const CEILING_SCENE : PackedScene = preload( "res://prefabs/rooms/ceiling.tscn" )
+
+## This room's baked light for each way its walls can face, by borders. Made by Project > Tools > Bake Room
+## Lighting: the floor and ceiling never turn with the room, so which way its walls face changes its light.
+@export var light_bakes : Dictionary[ int, LightmapGIData ]
+
+## Moves each wall (a box with no thickness) WALL_INSET toward the middle of the room
+func inset_walls() -> void:
+	for wall : MeshInstance3D in find_children( "*", "MeshInstance3D", false, true ):
+		var box := wall.mesh as BoxMesh
+		if not box: continue
+		var thin := [ box.size.x, box.size.y, box.size.z ].find( 0.0 )
+		if thin == -1: continue
+		var across := wall.basis[ thin ].normalized()
+		wall.position -= across * signf( across.dot( wall.position ) ) * WALL_INSET
+
+## The floor and ceiling every room gets. They aren't part of the room scenes, so their textures never turn
+## with a room and line up from room to room (see pose_floor_and_ceiling).
+static func make_floor_and_ceiling() -> Node3D:
+	var floor_and_ceiling := Node3D.new()
+	floor_and_ceiling.name = "FloorAndCeiling"
+	floor_and_ceiling.add_child( FLOOR_SCENE.instantiate() )
+	floor_and_ceiling.add_child( CEILING_SCENE.instantiate() )
+	return floor_and_ceiling
+
+## Turns the floor and ceiling back by the room's quarter turns, so their textures face the same way as every
+## other room's. The ceiling's light fixture and lights still turn with the room.
+static func pose_floor_and_ceiling(floor_and_ceiling: Node3D, turns: int) -> void:
+	floor_and_ceiling.rotation.y = turns * PI / 2
+	var with_room := Transform3D( Basis( Vector3.UP, -turns * PI / 2 ), Vector3.ZERO )
+	for part : Node3D in floor_and_ceiling.get_node( "Ceiling" ).get_children(): part.transform = with_room * part.transform
+
+## Adds the floor and ceiling (see pose_floor_and_ceiling) and the light baked for the way this room's walls
+## face. Without that bake the room's lights stay live.
+func add_floor_and_ceiling(turns: int) -> void:
+	var floor_and_ceiling := make_floor_and_ceiling()
+	pose_floor_and_ceiling( floor_and_ceiling, turns )
+	add_child( floor_and_ceiling )
+	if not light_bakes.has( borders ): return
+	var lightmap := LightmapGI.new()
+	lightmap.light_data = light_bakes[ borders ]
+	add_child( lightmap )
+#endregion
+
 #region lights
 # How long this room's lights take to fade in when RoomContainer turns them on
 const LIGHT_FADE_TIME := 0.5
