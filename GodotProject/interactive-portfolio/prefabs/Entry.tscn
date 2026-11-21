@@ -4,21 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://cycv7nkyk6opa" path="res://icon.svg" id="2_icon"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bpmhk"]
-size = Vector3(1.395, 1.61, 0.01)
+resource_local_to_scene = true
+size = Vector3(1.395, 2.47, 0.01)
 
 [node name="Exhibit" type="Node3D" unique_id=800036504 groups=["LeftClickable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02398014)
 script = ExtResource("1_vjtbd")
-start_direction = null
 
 [node name="Name" type="Label3D" parent="." unique_id=118950599]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8218436, 0)
 text = "Entry Name"
 
 [node name="MainImage" type="Sprite3D" parent="." unique_id=1503959665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7129929, 0)
 texture = ExtResource("2_icon")
 
 [node name="MouseCollider" type="StaticBody3D" parent="." unique_id=2027479283]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MouseCollider" unique_id=9154571 groups=["LeftClickable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006, 0.185, 0)
 shape = SubResource("BoxShape3D_bpmhk")
