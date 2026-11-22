@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b0ok6cox56206" path="res://Player/pause_menu.tscn" id="3_h12aw"]
 [ext_resource type="Texture2D" uid="uid://ss2kr1u2ew8q" path="res://assets/images/keybinds/tildaOrTapForPause.png" id="4_468gn"]
 [ext_resource type="Texture2D" uid="uid://47b4oitf02s7" path="res://assets/images/keybinds/Mouse.png" id="5_lo3os"]
+[ext_resource type="PackedScene" uid="uid://c3ie8m45lxi00" path="res://prefabs/ui_exhibit.tscn" id="6_8t2oa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lo3os"]
 atlas = ExtResource("5_lo3os")
@@ -166,6 +167,8 @@ scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_bpmhk")
 animation = &"Off"
 offset = Vector2(20, 20)
+
+[node name="UIExhibit" parent="Camera3D" unique_id=378705747 instance=ExtResource("6_8t2oa")]
 
 [node name="PauseMenu" parent="Camera3D" unique_id=1901717719 instance=ExtResource("3_h12aw")]
 visible = false

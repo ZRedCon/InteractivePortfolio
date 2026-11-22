@@ -11,8 +11,7 @@ var is_open : bool = false
 
 var mode : int:
 	set(val):
-		if val != WIDE and val != THIN: 
-			return
+		if val != WIDE and val != THIN: return
 		mode = val
 		vertical = val
 		move_child(slide_show if vertical else text_important, 0)

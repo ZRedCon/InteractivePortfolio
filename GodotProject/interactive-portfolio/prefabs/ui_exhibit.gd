@@ -1,5 +1,6 @@
 class_name ExhibitUI extends Control
 
+
 @onready var header_name := $Exhibit/Header/EntryName
 @onready var header_date := $Exhibit/Header/Date
 @onready var skills : SkillsManager = $Exhibit/Skills
@@ -10,16 +11,23 @@ class_name ExhibitUI extends Control
 @onready var contribution_holder : UnorderedList = $Exhibit/Content/TextImportant/Contribution/List
 @onready var notes_holder : ExhibitNotes = $Exhibit/Content/TextUnimportant/Notes
 
-#@var name : String
-#var descr : String
-#@var start_date : String
-#@var end_date : String
-#@var skills : int
-#var contribution : PackedStringArray
-#var notes : PackedStringArray
-#var main_image : String
-#var slide_show_images : PackedStringArray
-#var supplementary_links : Array[ Dictionary ]
+var tween : Tween
+
+func arrive(display: Entry) -> void:
+	set_values_from_entry(display)
+	if tween: tween.kill()
+	tween = create_tween()
+	tween.tween_property(self, "offset_transform_position", Vector2.ZERO, 1.0)\
+			.set_trans(Tween.TRANS_EXPO)\
+			.set_ease(Tween.EASE_OUT)
+
+
+func leave() -> void:
+	if tween: tween.kill()
+	tween = create_tween()
+	tween.tween_property(self, "offset_transform_position", Vector2(size.x, 0), 0.5)\
+			.set_trans(Tween.TRANS_BACK)\
+			.set_ease(Tween.EASE_IN)
 
 func set_values_from_entry(entry: Entry) -> void:
 	set_values(entry.name, entry.descr, entry.start_date, 
@@ -48,9 +56,9 @@ func set_values(exhibit_name: String, desc: String,
 		notes_holder.add_item( note )
 	links.remove_items()								# supplementary_links
 	links.add_set_of_links( sup_links )
-	
 
 func _ready() -> void:
+	offset_transform_position.x = size.x
 	set_values("Name", 
 				"Desc", 
 				"start", 
