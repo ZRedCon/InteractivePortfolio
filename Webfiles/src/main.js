@@ -1,11 +1,15 @@
 import * as ToHTML from './entryToExhibit.js'
 import { SlideShow } from './slideShow.js'
+import * as Filters from './filters.js'
 
 const DATA_PATH = "assets/data/";
 const DATA_INDEX_PATH = "assets/data-index.json";
 
+
+let rawObjects = [];
 let objects = [];
-let newestFirst = [];
+let skillMask = ToHTML.SKILLS_MAX;
+let historyFilter = "newest";
 
 async function fetchJson(url) {
     const response = await fetch(url);
@@ -25,21 +29,27 @@ async function loadEntry(fileName) {
 }
 
 window.onload = async () => {
+    Filters.initUI();
+    Filters.setCallback(updateFromFilters);
+
     console.log("Starting parse...");
     const fileNames = await fetchJson(DATA_INDEX_PATH);
     const entries = await Promise.all(fileNames.map(loadEntry));
-    objects = entries.filter((entry) => entry !== null);
+    rawObjects = entries.filter((entry) => entry !== null);
+    objects = [...rawObjects];
     console.log("Parsed objects: ", objects);
-    const exhibits = document.querySelector("#exhibits");
 
-    newestFirst = orderNewestFirst();
+    placeHTML(orderNewestFirst());
 
-    for (const item of newestFirst) {
-        let conversion = ToHTML.getHTMLFromEntry( item );
-        exhibits.insertAdjacentHTML("beforeend", conversion);
-        new SlideShow(exhibits.lastElementChild.querySelector(".slide-show"));
-    }
+    console.log("HTML PARSING COMPELTE");
 };
+
+//#region Filtering
+
+function updateFromFilters() {
+    skillMask = Filters.getFilterSkills();
+    orderHistory(Filters.getAgeMode());
+}
 
 function orderNewestFirst() {
     let orderedObjects = [];
@@ -55,7 +65,7 @@ function orderNewestFirst() {
             endDate = (object["time"])[0];
             isOngoing = true;
         }
-            
+        
         // Number() so "+ day" adds instead of gluing strings together
         let values = endDate.split("/").map(Number);
         let year = values.at(-1);
@@ -90,3 +100,36 @@ function orderNewestFirst() {
 
     return orderedObjects;
 }
+
+function orderOldestFirst() {
+    let newest = orderNewestFirst();
+    return newest.reverse();
+}
+
+function orderHistory(mode) {
+    filterObjects();
+    if (mode == "newest") placeHTML(orderNewestFirst());
+    else if (mode == "oldest") placeHTML(orderOldestFirst());
+
+}
+
+function filterObjects() {
+    objects = [];
+    for (const item of rawObjects) {
+        if ((item[ "related-skills" ] & skillMask) > 0)
+            objects.push( item );
+    }
+}
+
+function placeHTML(entries) {
+    const exhibits = document.querySelector("#exhibits");
+    exhibits.innerHTML = ""
+
+    for (const item of entries) {
+        let conversion = ToHTML.getHTMLFromEntry( item );
+        exhibits.insertAdjacentHTML("beforeend", conversion);
+        new SlideShow(exhibits.lastElementChild.querySelector(".slide-show"));
+    }
+}
+
+//#endregion

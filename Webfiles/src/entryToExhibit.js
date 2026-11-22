@@ -76,6 +76,7 @@ function convertToSlideShow(slideShow, name) {
     return output + `</section>`;
 }
 
+const SKILLS_MAX = 511;
 const SKILLS = [
     "Game Design",
 	"Game Dev",
@@ -106,4 +107,4 @@ function convertToSkills(skills) {
 
 
 
-export { getHTMLFromEntry }
+export { getHTMLFromEntry, SKILLS_MAX }

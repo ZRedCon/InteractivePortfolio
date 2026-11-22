@@ -3,6 +3,9 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Interactive Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" class="native-dark-class-original">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 	<link rel="shortcut icon" href="assets/images/famicons/famicon-16.png" type="image/x-icon" sizes="16x16">
@@ -10,19 +13,44 @@
     <link rel="shortcut icon" href="assets/images/famicons/famicon-48.png" type="image/x-icon" sizes="48x48">
     <link rel="stylesheet" href="styles/default-styles.css">
     <link rel="stylesheet" href="styles/exhibit.css">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="./styles/filters.css">
     <script src="src/main.js" type="module"></script>
 </head>
 <body>
-    <h1>Welcome to the interactive Portfolio!</h1>
-    <!-- Godot game window (Godot's Web export writes into the godot/ folder) -->
-    <!-- loading="lazy": the frame only loads once it's on screen, so on phones (where CSS hides it) the game never downloads -->
+    <h1 class="jaro-title">Welcome to the Museum!</h1>
     <iframe id="godot-frame" src="godot/index.html" title="Interactive Portfolio" loading="lazy" allowfullscreen></iframe>
-    <article id="warning">
-        <h1>Hey There!</h1>
-        <p>If you can read this there is a very good chance the interactive portfolio (above) isn't working properly. Below is the exact same info, just as a simple website instead!</p>
-    </article>
 
-    <div id="exhibits"></div>
+    <p>In case you're concered, the information provided on this web portfolio is the exact same as the interactive one, just formated more traditionally</p>
+
+    <div id="filters" class="ibm-plex-serif-regular">
+        <h2>Filters</h2>
+        <hr>
+        <h3>Age:</h3>
+        <section class="filter-selectors">
+            <button type="button" id="newest" class="btn-off no-double-tap" disabled>Newest</button>
+            <button type="button" id="oldest" class="btn-on no-double-tap">Oldest</button>
+        </section>
+
+        <h3>Skills:</h3>
+        <section id="skill-buttons" class="filter-selectors">
+            <button type="button" id="g-design" class="btn-on">Game Design</button>
+            <button type="button" id="g-dev" class="btn-on">Game Dev</button>
+            <button type="button" id="prog" class="btn-on">Programming</button>
+            <button type="button" id="web" class="btn-on">Web Design & Dev</button>
+            <button type="button" id="music" class="btn-on">Music Comp</button>
+            <button type="button" id="audio" class="btn-on">Audio Design</button>
+            <button type="button" id="art" class="btn-on">Art</button>
+            <button type="button" id="ui-x" class="btn-on">UI/UX</button>
+            <button type="button" id="prod" class="btn-on">Production</button>
+        </section>
+        <section class="filter-selectors">
+            <button type="reset" id="all" class="btn-off no-double-tap" disabled>Select All</button>
+            <button type="button" id="none" class="btn-on no-double-tap">Clear</button>
+        </section>
+        
+    </div>
+    <div id="exhibits" class="ibm-plex-serif-regular"></div>
 
 </body>
 </html>

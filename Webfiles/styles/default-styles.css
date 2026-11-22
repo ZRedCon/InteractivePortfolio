@@ -1,13 +1,18 @@
 /* Page-wide colors. Other stylesheets (like exhibit.css) use these through var(--name),
    so changing a value here changes it everywhere. All text colors pass WCAG AA contrast. */
 :root {
-    --color-page: #f3f4f6;      /* page background */
-    --color-surface: #ffffff;   /* exhibit cards */
-    --color-text: #1f2328;      /* main text */
-    --color-muted: #5b6470;     /* secondary text: dates, notes */
-    --color-border: #d8dde3;    /* thin divider lines and card outlines */
-    --color-accent: #0b62c4;    /* links */
+    --color-page: #e6e6e6;
+    --color-surface: #ffffff;
+    --color-text: #1f2328;
+    --color-muted: #5b6470;
+    --color-border: #d8dde3;
+    --color-accent: #0b62c4;
+    --color-succes: #a9e9c9;
+    --color-failure: #e0c5c5;
+    --color-toggle-on: #d3d3d3;
+    --color-toggle-off: #1d1d1d;
 }
+
 
 /* Makes width/height include padding and borders, so sizes add up the way you'd expect. */
 *,

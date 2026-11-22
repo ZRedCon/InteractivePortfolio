@@ -142,7 +142,7 @@ texture = ExtResource("4_468gn")
 
 [node name="Label" type="Label" parent="Camera3D/ContUI/HBoxContainer" unique_id=2009970269]
 layout_mode = 2
-text = "Tap here, or press ~/` to open menu."
+text = "Press ~/` to open menu."
 
 [node name="Control" type="MarginContainer" parent="Camera3D/ContUI" unique_id=1491366652]
 layout_mode = 1
