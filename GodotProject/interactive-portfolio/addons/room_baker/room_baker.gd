@@ -75,6 +75,9 @@ func _bake_room(path: String, type: int) -> void:
 		var node := room.get_node_or_null( old )
 		if node: node.free()
 
+	# Carpets are cut again, so a change to how carpets are made reaches every room and its bake
+	for carpet : Carpet in room.find_children( "*", "Carpet", true, false ): carpet.cut( carpet.walls )
+
 	# Room meshes: lightmap UVs, with texels the same size in meters however the mesh node is scaled
 	var to_room := room.global_transform.affine_inverse()
 	var resized : Dictionary[ Array, BoxMesh ] = {}
@@ -106,7 +109,7 @@ func _bake_room(path: String, type: int) -> void:
 	if not was_open: EditorInterface.close_scene()
 	await _frames( 2 )
 
-# A box stretched by its node's scale (like a carpet: a 1 m box scaled to 5 x 0.1 x 10) gets as many lightmap
+# A box stretched by its node's scale (like the old box carpets: a 1 m box scaled to 5 x 0.1 x 10) gets as many lightmap
 # texels on its thin sides as on its top, which made carpets most of every lightmap. So the stretch goes into the
 # box's size and the node's scale goes back to 1. It looks exactly the same: a box's texture is mapped per face.
 # Boxes stretched the same way share one resized box (resized: [ old box, stretch ] -> new box).

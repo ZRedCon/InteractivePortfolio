@@ -283,9 +283,12 @@ static func _quarter_turns(walls: int, wanted: int) -> int:
 	return -1
 
 # Mirrors a room left to right by moving each piece to its mirrored spot. The pieces keep their own shape
-# (their walls, carpets and pillars look the same mirrored), since physics and the light baker can't handle
-# the negative scale of a true mirror image. Room Baker bakes mirrored rooms posed by this same function.
+# (walls and pillars look the same mirrored), since physics and the light baker can't handle the negative
+# scale of a true mirror image. A carpet isn't always symmetric, so it's cut again for the mirrored walls.
+# Room Baker bakes mirrored rooms posed by this same function.
 static func _mirror(room: Node3D) -> void:
 	for child in room.get_children():
 		var piece := child as Node3D
 		if piece: piece.transform = Transform3D.FLIP_X * piece.transform * Transform3D.FLIP_X
+		var carpet := child as Carpet
+		if carpet: carpet.cut( Room.mirror_direction( carpet.walls ) )

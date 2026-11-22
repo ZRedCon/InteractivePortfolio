@@ -1,12 +1,12 @@
-[gd_scene format=3 uid="uid://mfhitphyjduo"]
+[gd_scene format=4 uid="uid://mfhitphyjduo"]
 
 [ext_resource type="Material" uid="uid://gh7rd5ns3sdx" path="res://assets/materials/cobblestone.tres" id="2_1mk8w"]
 [ext_resource type="LightmapGIData" uid="uid://bnlp8u8x8i8i7" path="res://prefabs/rooms/lightmaps/end_hall_turn0.lmbake" id="2_jswcj"]
 [ext_resource type="LightmapGIData" uid="uid://b5bhg4g2osrbu" path="res://prefabs/rooms/lightmaps/end_hall_turn1.lmbake" id="3_6pv0c"]
-[ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="3_arfv5"]
 [ext_resource type="LightmapGIData" uid="uid://itr1x72fk5f3" path="res://prefabs/rooms/lightmaps/end_hall_turn2.lmbake" id="4_1y3f2"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
 [ext_resource type="LightmapGIData" uid="uid://b2q5834r52kgk" path="res://prefabs/rooms/lightmaps/end_hall_turn3.lmbake" id="5_08ekb"]
+[ext_resource type="PackedScene" uid="uid://do05qnq5imiub" path="res://Props/carpet.tscn" id="7_jswcj"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_arfv5"]
 lightmap_size_hint = Vector2i(58, 162)
@@ -17,14 +17,22 @@ size = Vector3(0, 10, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_26a0a"]
 size = Vector3(0, 10, 10)
 
-[sub_resource type="BoxMesh" id="BoxMesh_jswcj"]
-lightmap_size_hint = Vector2i(70, 50)
-add_uv2 = true
-uv2_padding = 4.0
-size = Vector3(5, 0.1, 7.5)
+[sub_resource type="ArrayMesh" id="ArrayMesh_jswcj"]
+lightmap_size_hint = Vector2i(42, 60)
+_surfaces = [{
+"aabb": AABB(-2.5, -0.05, -2.5, 5, 0.1, 7.5),
+"attribute_data": PackedByteArray("q6oqPgAAgD6ENxo/OcpuP6uqKj4AAAC+hDcaPwnkmj6rqiq+AAAAvgAAAAAJ5Jo+q6oqvgAAgD4AAAAAOcpuPwAAAAAAAAAAAAAAAAAAAAAAAAA/AAAAAEdTZz8AAAAAAAAAPwvXoztHU2c/Qa4JPAAAAAAL16M7AAAAAEGuCTwAAAAAAAAAAAAAAAAJ5Jo9q6qqPgAAAACENxo/CeSaPauqqj4L16M7hDcaP9EZrD0AAAAAC9ejOwAAAADRGaw9AAAAAAAAAAAAAAAACeQaPgAAAD8AAAAAR1NnPwnkGj4AAAA/C9ejO0dTZz/tfiM+AAAAAAvXozsAAAAA7X4jPgAAAAAAAAAAAAAAAA5WaD6rqqo+AAAAAIQ3Gj8OVmg+q6qqPgvXozuENxo/8fBwPgAAAAAL16M7AAAAAPHwcD4="),
+"format": 34359742519,
+"index_count": 30,
+"index_data": PackedByteArray("AAADAAIAAgABAAAABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AAAgQM3MTD0AAKBAAAAgQM3MTD0AACDAAAAgwM3MTD0AACDAAAAgwM3MTD0AAKBAAAAgQM3MTD0AAKBAAAAgQM3MTD0AACDAAAAgQM3MTL0AACDAAAAgQM3MTL0AAKBAAAAgQM3MTD0AACDAAAAgwM3MTD0AACDAAAAgwM3MTL0AACDAAAAgQM3MTL0AACDAAAAgwM3MTD0AACDAAAAgwM3MTD0AAKBAAAAgwM3MTL0AAKBAAAAgwM3MTL0AACDAAAAgwM3MTD0AAKBAAAAgQM3MTD0AAKBAAAAgQM3MTL0AAKBAAAAgwM3MTL0AAKBA/3///////7//f///////v/9///////+//3///////7////9//////////3//////////f/////////9///////////8AAP+//////wAA/7//////AAD/v/////8AAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//f/9/////v/9//3////+//3//f////7//f/9/////vw==")
+}]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_p2hpq"]
-size = Vector3(5, 0.1, 7.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6pv0c"]
+data = PackedVector3Array(2.5, 0.049999997, 5, -2.5, 0.049999997, 5, -2.5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, 2.5, 0.049999997, -2.5, 2.5, 0.049999997, 5, 2.5, 0.049999997, 5, 2.5, 0.049999997, -2.5, 2.5, -0.049999997, -2.5, 2.5, 0.049999997, 5, 2.5, -0.049999997, -2.5, 2.5, -0.049999997, 5, 2.5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, -2.5, -0.049999997, -2.5, 2.5, 0.049999997, -2.5, -2.5, -0.049999997, -2.5, 2.5, -0.049999997, -2.5, -2.5, 0.049999997, -2.5, -2.5, 0.049999997, 5, -2.5, -0.049999997, 5, -2.5, 0.049999997, -2.5, -2.5, -0.049999997, 5, -2.5, -0.049999997, -2.5, -2.5, 0.049999997, 5, 2.5, 0.049999997, 5, 2.5, -0.049999997, 5, -2.5, 0.049999997, 5, 2.5, -0.049999997, 5, -2.5, -0.049999997, 5)
 
 [node name="EndHall" type="StaticBody3D" unique_id=238031762]
 script = ExtResource("4_room")
@@ -65,11 +73,7 @@ mesh = SubResource("BoxMesh_arfv5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0)
 shape = SubResource("BoxShape3D_26a0a")
 
-[node name="Carpet" type="MeshInstance3D" parent="." unique_id=1780180885 groups=["Floor"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
-material_override = ExtResource("3_arfv5")
-mesh = SubResource("BoxMesh_jswcj")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1950297427 groups=["Floor"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
-shape = SubResource("BoxShape3D_p2hpq")
+[node name="Carpet" parent="." unique_id=571867385 instance=ExtResource("7_jswcj")]
+walls = 251
+_mesh = SubResource("ArrayMesh_jswcj")
+_shape = SubResource("ConcavePolygonShape3D_6pv0c")

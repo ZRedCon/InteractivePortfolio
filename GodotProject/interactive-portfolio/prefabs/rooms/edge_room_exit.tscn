@@ -1,30 +1,29 @@
-[gd_scene format=3 uid="uid://x74xnxfn4mj8"]
+[gd_scene format=4 uid="uid://x74xnxfn4mj8"]
 
 [ext_resource type="LightmapGIData" uid="uid://p8add7oytga4" path="res://prefabs/rooms/lightmaps/edge_room_exit_turn0.lmbake" id="2_fequd"]
 [ext_resource type="LightmapGIData" uid="uid://bcp6newxuyaqm" path="res://prefabs/rooms/lightmaps/edge_room_exit_turn1.lmbake" id="3_4g8k5"]
-[ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="3_s3gbs"]
 [ext_resource type="PackedScene" uid="uid://d3msxdbxllyqn" path="res://prefabs/Props/pillar.tscn" id="4_airqg"]
 [ext_resource type="LightmapGIData" uid="uid://jfqypr6istrh" path="res://prefabs/rooms/lightmaps/edge_room_exit_turn2.lmbake" id="4_gky5k"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
 [ext_resource type="LightmapGIData" uid="uid://cvrg0d7jv5i4k" path="res://prefabs/rooms/lightmaps/edge_room_exit_turn3.lmbake" id="5_8012f"]
+[ext_resource type="PackedScene" uid="uid://do05qnq5imiub" path="res://Props/carpet.tscn" id="6_fequd"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_fequd"]
-lightmap_size_hint = Vector2i(95, 63)
-add_uv2 = true
-uv2_padding = 4.0
-size = Vector3(10, 0.1, 7.5)
+[sub_resource type="ArrayMesh" id="ArrayMesh_fequd"]
+lightmap_size_hint = Vector2i(54, 81)
+_surfaces = [{
+"aabb": AABB(-5, -0.05, -5, 10, 0.1, 10),
+"attribute_data": PackedByteArray("q6qqPgAAgD57CW0/pltzP6uqqj4AAAC+ewltP9Ot+T6rqio+AAAAvhzHMT/Trfk+q6oqPgAAgL4cxzE/qqqqPquqKr4AAIC+ewltPqqqqj6rqiq+AAAAvnsJbT7Trfk+q6qqvgAAAL4AAAAA0635Pquqqr4AAIA+AAAAAKZbcz8AAAAAAAAAAAAAAAAAAAAAAAAAPwAAAAAcxzE/AAAAAAAAAD8L16M7HMcxP4dFyjsAAAAAC9ejOwAAAACHRco7AAAAAAAAAAAAAAAAOI5jPauqKj4AAAAAewltPjiOYz2rqio+C9ejO3sJbT7p1nw9AAAAAAvXozsAAAAA6dZ8PQAAAAAAAAAAx3GcPjiOYz2rqio+AAAAAEN7CT84jmM9q6oqPgvXoztDewk/6dZ8PQAAAAAL16M7x3GcPunWfD0AAAAAAAAAAAAAAAA4juM9q6qqPgAAAAB7Ce0+OI7jPauqqj4L16M7ewntPpAy8D0AAAAAC9ejOwAAAACQMvA9AAAAAAAAAABDewk/OI7jPauqKj4AAAAAob1EPziO4z2rqio+C9ejO6G9RD+QMvA9AAAAAAvXoztDewk/kDLwPQAAAAAAAAAAAAAAAKqqKj6rqio+AAAAAHsJbT6qqio+q6oqPgvXozt7CW0+1vwwPgAAAAAL16M7AAAAANb8MD4AAAAAAAAAAAAAAAA5jmM+AAAAPwAAAAAcxzE/OY5jPgAAAD8L16M7HMcxP2XgaT4AAAAAC9ejOwAAAABl4Gk+AAAAAAAAAAAAAAAA4ziOPquqKj8AAAAAewltP+M4jj6rqio/C9ejO3sJbT/5YZE+AAAAAAvXozsAAAAA+WGRPg=="),
+"format": 34359742519,
+"index_count": 66,
+"index_data": PackedByteArray("AAAHAAYABQAEAAMAAgABAAAAAAAGAAUABQADAAIAAgAAAAUACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("AACgQM3MTD0AAKBAAACgQM3MTD0AACDAAAAgQM3MTD0AACDAAAAgQM3MTD0AAKDAAAAgwM3MTD0AAKDAAAAgwM3MTD0AACDAAACgwM3MTD0AACDAAACgwM3MTD0AAKBAAACgQM3MTD0AAKBAAACgQM3MTD0AACDAAACgQM3MTL0AACDAAACgQM3MTL0AAKBAAACgQM3MTD0AACDAAAAgQM3MTD0AACDAAAAgQM3MTL0AACDAAACgQM3MTL0AACDAAAAgQM3MTD0AACDAAAAgQM3MTD0AAKDAAAAgQM3MTL0AAKDAAAAgQM3MTL0AACDAAAAgQM3MTD0AAKDAAAAgwM3MTD0AAKDAAAAgwM3MTL0AAKDAAAAgQM3MTL0AAKDAAAAgwM3MTD0AAKDAAAAgwM3MTD0AACDAAAAgwM3MTL0AACDAAAAgwM3MTL0AAKDAAAAgwM3MTD0AACDAAACgwM3MTD0AACDAAACgwM3MTL0AACDAAAAgwM3MTL0AACDAAACgwM3MTD0AACDAAACgwM3MTD0AAKBAAACgwM3MTL0AAKBAAACgwM3MTL0AACDAAACgwM3MTD0AAKBAAACgQM3MTD0AAKBAAACgQM3MTL0AAKBAAACgwM3MTL0AAKBA/3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v////3//////////f/////////9//////////3///////////wAA/7//////AAD/v/////8AAP+//////wAA/7////9//////////3//////////f/////////9///////////8AAP+//////wAA/7//////AAD/v/////8AAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//////AAD/v/////8AAP+//////wAA/7//////AAD/vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+//3//f////7//f/9/////v/9//3////+//3//f////78=")
+}]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qj3d5"]
-size = Vector3(10, 0.1, 7.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4g8k5"]
-lightmap_size_hint = Vector2i(83, 63)
-add_uv2 = true
-uv2_padding = 4.0
-size = Vector3(5, 0.1, 10)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_fupfw"]
-size = Vector3(5, 0.1, 10)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4g8k5"]
+data = PackedVector3Array(5, 0.049999997, 5, -5, 0.049999997, 5, -5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, -2.5, 0.049999997, -5, 2.5, 0.049999997, -5, 2.5, 0.049999997, -2.5, 5, 0.049999997, -2.5, 5, 0.049999997, 5, 5, 0.049999997, 5, -5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, 2.5, 0.049999997, -5, 2.5, 0.049999997, -2.5, 2.5, 0.049999997, -2.5, 5, 0.049999997, 5, -2.5, 0.049999997, -2.5, 5, 0.049999997, 5, 5, 0.049999997, -2.5, 5, -0.049999997, -2.5, 5, 0.049999997, 5, 5, -0.049999997, -2.5, 5, -0.049999997, 5, 5, 0.049999997, -2.5, 2.5, 0.049999997, -2.5, 2.5, -0.049999997, -2.5, 5, 0.049999997, -2.5, 2.5, -0.049999997, -2.5, 5, -0.049999997, -2.5, 2.5, 0.049999997, -2.5, 2.5, 0.049999997, -5, 2.5, -0.049999997, -5, 2.5, 0.049999997, -2.5, 2.5, -0.049999997, -5, 2.5, -0.049999997, -2.5, 2.5, 0.049999997, -5, -2.5, 0.049999997, -5, -2.5, -0.049999997, -5, 2.5, 0.049999997, -5, -2.5, -0.049999997, -5, 2.5, -0.049999997, -5, -2.5, 0.049999997, -5, -2.5, 0.049999997, -2.5, -2.5, -0.049999997, -2.5, -2.5, 0.049999997, -5, -2.5, -0.049999997, -2.5, -2.5, -0.049999997, -5, -2.5, 0.049999997, -2.5, -5, 0.049999997, -2.5, -5, -0.049999997, -2.5, -2.5, 0.049999997, -2.5, -5, -0.049999997, -2.5, -2.5, -0.049999997, -2.5, -5, 0.049999997, -2.5, -5, 0.049999997, 5, -5, -0.049999997, 5, -5, 0.049999997, -2.5, -5, -0.049999997, 5, -5, -0.049999997, -2.5, -5, 0.049999997, 5, 5, 0.049999997, 5, 5, -0.049999997, 5, -5, 0.049999997, 5, 5, -0.049999997, 5, -5, -0.049999997, 5)
 
 [node name="EdgeRoomExit" type="StaticBody3D" unique_id=330329479]
 script = ExtResource("4_room")
@@ -35,21 +34,10 @@ light_bakes = Dictionary[int, LightmapGIData]({
 160: ExtResource("2_fequd")
 })
 
-[node name="Carpet" type="MeshInstance3D" parent="." unique_id=807715401 groups=["Floor"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
-material_override = ExtResource("3_s3gbs")
-mesh = SubResource("BoxMesh_fequd")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=247017790 groups=["Floor"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
-shape = SubResource("BoxShape3D_qj3d5")
-
-[node name="Carpet2" type="MeshInstance3D" parent="." unique_id=978703524 groups=["Floor"]]
-material_override = ExtResource("3_s3gbs")
-mesh = SubResource("BoxMesh_4g8k5")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=375292172 groups=["Floor"]]
-shape = SubResource("BoxShape3D_fupfw")
+[node name="Carpet" parent="." unique_id=571867385 instance=ExtResource("6_fequd")]
+walls = 160
+_mesh = SubResource("ArrayMesh_fequd")
+_shape = SubResource("ConcavePolygonShape3D_4g8k5")
 
 [node name="Pillar" parent="." unique_id=186650993 instance=ExtResource("4_airqg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)

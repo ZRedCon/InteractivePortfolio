@@ -1,18 +1,26 @@
-[gd_scene format=3 uid="uid://ehfv3by5urnp"]
+[gd_scene format=4 uid="uid://ehfv3by5urnp"]
 
 [ext_resource type="LightmapGIData" uid="uid://c25ehpfotmw7k" path="res://prefabs/rooms/lightmaps/four_way_intersection_hall_turn0.lmbake" id="2_6qsta"]
-[ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="2_pt7cb"]
+[ext_resource type="PackedScene" uid="uid://do05qnq5imiub" path="res://Props/carpet.tscn" id="3_6qsta"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="3_room"]
 [ext_resource type="PackedScene" uid="uid://d3msxdbxllyqn" path="res://prefabs/Props/pillar.tscn" id="4_6qsta"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_6qsta"]
-lightmap_size_hint = Vector2i(83, 63)
-add_uv2 = true
-uv2_padding = 4.0
-size = Vector3(5, 0.1, 10)
+[sub_resource type="ArrayMesh" id="ArrayMesh_6qsta"]
+lightmap_size_hint = Vector2i(54, 81)
+_surfaces = [{
+"aabb": AABB(-5, -0.05, -5, 10, 0.1, 10),
+"attribute_data": PackedByteArray("q6oqPgAAgD4cxzE/pltzP6uqKj4AAAA+HMcxPxLaSz+rqqo+AAAAPnsJbT8S2ks/q6qqPgAAAL57CW0/0635PquqKj4AAAC+HMcxP9Ot+T6rqio+AACAvhzHMT+qqqo+q6oqvgAAgL57CW0+qqqqPquqKr4AAAC+ewltPtOt+T6rqqq+AAAAvgAAAADTrfk+q6qqvgAAAD4AAAAAEtpLP6uqKr4AAAA+ewltPhLaSz+rqiq+AACAPnsJbT6mW3M/AAAAAAAAAAAAAAAAAAAAAKuqKj4AAAAAewltPgAAAACrqio+C9ejO3sJbT6HRco7AAAAAAvXozsAAAAAh0XKOwAAAAAAAAAAx3GcPgAAAACrqio+AAAAAEN7CT8AAAAAq6oqPgvXoztDewk/h0XKOwAAAAAL16M7x3GcPodFyjsAAAAAAAAAAAAAAAA4jmM9q6qqPgAAAAB7Ce0+OI5jPauqqj4L16M7ewntPunWfD0AAAAAC9ejOwAAAADp1nw9AAAAAAAAAABDewk/OI5jPauqKj4AAAAAob1EPziOYz2rqio+C9ejO6G9RD/p1nw9AAAAAAvXoztDewk/6dZ8PQAAAAAAAAAAAAAAADiO4z2rqio+AAAAAHsJbT44juM9q6oqPgvXozt7CW0+kDLwPQAAAAAL16M7AAAAAJAy8D0AAAAAAAAAAMdxnD44juM9q6qqPgAAAAChvUQ/OI7jPauqqj4L16M7ob1EP5Ay8D0AAAAAC9ejO8dxnD6QMvA9AAAAAAAAAAAAAAAAqqoqPquqKj4AAAAAewltPqqqKj6rqio+C9ejO3sJbT7W/DA+AAAAAAvXozsAAAAA1vwwPgAAAAAAAAAAx3GcPqqqKj6rqio+AAAAAEN7CT+qqio+q6oqPgvXoztDewk/1vwwPgAAAAAL16M7x3GcPtb8MD4AAAAAAAAAAAAAAAA5jmM+q6qqPgAAAAB7Ce0+OY5jPquqqj4L16M7ewntPmXgaT4AAAAAC9ejOwAAAABl4Gk+AAAAAAAAAABDewk/OY5jPquqKj4AAAAAob1EPzmOYz6rqio+C9ejO6G9RD9l4Gk+AAAAAAvXoztDewk/ZeBpPgAAAAAAAAAAAAAAAOM4jj6rqio+AAAAAHsJbT7jOI4+q6oqPgvXozt7CW0++WGRPgAAAAAL16M7AAAAAPlhkT4AAAAAAAAAAMdxnD7jOI4+q6qqPgAAAAChvUQ/4ziOPquqqj4L16M7ob1EP/lhkT4AAAAAC9ejO8dxnD75YZE+"),
+"format": 34359742519,
+"index_count": 102,
+"index_data": PackedByteArray("AAALAAoACgAJAAgABwAGAAUABAADAAIAAQAAAAoACgAIAAcABwAFAAQABAACAAEAAQAKAAcABwAEAAEADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 60,
+"vertex_data": PackedByteArray("AAAgQM3MTD0AAKBAAAAgQM3MTD0AACBAAACgQM3MTD0AACBAAACgQM3MTD0AACDAAAAgQM3MTD0AACDAAAAgQM3MTD0AAKDAAAAgwM3MTD0AAKDAAAAgwM3MTD0AACDAAACgwM3MTD0AACDAAACgwM3MTD0AACBAAAAgwM3MTD0AACBAAAAgwM3MTD0AAKBAAAAgQM3MTD0AAKBAAAAgQM3MTD0AACBAAAAgQM3MTL0AACBAAAAgQM3MTL0AAKBAAAAgQM3MTD0AACBAAACgQM3MTD0AACBAAACgQM3MTL0AACBAAAAgQM3MTL0AACBAAACgQM3MTD0AACBAAACgQM3MTD0AACDAAACgQM3MTL0AACDAAACgQM3MTL0AACBAAACgQM3MTD0AACDAAAAgQM3MTD0AACDAAAAgQM3MTL0AACDAAACgQM3MTL0AACDAAAAgQM3MTD0AACDAAAAgQM3MTD0AAKDAAAAgQM3MTL0AAKDAAAAgQM3MTL0AACDAAAAgQM3MTD0AAKDAAAAgwM3MTD0AAKDAAAAgwM3MTL0AAKDAAAAgQM3MTL0AAKDAAAAgwM3MTD0AAKDAAAAgwM3MTD0AACDAAAAgwM3MTL0AACDAAAAgwM3MTL0AAKDAAAAgwM3MTD0AACDAAACgwM3MTD0AACDAAACgwM3MTL0AACDAAAAgwM3MTL0AACDAAACgwM3MTD0AACDAAACgwM3MTD0AACBAAACgwM3MTL0AACBAAACgwM3MTL0AACDAAACgwM3MTD0AACBAAAAgwM3MTD0AACBAAAAgwM3MTL0AACBAAACgwM3MTL0AACBAAAAgwM3MTD0AACBAAAAgwM3MTD0AAKBAAAAgwM3MTL0AAKBAAAAgwM3MTL0AACBAAAAgwM3MTD0AAKBAAAAgQM3MTD0AAKBAAAAgQM3MTL0AAKBAAAAgwM3MTL0AAKBA/3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/////f/////////9//////////3//////////f///////f/9/////v/9//3////+//3//f////7//f/9/////v////3//////////f/////////9//////////3///////////wAA/7//////AAD/v/////8AAP+//////wAA/7////9//////////3//////////f/////////9///////////8AAP+//////wAA/7//////AAD/v/////8AAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//////AAD/v/////8AAP+//////wAA/7//////AAD/vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+//3//f////7//f/9/////v/9//3////+//3//f////78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9//3////+//3//f////7//f/9/////v/9//3////+/")
+}]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qr2sl"]
-size = Vector3(5, 0.1, 10)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c4i18"]
+data = PackedVector3Array(2.5, 0.049999997, 5, -2.5, 0.049999997, 5, -2.5, 0.049999997, 2.5, -2.5, 0.049999997, 2.5, -5, 0.049999997, 2.5, -5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, -2.5, 0.049999997, -5, 2.5, 0.049999997, -5, 2.5, 0.049999997, -2.5, 5, 0.049999997, -2.5, 5, 0.049999997, 2.5, 2.5, 0.049999997, 2.5, 2.5, 0.049999997, 5, -2.5, 0.049999997, 2.5, -2.5, 0.049999997, 2.5, -5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, 2.5, 0.049999997, -5, 2.5, 0.049999997, -2.5, 2.5, 0.049999997, -2.5, 5, 0.049999997, 2.5, 2.5, 0.049999997, 2.5, 2.5, 0.049999997, 2.5, -2.5, 0.049999997, 2.5, -2.5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, 2.5, 0.049999997, -2.5, 2.5, 0.049999997, 2.5, 2.5, 0.049999997, 5, 2.5, 0.049999997, 2.5, 2.5, -0.049999997, 2.5, 2.5, 0.049999997, 5, 2.5, -0.049999997, 2.5, 2.5, -0.049999997, 5, 2.5, 0.049999997, 2.5, 5, 0.049999997, 2.5, 5, -0.049999997, 2.5, 2.5, 0.049999997, 2.5, 5, -0.049999997, 2.5, 2.5, -0.049999997, 2.5, 5, 0.049999997, 2.5, 5, 0.049999997, -2.5, 5, -0.049999997, -2.5, 5, 0.049999997, 2.5, 5, -0.049999997, -2.5, 5, -0.049999997, 2.5, 5, 0.049999997, -2.5, 2.5, 0.049999997, -2.5, 2.5, -0.049999997, -2.5, 5, 0.049999997, -2.5, 2.5, -0.049999997, -2.5, 5, -0.049999997, -2.5, 2.5, 0.049999997, -2.5, 2.5, 0.049999997, -5, 2.5, -0.049999997, -5, 2.5, 0.049999997, -2.5, 2.5, -0.049999997, -5, 2.5, -0.049999997, -2.5, 2.5, 0.049999997, -5, -2.5, 0.049999997, -5, -2.5, -0.049999997, -5, 2.5, 0.049999997, -5, -2.5, -0.049999997, -5, 2.5, -0.049999997, -5, -2.5, 0.049999997, -5, -2.5, 0.049999997, -2.5, -2.5, -0.049999997, -2.5, -2.5, 0.049999997, -5, -2.5, -0.049999997, -2.5, -2.5, -0.049999997, -5, -2.5, 0.049999997, -2.5, -5, 0.049999997, -2.5, -5, -0.049999997, -2.5, -2.5, 0.049999997, -2.5, -5, -0.049999997, -2.5, -2.5, -0.049999997, -2.5, -5, 0.049999997, -2.5, -5, 0.049999997, 2.5, -5, -0.049999997, 2.5, -5, 0.049999997, -2.5, -5, -0.049999997, 2.5, -5, -0.049999997, -2.5, -5, 0.049999997, 2.5, -2.5, 0.049999997, 2.5, -2.5, -0.049999997, 2.5, -5, 0.049999997, 2.5, -2.5, -0.049999997, 2.5, -5, -0.049999997, 2.5, -2.5, 0.049999997, 2.5, -2.5, 0.049999997, 5, -2.5, -0.049999997, 5, -2.5, 0.049999997, 2.5, -2.5, -0.049999997, 5, -2.5, -0.049999997, 2.5, -2.5, 0.049999997, 5, 2.5, 0.049999997, 5, 2.5, -0.049999997, 5, -2.5, 0.049999997, 5, 2.5, -0.049999997, 5, -2.5, -0.049999997, 5)
 
 [node name="FourWayIntersectionHall" type="StaticBody3D" unique_id=1597239778]
 script = ExtResource("3_room")
@@ -20,21 +28,10 @@ light_bakes = Dictionary[int, LightmapGIData]({
 170: ExtResource("2_6qsta")
 })
 
-[node name="Carpet2" type="MeshInstance3D" parent="." unique_id=773485659 groups=["Floor"]]
-material_override = ExtResource("2_pt7cb")
-mesh = SubResource("BoxMesh_6qsta")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=857920565 groups=["Floor"]]
-shape = SubResource("BoxShape3D_qr2sl")
-
-[node name="Carpet3" type="MeshInstance3D" parent="." unique_id=2045365369 groups=["Floor"]]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
-material_override = ExtResource("2_pt7cb")
-mesh = SubResource("BoxMesh_6qsta")
-
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=582165622 groups=["Floor"]]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
-shape = SubResource("BoxShape3D_qr2sl")
+[node name="Carpet" parent="." unique_id=571867385 instance=ExtResource("3_6qsta")]
+walls = 170
+_mesh = SubResource("ArrayMesh_6qsta")
+_shape = SubResource("ConcavePolygonShape3D_c4i18")
 
 [node name="Pillar" parent="." unique_id=186650993 instance=ExtResource("4_6qsta")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)

@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://exp77fv8uwod" path="res://Props/carpet.gd" id="1_c0tcm"]
 [ext_resource type="Script" uid="uid://d4c7bvmwt6ieb" path="res://Props/procedural_carpet.gd" id="2_vr47f"]
+[ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="3_carpet"]
 
-[node name="Carpet" type="Node3D" unique_id=571867385]
+[node name="Carpet" type="StaticBody3D" unique_id=571867385]
 script = ExtResource("1_c0tcm")
 
-[node name="CarpetMesh" type="MeshInstance3D" parent="." unique_id=1885854164]
+[node name="CarpetMesh" type="MeshInstance3D" parent="." unique_id=1885854164 groups=["Floor"]]
+material_override = ExtResource("3_carpet")
 script = ExtResource("2_vr47f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1970572440 groups=["Floor"]]

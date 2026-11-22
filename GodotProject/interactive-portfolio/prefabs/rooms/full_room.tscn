@@ -1,17 +1,25 @@
-[gd_scene format=3 uid="uid://nisiakgic0vt"]
+[gd_scene format=4 uid="uid://nisiakgic0vt"]
 
-[ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="1_si0tb"]
 [ext_resource type="LightmapGIData" uid="uid://bdputl3g8h456" path="res://prefabs/rooms/lightmaps/full_room_turn0.lmbake" id="2_nqaw8"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="2_room"]
+[ext_resource type="PackedScene" uid="uid://do05qnq5imiub" path="res://Props/carpet.tscn" id="3_nqaw8"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_nqaw8"]
-lightmap_size_hint = Vector2i(108, 63)
-add_uv2 = true
-uv2_padding = 4.0
-size = Vector3(10, 0.1, 10)
+[sub_resource type="ArrayMesh" id="ArrayMesh_nqaw8"]
+lightmap_size_hint = Vector2i(54, 72)
+_surfaces = [{
+"aabb": AABB(-5, -0.05, -5, 10, 0.1, 10),
+"attribute_data": PackedByteArray("q6qqPgAAgD57CW0/HcdxP6uqqj4AAIC+ewltPwEAgD6rqqq+AACAvgAAAAABAIA+q6qqvgAAgD4AAAAAHcdxPwAAAAAAAAAAAAAAAAAAAACrqio/AAAAAHsJbT8AAAAAq6oqPwvXozt7CW0/Oo7jOwAAAAAL16M7AAAAADqO4zsAAAAAAAAAAAAAAAAAAIA9q6oqPwAAAAB7CW0/AACAPauqKj8L16M7ewltP+Q4jj0AAAAAC9ejOwAAAADkOI49AAAAAAAAAAAAAAAAAAAAPquqKj8AAAAAewltPwAAAD6rqio/C9ejO3sJbT9yHAc+AAAAAAvXozsAAAAAchwHPgAAAAAAAAAAAAAAAAEAQD6rqio/AAAAAHsJbT8BAEA+q6oqPwvXozt7CW0/chxHPgAAAAAL16M7AAAAAHIcRz4="),
+"format": 34359742519,
+"index_count": 30,
+"index_data": PackedByteArray("AAADAAIAAgABAAAABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AACgQM3MTD0AAKBAAACgQM3MTD0AAKDAAACgwM3MTD0AAKDAAACgwM3MTD0AAKBAAACgQM3MTD0AAKBAAACgQM3MTD0AAKDAAACgQM3MTL0AAKDAAACgQM3MTL0AAKBAAACgQM3MTD0AAKDAAACgwM3MTD0AAKDAAACgwM3MTL0AAKDAAACgQM3MTL0AAKDAAACgwM3MTD0AAKDAAACgwM3MTD0AAKBAAACgwM3MTL0AAKBAAACgwM3MTL0AAKDAAACgwM3MTD0AAKBAAACgQM3MTD0AAKBAAACgQM3MTL0AAKBAAACgwM3MTL0AAKBA/3///////7//f///////v/9///////+//3///////7////9//////////3//////////f/////////9///////////8AAP+//////wAA/7//////AAD/v/////8AAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//f/9/////v/9//3////+//3//f////7//f/9/////vw==")
+}]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_nqaw8"]
-size = Vector3(10, 0.1, 10)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6kekw"]
+data = PackedVector3Array(5, 0.049999997, 5, -5, 0.049999997, 5, -5, 0.049999997, -5, -5, 0.049999997, -5, 5, 0.049999997, -5, 5, 0.049999997, 5, 5, 0.049999997, 5, 5, 0.049999997, -5, 5, -0.049999997, -5, 5, 0.049999997, 5, 5, -0.049999997, -5, 5, -0.049999997, 5, 5, 0.049999997, -5, -5, 0.049999997, -5, -5, -0.049999997, -5, 5, 0.049999997, -5, -5, -0.049999997, -5, 5, -0.049999997, -5, -5, 0.049999997, -5, -5, 0.049999997, 5, -5, -0.049999997, 5, -5, 0.049999997, -5, -5, -0.049999997, 5, -5, -0.049999997, -5, -5, 0.049999997, 5, 5, 0.049999997, 5, 5, -0.049999997, 5, -5, 0.049999997, 5, 5, -0.049999997, 5, -5, -0.049999997, 5)
 
 [node name="FullRoom" type="StaticBody3D" unique_id=258967468]
 script = ExtResource("2_room")
@@ -19,9 +27,6 @@ light_bakes = Dictionary[int, LightmapGIData]({
 0: ExtResource("2_nqaw8")
 })
 
-[node name="Carpet" type="MeshInstance3D" parent="." unique_id=1354914698 groups=["Floor"]]
-material_override = ExtResource("1_si0tb")
-mesh = SubResource("BoxMesh_nqaw8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1672119466 groups=["Floor"]]
-shape = SubResource("BoxShape3D_nqaw8")
+[node name="Carpet" parent="." unique_id=571867385 instance=ExtResource("3_nqaw8")]
+_mesh = SubResource("ArrayMesh_nqaw8")
+_shape = SubResource("ConcavePolygonShape3D_6kekw")

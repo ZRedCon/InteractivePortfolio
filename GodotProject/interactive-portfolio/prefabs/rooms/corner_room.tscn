@@ -1,21 +1,29 @@
-[gd_scene format=3 uid="uid://b8dna75hm6wq5"]
+[gd_scene format=4 uid="uid://b8dna75hm6wq5"]
 
 [ext_resource type="LightmapGIData" uid="uid://demrpy0b1eydv" path="res://prefabs/rooms/lightmaps/corner_room_turn0.lmbake" id="2_8dk34"]
-[ext_resource type="Material" uid="uid://b8hdv61qpbgdc" path="res://assets/materials/carpet.tres" id="2_14t88"]
 [ext_resource type="LightmapGIData" uid="uid://m0tyor7pwhwr" path="res://prefabs/rooms/lightmaps/corner_room_turn1.lmbake" id="3_t0brx"]
 [ext_resource type="Material" uid="uid://gh7rd5ns3sdx" path="res://assets/materials/cobblestone.tres" id="3_t5whi"]
 [ext_resource type="LightmapGIData" uid="uid://c4urknms7ljtf" path="res://prefabs/rooms/lightmaps/corner_room_turn2.lmbake" id="4_p8pqv"]
 [ext_resource type="Script" uid="uid://dpj4ne3mfoem7" path="res://prefabs/rooms/room.gd" id="4_room"]
 [ext_resource type="LightmapGIData" uid="uid://dq5paslnsoq42" path="res://prefabs/rooms/lightmaps/corner_room_turn3.lmbake" id="5_53hgi"]
+[ext_resource type="PackedScene" uid="uid://do05qnq5imiub" path="res://Props/carpet.tscn" id="6_8dk34"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_8dk34"]
-lightmap_size_hint = Vector2i(83, 50)
-add_uv2 = true
-uv2_padding = 4.0
-size = Vector3(7.5, 0.1, 7.5)
+[sub_resource type="ArrayMesh" id="ArrayMesh_8dk34"]
+lightmap_size_hint = Vector2i(42, 60)
+_surfaces = [{
+"aabb": AABB(-2.5, -0.05, -2.5, 7.5, 0.1, 7.5),
+"attribute_data": PackedByteArray("q6qqPgAAgD5HU2c/OcpuP6uqqj4AAAC+R1NnPwnkmj6rqiq+AAAAvgAAAAAJ5Jo+q6oqvgAAgD4AAAAAOcpuPwAAAAAAAAAAAAAAAAAAAAAAAAA/AAAAAEdTZz8AAAAAAAAAPwvXoztHU2c/Qa4JPAAAAAAL16M7AAAAAEGuCTwAAAAAAAAAAAAAAAAJ5Jo9AAAAPwAAAABHU2c/CeSaPQAAAD8L16M7R1NnP9EZrD0AAAAAC9ejOwAAAADRGaw9AAAAAAAAAAAAAAAACeQaPgAAAD8AAAAAR1NnPwnkGj4AAAA/C9ejO0dTZz/tfiM+AAAAAAvXozsAAAAA7X4jPgAAAAAAAAAAAAAAAA5WaD4AAAA/AAAAAEdTZz8OVmg+AAAAPwvXoztHU2c/8fBwPgAAAAAL16M7AAAAAPHwcD4="),
+"format": 34359742519,
+"index_count": 30,
+"index_data": PackedByteArray("AAADAAIAAgABAAAABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AACgQM3MTD0AAKBAAACgQM3MTD0AACDAAAAgwM3MTD0AACDAAAAgwM3MTD0AAKBAAACgQM3MTD0AAKBAAACgQM3MTD0AACDAAACgQM3MTL0AACDAAACgQM3MTL0AAKBAAACgQM3MTD0AACDAAAAgwM3MTD0AACDAAAAgwM3MTL0AACDAAACgQM3MTL0AACDAAAAgwM3MTD0AACDAAAAgwM3MTD0AAKBAAAAgwM3MTL0AAKBAAAAgwM3MTL0AACDAAAAgwM3MTD0AAKBAAACgQM3MTD0AAKBAAACgQM3MTL0AAKBAAAAgwM3MTL0AAKBA/3///////7//f///////v/9///////+//3///////7////9//////////3//////////f/////////9///////////8AAP+//////wAA/7//////AAD/v/////8AAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//f/9/////v/9//3////+//3//f////7//f/9/////vw==")
+}]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mc308"]
-size = Vector3(7.5, 0.1, 7.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t0brx"]
+data = PackedVector3Array(5, 0.049999997, 5, -2.5, 0.049999997, 5, -2.5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, 5, 0.049999997, -2.5, 5, 0.049999997, 5, 5, 0.049999997, 5, 5, 0.049999997, -2.5, 5, -0.049999997, -2.5, 5, 0.049999997, 5, 5, -0.049999997, -2.5, 5, -0.049999997, 5, 5, 0.049999997, -2.5, -2.5, 0.049999997, -2.5, -2.5, -0.049999997, -2.5, 5, 0.049999997, -2.5, -2.5, -0.049999997, -2.5, 5, -0.049999997, -2.5, -2.5, 0.049999997, -2.5, -2.5, 0.049999997, 5, -2.5, -0.049999997, 5, -2.5, 0.049999997, -2.5, -2.5, -0.049999997, 5, -2.5, -0.049999997, -2.5, -2.5, 0.049999997, 5, 5, 0.049999997, 5, 5, -0.049999997, 5, -2.5, 0.049999997, 5, 5, -0.049999997, 5, -2.5, -0.049999997, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7lw3a"]
 lightmap_size_hint = Vector2i(58, 162)
@@ -35,14 +43,10 @@ light_bakes = Dictionary[int, LightmapGIData]({
 248: ExtResource("2_8dk34")
 })
 
-[node name="Carpet" type="MeshInstance3D" parent="." unique_id=356347482 groups=["Floor"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0, 1.25)
-material_override = ExtResource("2_14t88")
-mesh = SubResource("BoxMesh_8dk34")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=515639429 groups=["Floor"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0, 1.25)
-shape = SubResource("BoxShape3D_mc308")
+[node name="Carpet" parent="." unique_id=571867385 instance=ExtResource("6_8dk34")]
+walls = 248
+_mesh = SubResource("ArrayMesh_8dk34")
+_shape = SubResource("ConcavePolygonShape3D_t0brx")
 
 [node name="WallNX" type="MeshInstance3D" parent="." unique_id=441608407]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, 0)
