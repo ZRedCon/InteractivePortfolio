@@ -169,6 +169,7 @@ animation = &"Off"
 offset = Vector2(20, 20)
 
 [node name="UIExhibit" parent="Camera3D" unique_id=378705747 instance=ExtResource("6_8t2oa")]
+visible = false
 
 [node name="PauseMenu" parent="Camera3D" unique_id=1901717719 instance=ExtResource("3_h12aw")]
 visible = false

@@ -11,6 +11,22 @@
 [ext_resource type="PackedScene" uid="uid://cc84u6s1hq2lj" path="res://prefabs/slide.tscn" id="10_sllkz"]
 [ext_resource type="PackedScene" uid="uid://ctqw7kxvyuo63" path="res://prefabs/slide_dot.tscn" id="11_8o4o5"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.07, 0.075, 0.09, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.12)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qit8j"]
 content_margin_top = 8.0
 content_margin_bottom = 8.0
@@ -49,94 +65,134 @@ grow_vertical = 2
 offset_transform_enabled = true
 script = ExtResource("1_fwjg3")
 
-[node name="Exhibit" type="VBoxContainer" parent="." unique_id=69379542]
-editor_description = "article.exhibit (wide layout). Offsets of 33 = 2rem padding + 1px border. Separation 24 = --exhibit-gap."
+[node name="Card" type="PanelContainer" parent="." unique_id=2133273876]
+editor_description = "article.exhibit: the card's background, border, rounded corners and padding (the content margins of its StyleBox). Inset 12 px from the screen's edges, so a little of the museum shows around it."
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 33.0
-offset_top = 33.0
-offset_right = -33.0
-offset_bottom = 295.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 24
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
 
-[node name="Header" type="HBoxContainer" parent="Exhibit" unique_id=1848816691]
+[node name="Exhibit" type="VBoxContainer" parent="Card" unique_id=69379542]
+editor_description = "The card's sections, top to bottom. Separation 16 = the space between them."
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="EntryName" type="Label" parent="Exhibit/Header" unique_id=1209063004]
+[node name="Header" type="HBoxContainer" parent="Card/Exhibit" unique_id=1848816691]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="EntryName" type="Label" parent="Card/Exhibit/Header" unique_id=1209063004]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
 text = "[name]"
 autowrap_mode = 3
 
-[node name="Date" type="Label" parent="Exhibit/Header" unique_id=883133244]
+[node name="Date" type="Label" parent="Card/Exhibit/Header" unique_id=883133244]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "[start] - [end]"
 horizontal_alignment = 2
 
-[node name="Skills" type="PanelContainer" parent="Exhibit" unique_id=1607492032]
+[node name="Skills" type="PanelContainer" parent="Card/Exhibit" unique_id=1607492032]
 editor_description = "section.skills. Content margins of 8 = 0.5em padding-block (7 px at its 14 px font size) + 1px border-block."
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_qit8j")
 script = ExtResource("1_xnv4v")
 
-[node name="Flow" type="HFlowContainer" parent="Exhibit/Skills" unique_id=217641539]
+[node name="Flow" type="HFlowContainer" parent="Card/Exhibit/Skills" unique_id=217641539]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 alignment = 1
 
-[node name="Content" type="BoxContainer" parent="Exhibit" unique_id=219210833]
+[node name="Content" type="HBoxContainer" parent="Card/Exhibit" unique_id=219210833]
+editor_description = "The text on the left, the slideshow on the right. Gets all the height the other sections leave. content.gd sets SlideFrame's width from this row's height."
 layout_mode = 2
-theme_override_constants/separation = 24
+size_flags_vertical = 3
+theme_override_constants/separation = 20
 script = ExtResource("1_qit8j")
 
-[node name="TextImportant" type="VBoxContainer" parent="Exhibit/Content" unique_id=1163782132]
+[node name="TextScroll" type="ScrollContainer" parent="Card/Exhibit/Content" unique_id=1724030207]
+editor_description = "The description, contributions and notes share this column and scroll together. scrollbar_h_separation = the space between the text and the scroll bar."
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/scrollbar_h_separation = 10
+horizontal_scroll_mode = 0
+
+[node name="Text" type="VBoxContainer" parent="Card/Exhibit/Content/TextScroll" unique_id=653989365]
+editor_description = "Expand (horizontal) makes it as wide as TextScroll, so the text wraps at the column's edge."
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 24
 
-[node name="ProjDesc" type="VBoxContainer" parent="Exhibit/Content/TextImportant" unique_id=996420029]
+[node name="TextImportant" type="VBoxContainer" parent="Card/Exhibit/Content/TextScroll/Text" unique_id=1163782132]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ProjDesc" type="VBoxContainer" parent="Card/Exhibit/Content/TextScroll/Text/TextImportant" unique_id=996420029]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Heading" type="Label" parent="Exhibit/Content/TextImportant/ProjDesc" unique_id=1802579263]
+[node name="Heading" type="Label" parent="Card/Exhibit/Content/TextScroll/Text/TextImportant/ProjDesc" unique_id=1802579263]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Project Description:"
 
-[node name="Description" type="Label" parent="Exhibit/Content/TextImportant/ProjDesc" unique_id=577939168]
+[node name="Description" type="Label" parent="Card/Exhibit/Content/TextScroll/Text/TextImportant/ProjDesc" unique_id=577939168]
 layout_mode = 2
 text = "[Desc]"
 autowrap_mode = 3
 
-[node name="Contribution" type="VBoxContainer" parent="Exhibit/Content/TextImportant" unique_id=1759535947]
+[node name="Contribution" type="VBoxContainer" parent="Card/Exhibit/Content/TextScroll/Text/TextImportant" unique_id=1759535947]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Heading" type="Label" parent="Exhibit/Content/TextImportant/Contribution" unique_id=821224670]
+[node name="Heading" type="Label" parent="Card/Exhibit/Content/TextScroll/Text/TextImportant/Contribution" unique_id=821224670]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Contributions:"
 
-[node name="List" type="VBoxContainer" parent="Exhibit/Content/TextImportant/Contribution" unique_id=740831091]
+[node name="List" type="VBoxContainer" parent="Card/Exhibit/Content/TextScroll/Text/TextImportant/Contribution" unique_id=740831091]
 layout_mode = 2
 theme_override_constants/separation = 6
 script = ExtResource("4_atjpu")
 
-[node name="SlideShow" type="Control" parent="Exhibit/Content" unique_id=277074186]
-editor_description = "section.slide-show: flex 0 0 calc(100% / 3) + aspect-ratio 16 / 9. Min size = a third of the 1134 px content row, at 16:9 (378 x 212.625); recompute both if the SubViewport width changes. Gets stretched to the tallest column's height, like align-items: stretch. slide_show.gd runs it (src/slideShow.js on the website)."
-custom_minimum_size = Vector2(378, 212.625)
+[node name="TextUnimportant" type="VBoxContainer" parent="Card/Exhibit/Content/TextScroll/Text" unique_id=1454613416]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Heading" type="Label" parent="Card/Exhibit/Content/TextScroll/Text/TextUnimportant" unique_id=469666656]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Notes:"
+
+[node name="Notes" type="VBoxContainer" parent="Card/Exhibit/Content/TextScroll/Text/TextUnimportant" unique_id=1794597078]
+layout_mode = 2
+theme_override_constants/separation = 11
+script = ExtResource("6_atjpu")
+
+[node name="SlideFrame" type="AspectRatioContainer" parent="Card/Exhibit/Content" unique_id=1132945293]
+editor_description = "section.slide-show's aspect-ratio: 16 / 9. Fits the slideshow inside itself at that ratio, at the top. content.gd sets its width, ui_exhibit.gd hides it for entries with no images."
+custom_minimum_size = Vector2(748, 0)
+layout_mode = 2
+ratio = 1.7777778
+alignment_horizontal = 2
+alignment_vertical = 0
+
+[node name="SlideShow" type="Control" parent="Card/Exhibit/Content/SlideFrame" unique_id=277074186]
+editor_description = "section.slide-show. SlideFrame sets its size. slide_show.gd runs it (src/slideShow.js on the website)."
 layout_mode = 2
 script = ExtResource("5_eqgsw")
 
-[node name="Slides" type="Panel" parent="Exhibit/Content/SlideShow" unique_id=1246592542]
+[node name="Slides" type="Panel" parent="Card/Exhibit/Content/SlideFrame/SlideShow" unique_id=1246592542]
 editor_description = "The frame: section.slide-show's black background, and overflow: hidden = clip_contents. slide_show.gd puts one prefabs/slide.tscn per image in here."
 clip_contents = true
 layout_mode = 1
@@ -148,12 +204,12 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_839nz")
 
-[node name="Slide" parent="Exhibit/Content/SlideShow/Slides" unique_id=1917369586 instance=ExtResource("10_sllkz")]
+[node name="Slide" parent="Card/Exhibit/Content/SlideFrame/SlideShow/Slides" unique_id=1917369586 instance=ExtResource("10_sllkz")]
 editor_description = "Placeholder so the editor shows an image. slide_show.gd removes it when the game runs."
 layout_mode = 1
 texture = ExtResource("1_px4js")
 
-[node name="PrevArrow" type="Button" parent="Exhibit/Content/SlideShow" unique_id=1246171231]
+[node name="PrevArrow" type="Button" parent="Card/Exhibit/Content/SlideFrame/SlideShow" unique_id=1246171231]
 editor_description = ".slide-arrow.prev: a 2.25rem (36 px) circle, 0.5rem (8 px) in from the left edge, vertically centered."
 layout_mode = 1
 anchors_preset = 4
@@ -171,7 +227,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_l3tmo")
 theme_override_styles/hover = SubResource("StyleBoxFlat_31mtn")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_l3tmo")
 
-[node name="Chevron" type="Line2D" parent="Exhibit/Content/SlideShow/PrevArrow" unique_id=1946046333]
+[node name="Chevron" type="Line2D" parent="Card/Exhibit/Content/SlideFrame/SlideShow/PrevArrow" unique_id=1946046333]
 points = PackedVector2Array(21, 11, 14, 18, 21, 25)
 width = 3.0
 joint_mode = 2
@@ -179,7 +235,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
 
-[node name="NextArrow" type="Button" parent="Exhibit/Content/SlideShow" unique_id=775078514]
+[node name="NextArrow" type="Button" parent="Card/Exhibit/Content/SlideFrame/SlideShow" unique_id=775078514]
 editor_description = ".slide-arrow.next: a 2.25rem (36 px) circle, 0.5rem (8 px) in from the right edge, vertically centered."
 layout_mode = 1
 anchors_preset = 6
@@ -200,7 +256,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_l3tmo")
 theme_override_styles/hover = SubResource("StyleBoxFlat_31mtn")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_l3tmo")
 
-[node name="Chevron" type="Line2D" parent="Exhibit/Content/SlideShow/NextArrow" unique_id=347131425]
+[node name="Chevron" type="Line2D" parent="Card/Exhibit/Content/SlideFrame/SlideShow/NextArrow" unique_id=347131425]
 points = PackedVector2Array(15, 11, 22, 18, 15, 25)
 width = 3.0
 joint_mode = 2
@@ -208,7 +264,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
 
-[node name="Dots" type="HBoxContainer" parent="Exhibit/Content/SlideShow" unique_id=524447623]
+[node name="Dots" type="HBoxContainer" parent="Card/Exhibit/Content/SlideFrame/SlideShow" unique_id=524447623]
 editor_description = ".slide-dots: a centered row, 0.5rem (8 px) above the bottom edge, with 0.375rem (6 px) gaps. slide_show.gd puts one prefabs/slide_dot.tscn per image in here."
 layout_mode = 1
 anchors_preset = 12
@@ -223,39 +279,24 @@ mouse_filter = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="Dot" parent="Exhibit/Content/SlideShow/Dots" unique_id=952989595 instance=ExtResource("11_8o4o5")]
+[node name="Dot" parent="Card/Exhibit/Content/SlideFrame/SlideShow/Dots" unique_id=952989595 instance=ExtResource("11_8o4o5")]
 editor_description = "Placeholder dots so the editor shows the marker (this one drawn as the current image). slide_show.gd replaces them when the game runs."
 modulate = Color(1, 1, 1, 1)
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 
-[node name="Dot2" parent="Exhibit/Content/SlideShow/Dots" unique_id=1791579305 instance=ExtResource("11_8o4o5")]
+[node name="Dot2" parent="Card/Exhibit/Content/SlideFrame/SlideShow/Dots" unique_id=1791579305 instance=ExtResource("11_8o4o5")]
 layout_mode = 2
 
-[node name="Dot3" parent="Exhibit/Content/SlideShow/Dots" unique_id=1656649350 instance=ExtResource("11_8o4o5")]
+[node name="Dot3" parent="Card/Exhibit/Content/SlideFrame/SlideShow/Dots" unique_id=1656649350 instance=ExtResource("11_8o4o5")]
 layout_mode = 2
 
-[node name="Timer" type="Timer" parent="Exhibit/Content/SlideShow" unique_id=1381072604]
+[node name="Timer" type="Timer" parent="Card/Exhibit/Content/SlideFrame/SlideShow" unique_id=1381072604]
 editor_description = "How long each image stays before the slideshow moves to the next one."
 wait_time = 5.0
 one_shot = true
 
-[node name="TextUnimportant" type="VBoxContainer" parent="Exhibit/Content" unique_id=1454613416]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 8
-
-[node name="Heading" type="Label" parent="Exhibit/Content/TextUnimportant" unique_id=469666656]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Notes:"
-
-[node name="Notes" type="VBoxContainer" parent="Exhibit/Content/TextUnimportant" unique_id=1794597078]
-layout_mode = 2
-theme_override_constants/separation = 11
-script = ExtResource("6_atjpu")
-
-[node name="Links" type="HFlowContainer" parent="Exhibit" unique_id=1101634949]
+[node name="Links" type="HFlowContainer" parent="Card/Exhibit" unique_id=1101634949]
 layout_mode = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12

@@ -1,6 +1,7 @@
 class_name PIH extends Node
 
 signal on_pause_change
+signal on_viewing_change
 
 const MOVE_WALK : float = 200.0
 const MOVE_SPRINT : float = 800.0
@@ -41,11 +42,25 @@ static var teleport_state : int:
 static var is_paused : bool:
 	get(): return Instance._paused
 
+static var is_viewing : bool:
+	get(): return Instance._viewing
+
+static var is_captured : bool:
+	get(): return Instance._captured
+
 var _paused : bool:
 	set(val):
 		_paused = val
 		on_pause_change.emit()
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if not val else Input.MOUSE_MODE_VISIBLE
+		_update_mouse_mode()
+
+# True while an exhibit's UI is open. The mouse is free then, so the visitor can use the UI and move off to
+# the rest of the page, and the pause key closes the exhibit instead of opening the menu.
+var _viewing : bool:
+	set(val):
+		_viewing = val
+		on_viewing_change.emit()
+		_update_mouse_mode()
 
 var _captured : bool:
 	get(): return Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
@@ -64,13 +79,20 @@ func _input(event: InputEvent) -> void:
 		_mouse_event_handler_fps( event )
 
 func _unhandled_input(event: InputEvent) -> void:
-	if (not _paused and not _captured and event is InputEventMouseButton and
+	if (not _paused and not _viewing and not _captured and event is InputEventMouseButton and
 		event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		get_viewport().set_input_as_handled() # This click was for getting into the game, not for clicking on things
+
+# The mouse is captured for looking around, unless the menu or an exhibit is open
+func _update_mouse_mode() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if _paused or _viewing else Input.MOUSE_MODE_CAPTURED
 
 func _pause_handler() -> void:
-	if Input.is_action_just_pressed("Pause"): _paused = not _paused
-	elif _was_captured and not _captured and not _paused: _paused = true
+	if Input.is_action_just_pressed("Pause"):
+		if _viewing: _viewing = false # An open exhibit closes first; the next press opens the menu
+		else: _paused = not _paused
+	elif _was_captured and not _captured and not _paused and not _viewing: _paused = true
 	_was_captured = _captured
 
 func _mouse_event_handler_fps(event: InputEventMouseMotion) -> void:

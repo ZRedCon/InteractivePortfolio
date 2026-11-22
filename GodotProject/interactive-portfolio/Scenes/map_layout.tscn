@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://b54r5mlop3w6n"
 
 [sub_resource type="Resource" id="Resource_m64cp"]
 script = ExtResource("4_3arg3")
-entries = Array[String](["highway-to-hell.json", "ritual-realties.json", "upgrade-ultimatum.json", "last-beach.json", "hideous-instakill.json", "reverberations.json", "secret-santa.json", "frong.json", "plinko.json", "dungeon-raider.json", "", "", "", "", "", "", ""])
+entries = Array[String](["lumen-vitae.json", "ouroboros.json", "interactive-portfolio.json", "ouroboros-demo.json", "ritual-realties.json", "upgrade-ultimatum.json", "last-beach.json", "hideous-instakill.json", "reverberations.json", "secret-santa.json", "frong.json", "highway-to-hell.json", "plinko.json", "dungeon-raider.json", "", "", ""])
 color = Color(0.39999998, 1, 0.53434646, 1)
 metadata/_custom_type_script = "uid://b54r5mlop3w6n"
 

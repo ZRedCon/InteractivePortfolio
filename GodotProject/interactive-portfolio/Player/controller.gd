@@ -13,6 +13,7 @@ const INVALID_COLOR := Color(1.0,0.15,0.2)
 @onready var telenode : Node3D = $Telenode
 @onready var mouse_sprite : AnimatedSprite2D = $Camera3D/ContUI/Control/AnimatedSprite2D
 @onready var ui_exhibit : ExhibitUI = $Camera3D/UIExhibit
+@onready var hud : Control = $Camera3D/ContUI
 
 var node_im_looking_at
 
@@ -33,9 +34,15 @@ func _ready() -> void:
 	material = (telenode.get_child( 0 ) as MeshInstance3D).get_active_material( 0 )
 	material.albedo_color = Color( 1,0,1 )
 	material.emission = Color( 1,0,1 )
+	PIH.Instance.on_viewing_change.connect( _on_viewing_change )
+
+# Opening an exhibit starts viewing (see _unhandled_input), and the pause key ends it (see PIH._pause_handler)
+func _on_viewing_change() -> void:
+	hud.visible = not PIH.is_viewing # The crosshair and key hints are for walking around
+	if not PIH.is_viewing: ui_exhibit.leave()
 
 func _physics_process(delta: float) -> void:
-	if PIH.is_paused: return
+	if PIH.is_paused or PIH.is_viewing: return
 	
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
@@ -104,16 +111,25 @@ static func _get_node_mouse_group(node: Node) -> int:
 		index += 1
 	return 0
 
+# The exhibit a node is part of, or null. The ray hits an exhibit's MouseCollider, which is a child of it.
+static func _get_exhibit(node: Node) -> Exhibit:
+	while node and not node is Exhibit: node = node.get_parent()
+	return node as Exhibit
+
 func _process(_delta: float) -> void:
 	if PIH.is_paused: return
 	
 	camera.rotation.x = PIH.mouse_x
 	rotation.y = PIH.mouse_y
+
+# Clicks come here only if no UI took them, and before PIH, so a click that captures the mouse is still uncaptured here
+func _unhandled_input(event: InputEvent) -> void:
+	if PIH.is_paused or PIH.is_viewing or not event.is_action_pressed("Interact"): return
+	# A click only counts while the mouse is captured. The click that captures it is just for getting into the game.
+	if event is InputEventMouseButton and not PIH.is_captured: return
+	if mouse_state != LEFT_MOUSE or not is_instance_valid(node_im_looking_at): return
 	
-	if Input.is_action_just_pressed("Interact") and mouse_state == LEFT_MOUSE:
-		print("Input confirmed...")
-		if is_instance_valid(node_im_looking_at) and node_im_looking_at is Exhibit:
-			print("Success!")
-			ui_exhibit.arrive( node_im_looking_at.entry_data )
-		else:
-			print("Failure! Conditions: is_instance_valid(node_im_looking_at): ", is_instance_valid(node_im_looking_at), " node_im_looking_at is Exhibit: ", node_im_looking_at is Exhibit)
+	var exhibit := _get_exhibit( node_im_looking_at )
+	if exhibit and exhibit.entry_data:
+		ui_exhibit.arrive( exhibit.entry_data )
+		PIH.Instance._viewing = true

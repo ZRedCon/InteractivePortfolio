@@ -150,8 +150,8 @@ func _set_pane(message: Dictionary) -> void:
 
 	var size : Vector2i = message.get( "size", pane.viewport.size )
 	var scene_path : String = message.get( "scene", "" )
-	# A different size starts over with a fresh scene, because that's what the game would do: scenes read
-	# their size once when they're made (ContentAdjuster picks thin or wide that way).
+	# A different size starts over with a fresh scene, because that's what the game would do: it starts
+	# at its window's size, so a scene is never made at one size and then shown at another.
 	if size != pane.viewport.size or scene_path != pane.scene_path or message.get( "restart", false ): pane.needs_instance = true
 	pane.viewport.size = size
 	pane.scene_path = scene_path

@@ -10,6 +10,7 @@ script = ExtResource("1_yfs1g")
 [node name="Bullet" type="Label" parent="." unique_id=1111313806]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+size_flags_vertical = 0
 text = "•"
 
 [node name="Text" type="Label" parent="." unique_id=462115385]
