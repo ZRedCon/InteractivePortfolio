@@ -1,6 +1,5 @@
 class_name ExhibitUI extends Control
 
-
 @onready var header_name := $Exhibit/Header/EntryName
 @onready var header_date := $Exhibit/Header/Date
 @onready var skills : SkillsManager = $Exhibit/Skills

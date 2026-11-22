@@ -12,6 +12,9 @@ const INVALID_COLOR := Color(1.0,0.15,0.2)
 @onready var camera_ray : RayCast3D = $Camera3D/RayCast3D
 @onready var telenode : Node3D = $Telenode
 @onready var mouse_sprite : AnimatedSprite2D = $Camera3D/ContUI/Control/AnimatedSprite2D
+@onready var ui_exhibit : ExhibitUI = $Camera3D/UIExhibit
+
+var node_im_looking_at
 
 var _tele_data : HitData
 var material : StandardMaterial3D
@@ -54,7 +57,8 @@ func _handle_floor_cast() -> void:
 		mouse_state = NO_MOUSE
 		return
 	
-	var collider := camera_ray.get_collider() as Node3D
+	node_im_looking_at = camera_ray.get_collider()
+	var collider := node_im_looking_at as Node3D
 	mouse_state = _get_mouse_group( collider, camera_ray.get_collider_shape() )
 	
 	var on_floor := _is_floor(collider, camera_ray.get_collider_shape())
@@ -105,3 +109,11 @@ func _process(_delta: float) -> void:
 	
 	camera.rotation.x = PIH.mouse_x
 	rotation.y = PIH.mouse_y
+	
+	if Input.is_action_just_pressed("Interact") and mouse_state == LEFT_MOUSE:
+		print("Input confirmed...")
+		if is_instance_valid(node_im_looking_at) and node_im_looking_at is Exhibit:
+			print("Success!")
+			ui_exhibit.arrive( node_im_looking_at.entry_data )
+		else:
+			print("Failure! Conditions: is_instance_valid(node_im_looking_at): ", is_instance_valid(node_im_looking_at), " node_im_looking_at is Exhibit: ", node_im_looking_at is Exhibit)
