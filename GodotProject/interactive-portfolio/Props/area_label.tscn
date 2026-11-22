@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c235yfgfqql0"]
+
+[ext_resource type="PackedScene" uid="uid://dnrvjvui15a0u" path="res://Props/header.tscn" id="1_q7wsq"]
+
+[node name="AreaLabel" type="Node3D" unique_id=1954763958]
+
+[node name="Header" parent="." unique_id=758347704 instance=ExtResource("1_q7wsq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441, 0)

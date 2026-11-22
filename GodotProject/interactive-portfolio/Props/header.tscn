@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dnrvjvui15a0u"]
+
+[ext_resource type="PackedScene" uid="uid://c5p277slttcyo" path="res://assets/models/Header.fbx" id="1_qbl18"]
+[ext_resource type="Texture2D" uid="uid://b2fjgvl6jhhkt" path="res://assets/textures/header/256/header_0.png" id="2_377f1"]
+[ext_resource type="Texture2D" uid="uid://ck1bo364e6iwf" path="res://assets/textures/header/256/header_2.png" id="3_45440"]
+[ext_resource type="Texture2D" uid="uid://d2asx2bpv0jxs" path="res://assets/textures/header/1024/Header_DefaultMaterial_Height.png" id="3_ibgjn"]
+[ext_resource type="Texture2D" uid="uid://b1ebbl2sq405i" path="res://assets/textures/header/256/header_1.png" id="3_m5ml8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbl18"]
+albedo_color = Color(0.42365116, 0.4236505, 0.42365062, 1)
+albedo_texture = ExtResource("2_377f1")
+roughness_texture = ExtResource("3_45440")
+normal_enabled = true
+normal_texture = ExtResource("3_m5ml8")
+heightmap_enabled = true
+heightmap_scale = 0.05
+heightmap_texture = ExtResource("3_ibgjn")
+texture_filter = 2
+
+[node name="Header" unique_id=758347704 instance=ExtResource("1_qbl18")]
+
+[node name="BézierCurve" parent="." index="0" unique_id=953925680]
+transform = Transform3D(500, 0, 0, 0, -2.1855694e-05, 500, 0, -500, -2.1855694e-05, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_qbl18")
