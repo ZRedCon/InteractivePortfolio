@@ -49,22 +49,31 @@ function orderNewestFirst() {
     for (const object of objects) {
         let dateNum = 0;
         let endDate = (object["time"])[1];
+        let isOngoing = false;
         if (endDate == "Ongoing") 
+        {
             endDate = (object["time"])[0];
-
+            isOngoing = true;
+        }
+            
         // Number() so "+ day" adds instead of gluing strings together
         let values = endDate.split("/").map(Number);
         let year = values.at(-1);
         let month = values.length >= 2 ? values[0] : 0;
         let day = values.length == 3 ? values[1] : 0;
         dateNum = 10000 * year + 100 * month + day;
+        if (isOngoing)
+        {
+            // Ongoing dates should be ordered: Oldest start date first
+            dateNum = Math.abs(dateNum - 100000000) + 100000000
+        }
+
         dates.push(dateNum);
     }
     let pool = [...objects];
 
     // O(n^2) time, I do not have time to find a faster solution!
     while (pool.length > 0) {
-        // Reset every pass: last pass's highest value was just removed
         let optimalIndex = 0;
         let optimalValue = -1;
         dates.forEach((item, index) => {
