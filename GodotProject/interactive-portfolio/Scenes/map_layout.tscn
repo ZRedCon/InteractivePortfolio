@@ -558,3 +558,12 @@ draw_color = Color(0.35, 0.75, 1, 1)
 draw_pos = Vector2(376, 44.5)
 draw_name = "Exhibit"
 metadata/_edit_lock_ = true
+
+[node name="Exhibit51" type="Node2D" parent="Props" unique_id=1422576660]
+script = ExtResource("3_m64cp")
+entry_file = "interactive-portfolio.json"
+queue = 39
+draw_color = Color(0.35, 0.75, 1, 1)
+draw_pos = Vector2(8, 3.5)
+draw_name = "Exhibit"
+metadata/_edit_lock_ = true
