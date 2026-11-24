@@ -1,3 +1,4 @@
+const DO_WIDGETS = false;
 
 function getHTMLFromEntry(object) {
     let exhibit = `
@@ -48,10 +49,39 @@ function convertToContribution(contributions) {
     return list + `</ul></section>`;
 }
 
+function widgetParser(widget) {
+    let tokens = widget.split(";;");
+    if (tokens.length == 0) return "";
+    else if (tokens.length == 1) return tokens[0];
+
+    let icon = tokens[0];
+    switch (icon) {
+        case "ITCH":        icon = `<i class="fa-brands fa-itch-io"></i>`; break;
+
+        case "YT":
+        case "YOUTUBE":     icon = `<i class="fa-brands fa-square-youtube"></i>`; break;
+
+        case "GH":
+        case "GIT":
+        case "GITHUB":      icon = `<i class="fa-brands fa-square-github"></i>`; break;
+
+        case "STEAM":       icon = `<i class="fa-brands fa-square-steam"></i>`; break;
+
+        case "GD":
+        case "GOOGLE":
+        case "GOOGLEDRIVE": icon = `<i class="fa-brands fa-google-drive"></i>`; break;
+
+        default:            icon = ""; break;
+    }
+
+    return DO_WIDGETS ? icon + "  " + tokens[1] : tokens[1];
+}
+
 function convertToLinks(links) {
     let output = `<section class="links">`;
     for (const item of links) {
-        output += `<a href="${item["url"]}">${item["display-text"]}</a>`;
+        let text = item["display-text"];
+        output += `<a target="_blank" href="${item["url"]}">${widgetParser(text)}  <i class="fa-solid fa-up-right-from-square"></i></a>`;
     }
     return output + `</section>`;
 }

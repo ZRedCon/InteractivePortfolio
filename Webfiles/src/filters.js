@@ -27,14 +27,14 @@ function initUI() {
     });
     all.addEventListener("click", () => {
         skillButtons.forEach(element => {
-            setButtonToggleState(element, true);
+            setButtonToggleState(element, false);
         });
         mask = MASK_MAX;
         verifyMask();
     });
     clear.addEventListener("click", () => {       
         skillButtons.forEach(element => {
-            setButtonToggleState(element, false);
+            setButtonToggleState(element, true);
         });
         mask = 0;
         verifyMask();
