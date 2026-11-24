@@ -86,8 +86,6 @@ function convertToLinks(links) {
     return output + `</section>`;
 }
 
-// The images, plus (when there's more than one) the arrows and the row of dots that marks the
-// current image. slideShow.js makes them move. No images = an empty section, which CSS hides.
 function convertToSlideShow(slideShow, name) {
     let output = `<section class="slide-show">`;
 

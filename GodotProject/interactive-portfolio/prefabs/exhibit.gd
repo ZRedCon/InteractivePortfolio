@@ -3,9 +3,9 @@ class_name Exhibit extends EdgeProp
 const SPRITE_HEIGHT_MAX = 128
 const COLLIDER_WIDTH_BASE = 1.395
 
-@onready var label := $Name
-@onready var sprite := $MainImage
-@onready var collider := $MouseCollider/CollisionShape3D
+@onready var label := $Offset/Name
+@onready var sprite := $Offset/MainImage
+@onready var collider := $Offset/MouseCollider/CollisionShape3D
 
 var entry_data : Entry
 

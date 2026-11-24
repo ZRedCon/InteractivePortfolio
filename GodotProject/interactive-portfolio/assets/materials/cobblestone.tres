@@ -1,8 +1,14 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://gh7rd5ns3sdx"]
 
-[ext_resource type="Texture2D" uid="uid://dodp5snfvh2wx" path="res://assets/images/MuseamTextures/debug/cobblestone.webp" id="1_rapp2"]
+[ext_resource type="Texture2D" uid="uid://b7c7jo350477l" path="res://assets/textures/Walls/512_Walls_0.png" id="1_6u4yy"]
+[ext_resource type="Texture2D" uid="uid://bwylfxepi8scu" path="res://assets/textures/Walls/512_Walls_2.png" id="2_d1uyu"]
+[ext_resource type="Texture2D" uid="uid://caavlnvyrwq27" path="res://assets/textures/Walls/512_Walls_1.png" id="3_qai45"]
 
 [resource]
-albedo_texture = ExtResource("1_rapp2")
-uv1_scale = Vector3(30, 20, 1)
+albedo_texture = ExtResource("1_6u4yy")
+metallic_specular = 0.22
+roughness_texture = ExtResource("3_qai45")
+normal_enabled = true
+normal_texture = ExtResource("2_d1uyu")
+uv1_scale = Vector3(3, 4, 1)
 texture_filter = 2
