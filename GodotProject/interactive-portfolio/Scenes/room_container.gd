@@ -127,7 +127,7 @@ func light_rooms_near_camera() -> void:
 	# Wait until the camera is a meter past the edge, so walking along an edge doesn't keep switching rooms
 	var lit_center := Vector2( _lit_from - MapLayout.start_tile )
 	if absf( at.x - lit_center.x ) < 0.6 and absf( at.z - lit_center.y ) < 0.6: return
-	var cell := Vector2i( roundi( at.x ), roundi( at.z ) ) + MapLayout.start_tile
+	var cell : Vector2i = Vector2i( roundi( at.x ), roundi( at.z ) ) + MapLayout.start_tile
 	_lit_from = cell
 
 	# Count the steps out from the camera's room through the openings, the way you'd see down a hall

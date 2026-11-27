@@ -7,13 +7,13 @@
 
 [sub_resource type="Resource" id="Resource_qvry0"]
 script = ExtResource("4_3arg3")
-entries = Array[String](["320.json", "ritual-realties.json", "highway-to-hell.json", "plinko.json", "hideous-instakill.json", "last-beach.json", "dungeon-raider.json", "frong.json", "reverberations.json", "secret-santa.json", "upgrade-ultimatum.json"])
+entries = Array[String](["ouroboros.json", "blood-machines.json", "lumen-vitae.json", "ritual-realties.json", "highway-to-hell.json", "plinko.json", "hideous-instakill.json", "last-beach.json", "dungeon-raider.json", "frong.json", "reverberations.json"])
 color = Color(0.114193834, 0.45933396, 0.99999994, 1)
 metadata/_custom_type_script = "uid://b54r5mlop3w6n"
 
 [sub_resource type="Resource" id="Resource_m64cp"]
 script = ExtResource("4_3arg3")
-entries = Array[String](["lumen-vitae.json", "ouroboros.json", "interactive-portfolio.json", "ouroboros-demo.json", "ritual-realties.json", "upgrade-ultimatum.json", "last-beach.json", "hideous-instakill.json", "reverberations.json", "secret-santa.json", "frong.json", "highway-to-hell.json", "plinko.json", "dungeon-raider.json", "", "", ""])
+entries = Array[String](["lumen-vitae.json", "ouroboros.json", "interactive-portfolio.json", "ouroboros-demo.json", "blood-machines.json", "ritual-realties.json", "upgrade-ultimatum.json", "last-beach.json", "hideous-instakill.json", "reverberations.json", "secret-santa.json", "frong.json", "highway-to-hell.json", "plinko.json", "dungeon-raider.json", "", ""])
 color = Color(0.39999998, 1, 0.53434646, 1)
 metadata/_custom_type_script = "uid://b54r5mlop3w6n"
 
@@ -556,14 +556,5 @@ queue = 38
 start_direction = 2
 draw_color = Color(0.35, 0.75, 1, 1)
 draw_pos = Vector2(376, 44.5)
-draw_name = "Exhibit"
-metadata/_edit_lock_ = true
-
-[node name="Exhibit51" type="Node2D" parent="Props" unique_id=1422576660]
-script = ExtResource("3_m64cp")
-entry_file = "interactive-portfolio.json"
-queue = 39
-draw_color = Color(0.35, 0.75, 1, 1)
-draw_pos = Vector2(8, 3.5)
 draw_name = "Exhibit"
 metadata/_edit_lock_ = true

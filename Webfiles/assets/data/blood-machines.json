@@ -4,7 +4,7 @@
 	"description": "Blood Machines is a Minecraft Tech Mod that is heavily inspired by Ultrakill; the machines in the mod run on the blood you collect from your enemies. (Note at time of writing the mod hasn't gotten this far.)",
 	"related-skills": 71,
 	"contribution": [
-		"New Block Textures",
+		"Block Textures",
 		"Item and block behaviors",
 		"Largest acomplishment from this mod is a type tree that functions like the trees in Ultrakill's 7-3."
 	],
@@ -12,7 +12,16 @@
 		"While I haven't worked on it in a long while I do plan on coming back to this one; Minecraft and Ultrkill are two of my favorite games, which has carried the spark of passion for this project several months past when I stopped working on it.",
 		"I am not exaggerating when I say Modding Minecraft is THE MOST TECHNICALLY CHALLANGING THING I have EVER done. Something as simple as adding a normal ass block took what felt like my entire academic and personal education to comprehend; let alone implement. (I made this with Forge if you're curios; can't speak on Fabric)."
 	],
-	"main-image": "Debug/Debug1/pair1",
-	"slide-show": [ ],
+	"main-image": "BloodMachines/2026-11-25_15.41.34",
+	"slide-show": [
+		"BloodMachines/2026-11-25_15.41.34",
+		"BloodMachines/2026-11-25_15.46.51",
+		"BloodMachines/2026-11-25_15.47.53",
+		"BloodMachines/2026-11-25_15.49.41",
+		"BloodMachines/2026-11-25_15.50.25",
+		"BloodMachines/2026-11-25_15.52.08",
+		"BloodMachines/2026-11-25_15.52.48",
+		"BloodMachines/2026-11-25_15.55.27"
+	],
 	"related-links": [ ]
 }
